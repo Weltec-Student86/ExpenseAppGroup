@@ -3,11 +3,10 @@
     internal class Program
     {
         static void Main(string[] args)
-
         {
+            //calling login menus
 
             LandingPage();
-
 
 
 
@@ -21,115 +20,60 @@
 
             //declaring varaibles
             int choice;
+            bool landingPageLoop = false;
 
-            //do { }
+            do {
+                
 
-            Console.WriteLine("\t******Welcome to the Expense App*******");
-            Console.WriteLine("\t Login or Register for an account");
-            Console.WriteLine();
-            Console.WriteLine("1. Login");
-            Console.WriteLine("2. Register");
-            Console.WriteLine("3. Administrator Login");
-            Console.WriteLine("99. Exit");
-            Console.WriteLine("Please select a choice");
-            choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\t******Welcome to the Expense App*******");
+                Console.WriteLine("\t Login or Register for an account");
+                Console.WriteLine();
+                Console.WriteLine("1. Login");
+                Console.WriteLine("2. Register");
+                Console.WriteLine("3. Administrator Login");
+                Console.WriteLine("99. Exit");
+                Console.WriteLine("Please select a choice");
+                choice = Convert.ToInt32(Console.ReadLine());
 
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("Login");
-                    Console.WriteLine();
-                    User.UserLogin();
-                    break;
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Login");
+                        Console.WriteLine();
+                        User.UserLogin();
+                        break;
 
-                case 2:
-                    Console.WriteLine("Register");
-                    Console.WriteLine();
-                    Register();
-                    break;
+                    case 2:
+                        Console.WriteLine("Register");
+                        Console.WriteLine();
+                        User.Register();
+                        break;
 
-                case 3:
-                    Console.WriteLine("Admin login");
-                    AdminLogin();
-                    break;
+                    case 3:
+                        Console.WriteLine("Admin login");
+                        Admin.AdminLogin();
+                        break;
 
-                case 4:
-                    Environment.Exit(0);
-                    break;
+                    case 4:
+                        Environment.Exit(0);
+                        break;
 
-                default:
-                    Console.WriteLine("Enter a valid option");
-                    break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Enter a valid option!\n");
+                        Console.WriteLine("Press any key to return to login page...");
+                        Console.ReadKey();
+                        Console.Clear();
+                        landingPageLoop = true;
+                        break;
+                }
+          
             }
+            while (landingPageLoop == true);
 
-            //}
-            //  while ()
-
-
-
-        }
+        }//end of Landing Page----------------------------------
 
 
-
-
-
-
-
-
-        public static void Register()
-        {
-            Console.Clear();
-
-            Console.WriteLine("Enter your first name:");
-            string firstName = Console.ReadLine();
-
-            Console.WriteLine("Enter your last name:");
-            string lastName = Console.ReadLine();
-
-            Console.WriteLine("Enter your date of birth:");
-            string dob = Console.ReadLine();
-
-            Console.WriteLine("Enter your username:");
-            string userName = Console.ReadLine();
-
-            Console.WriteLine("Enter your password:");
-            string password = Console.ReadLine();
-
-            Console.WriteLine("Re-enter password:");
-            string reEnteredPassword = Console.ReadLine();
-
-            if (password == reEnteredPassword)
-            {
-                Console.WriteLine("Success");
-            }
-            else
-            {
-                Console.WriteLine("Passwords do not match");
-            }
-
-        }//end of Register method
-
-        public static void AdminLogin()
-        {
-            Console.Clear();
-
-            Console.WriteLine("Enter your admin username:");
-            string adminUserName = Console.ReadLine();
-
-            Console.WriteLine("Enter your admin password:");
-            string adminPassword = Console.ReadLine();
-
-            if (adminUserName == "admin" && adminPassword == "password")
-            {
-                Console.WriteLine("Login success");
-            }
-            else
-            {
-                Console.WriteLine("Wrong login");
-            }
-        }//end of Login method
-
-      
 
 
 
