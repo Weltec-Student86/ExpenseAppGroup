@@ -8,5 +8,12 @@ namespace ExpenseAppGroup
 {
     public class Expenses
     {
+
+        public static void ViewExpenses()
+        { 
+        
+        
+        
+        }
     }
 }
