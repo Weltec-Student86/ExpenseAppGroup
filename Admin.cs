@@ -37,8 +37,12 @@ namespace ExpenseAppGroup
 
 
             }while(adminLoginMenu == true);
-        }//end of Admin Login method
+        }//end of Admin Login method-------------------------------------------------
 
+
+
+
+        //Admin Home-----------------------------------------------------------------
         public static void AdminHome()
         {
 
@@ -63,7 +67,6 @@ namespace ExpenseAppGroup
                 {
                     case 1:
                         Console.WriteLine("Viewing all user expenses");
-                        Console.WriteLine();
                         Expenses.ViewExpenses();
                         break;
 
@@ -73,6 +76,7 @@ namespace ExpenseAppGroup
 
                     case 3:
                         Console.WriteLine("Manage users");
+                        ManageUsers();
                         break;
 
                     case 4:
@@ -92,14 +96,17 @@ namespace ExpenseAppGroup
                         adminHomeLoop = true;
                         break;
 
-                }//end of switch-----------------------------------------------------------------------------------
+                }//end of switch-------------------------------------------------------------------
 
-            } while (adminHomeLoop == true); //do while loop to re-run user home menu
+            } while (adminHomeLoop == true); //do while loop to re-run admin home menu
+
+
+        }//end of AdminHome-------------------------------------------------------------------------------------
 
 
 
-        }//end of UserHome-------------------------------------------------------------------------------------
 
+        //Manage users------------------------------------------------------------------------------------------
         public static void ManageUsers()
         {
 
@@ -112,7 +119,7 @@ namespace ExpenseAppGroup
             {
                 Console.Clear() ;
 
-                Console.WriteLine("1.View all users");
+                Console.WriteLine("1. View all users");
                 Console.WriteLine("2. Add new user");
                 Console.WriteLine("3. Update user");
                 Console.WriteLine("4. Remove user");
@@ -123,18 +130,22 @@ namespace ExpenseAppGroup
                 {
                     case 1:
                         Console.WriteLine("Viewing all users");
+                        ViewUsers();
                         break;
 
                     case 2:
                         Console.WriteLine("Adding new user");
+                        AdminAddUser();
                         break;
 
                     case 3:
                         Console.WriteLine("Updating user details");
+                        AdminUpdateUser();
                         break;
 
                     case 4:
                         Console.WriteLine("Remove user");
+                        RemoveUser();
                         break;
 
                     case 5:
@@ -155,10 +166,103 @@ namespace ExpenseAppGroup
                 }
 
             }while (mngUserLoop == true);
-        }
+        }//end of Manage users----------------------------------------------
+
+
+
+        //View all users
+
+        public static void ViewUsers()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Prints list of users");
+
+
+
+        }//end of View User class-----------------------------------
+
+
+
+        //Admin add user--------------------------------------------
+        public static void AdminAddUser()
+        {
+
+            Console.Clear();
+
+            bool pwVerify = false;
+
+            Console.WriteLine("Enter the user's first name:");
+            string firstName = Console.ReadLine();
+
+            Console.WriteLine("Enter the user's last name:");
+            string lastName = Console.ReadLine();
+
+            Console.WriteLine("Enter the user's date of birth:");
+            string dob = Console.ReadLine();
+
+            Console.WriteLine("Enter their username:");
+            string userName = Console.ReadLine();
+
+            //Do-While loop for confirming password
+            do
+            {
+
+                Console.WriteLine("Enter their password:");
+                string password = Console.ReadLine();
+
+                Console.WriteLine("Re-enter their password:");
+                string reEnteredPassword = Console.ReadLine();
+
+                if (password == reEnteredPassword)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Account successfully created!");
+                    Console.WriteLine();
+                    pwVerify = true;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Passwords do not match, please re-enter password.");
+                    Console.WriteLine();
+                }
+
+            } while (pwVerify == false);
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+            ManageUsers();
+
+        }//end of Admin Add User ------------------------------------------------------------------
 
 
 
 
-    }//end of Admin------------------------------------------
+        //Update user------------------------------------------------------
+
+        public static void AdminUpdateUser()
+        {
+            Console.WriteLine("This will let the admin update user details");
+
+        }//end of Admin Update User ----------------------------------------
+
+
+
+
+
+        //Remove user-------------------------------------------------------
+
+        public static void RemoveUser()
+        {
+            Console.WriteLine("This will let the admin remove a user");
+        }//end of Remove User-----------------------------------------------
+
+
+
+
+
+    }//end of Admin-----------------------------------------------------------------------------------------------------------------------------------------------------
 }
