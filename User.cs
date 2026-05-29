@@ -16,27 +16,40 @@ namespace ExpenseAppGroup
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public User(string FirstName, string LastName, DateTime Birthday, string Username, string Password)
+        {
+
+        }
+
         //Menu for login 
         public static void UserLogin()
         {
             Console.Clear();
 
-            Console.WriteLine("Enter your username:");
-            string userName = Console.ReadLine();
+            bool userLoginScreen = false;
 
-            Console.WriteLine("Enter your password:");
-            string password = Console.ReadLine();
-
-            if (userName == "user" && password == "password")
+            do
             {
-                Console.WriteLine("Login success");
-            }
-            else
-            {
-                Console.WriteLine("Wrong login");
-            }
 
-            UserHome();
+                Console.WriteLine("Enter your username:");
+                string userName = Console.ReadLine();
+
+                Console.WriteLine("Enter your password:");
+                string password = Console.ReadLine();
+
+                if (userName == "user" && password == "password")
+                {
+                    Console.WriteLine("Login success");
+                    UserHome();
+                }
+                else
+                {
+                    Console.WriteLine("Wrong login");
+                    userLoginScreen = true;
+                }
+
+            } while (userLoginScreen == true);
+          
 
         }//end of Login method
 
