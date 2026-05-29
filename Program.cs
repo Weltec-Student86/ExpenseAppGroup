@@ -6,7 +6,6 @@
         {
             //calling login menus
 
-
             LandingPage();
 
 

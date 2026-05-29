@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -10,17 +11,39 @@ namespace ExpenseAppGroup
     public class User : Account
     {
 
-        public User(string firstName, string lastName, string username, string password)
+
+        //constructors
+        public User(string firstName, string lastName, DateTime birthday, string username, string password)
         {
-            //constructor
             this.FirstName = firstName;
             this.LastName = lastName;
-   
+            this.Birthday = birthday;
             this.Username = username;
             this.Password = password;
 
         }
-        //Menu for login 
+
+        public User(string firstName, string lastName, string username, string password)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Username = username;
+            this.Password = password;
+
+        }
+
+        //List and objects
+
+        public static List<User> users = new List<User>();
+        User exampleUser1 = new User("Peter", "Griffin", "p_man", "password");
+        User exampleUser2 = new User("Jimmy", "Beast", "mrbeast", "password");
+
+        
+        
+        //METHODS
+
+
+        //Menu for login --------------------------------------
         public static void UserLogin()
         {
             Console.Clear();
@@ -50,9 +73,13 @@ namespace ExpenseAppGroup
             } while (userLoginScreen == true);
           
 
-        }//end of Login method
+        }//end of Login method----------------------------------
 
-        //user Registration method
+
+
+
+
+        //user Registration method-----------------------------
         public static void Register()
         {
             Console.Clear();
@@ -60,28 +87,28 @@ namespace ExpenseAppGroup
             bool pwVerify = false;
               
                 Console.WriteLine("Enter your first name:");
-                string firstName = Console.ReadLine();
+                string firstNameEntered = Console.ReadLine();
 
                 Console.WriteLine("Enter your last name:");
-                string lastName = Console.ReadLine();
+                string lastNameEntered = Console.ReadLine();
 
-                Console.WriteLine("Enter your date of birth:");
-                string dob = Console.ReadLine();
+                //Console.WriteLine("Enter your date of birth (YYYY/MM/DD):");
+                //DateTime dobEntered = Convert.ToDateTime(Console.ReadLine());
 
                 Console.WriteLine("Enter your username:");
-                string userName = Console.ReadLine();
+                string userNameEntered = Console.ReadLine();
+
+                Console.WriteLine("Enter your password:");
+                string passwordEntered = Console.ReadLine();
 
             //Do-While loop for confirming password
             do
             {
 
-                Console.WriteLine("Enter your password:");
-                string password = Console.ReadLine();
-
                 Console.WriteLine("Re-enter password:");
-                string reEnteredPassword = Console.ReadLine();
+                string reEnteredPasswordEntered = Console.ReadLine();
 
-                if (password == reEnteredPassword)
+                if (passwordEntered == reEnteredPasswordEntered)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Account successfully created!");
@@ -97,6 +124,9 @@ namespace ExpenseAppGroup
 
             } while (pwVerify == false);
 
+            User newUser = new User(firstNameEntered, lastNameEntered, /*dobEntered*/ userNameEntered, passwordEntered);
+            users.Add(newUser);
+
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -104,14 +134,12 @@ namespace ExpenseAppGroup
 
             Program.LandingPage();
 
-        }//end of Register method
+        }//end of Register method---------------------------------------
 
 
 
 
-
-
-
+        //User home-----------------------------------------------------
         public static void UserHome()
         {
 
@@ -177,16 +205,26 @@ namespace ExpenseAppGroup
                         userHomeLoop = true;
                         break;
 
-                }//end of switch-----------------------------------------------------------------------------------
+                }//end of switch---------------------------------------
 
             } while (userHomeLoop == true) ; //do while loop to re-run user home menu
 
             
             
-        }//end of UserHome-------------------------------------------------------------------------------------
+        }//end of UserHome-------------------------------------------------------
 
 
 
+
+
+
+        //Display user details------------------------------------------------
+        public void DisplayUserDetails()
+        {
+            Console.WriteLine($"First name: {FirstName}");
+            Console.WriteLine($"Last name: {LastName}");
+            Console.WriteLine($"Username: {Username}");
+        }//end of Display user details----------------------------------------
 
     }//end of class---------------------------------------------------------------------------------------------
 }//end of namespace---------------------------------------------------------------------------------------------

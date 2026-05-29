@@ -8,6 +8,10 @@ namespace ExpenseAppGroup
 {
     public class Admin:Account
     {
+
+        //METHODS
+
+
         //Admin login screen
         public static void AdminLogin()
         {
@@ -96,7 +100,7 @@ namespace ExpenseAppGroup
                         adminHomeLoop = true;
                         break;
 
-                }//end of switch-------------------------------------------------------------------
+                }//end of switch-------------------------------------
 
             } while (adminHomeLoop == true); //do while loop to re-run admin home menu
 
@@ -129,7 +133,6 @@ namespace ExpenseAppGroup
                 switch (mngUserChoice)
                 {
                     case 1:
-                        Console.WriteLine("Viewing all users");
                         ViewUsers();
                         break;
 
@@ -176,16 +179,22 @@ namespace ExpenseAppGroup
         {
             Console.Clear();
 
-            Console.WriteLine("Prints list of users");
+            Console.WriteLine("Viewing all users");
 
+            foreach (User user in User.users)
+            {
+                user.DisplayUserDetails();
+            }
 
 
         }//end of View User class-----------------------------------
 
 
 
+
+
         //Admin add user--------------------------------------------
-        public static void AdminAddUser()
+        public static void AdminAddUser()                                                               //NEED TO CHANGE THIS SECTION TO MATCH REGISTER(); METHOD
         {
 
             Console.Clear();
