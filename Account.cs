@@ -14,11 +14,14 @@ namespace ExpenseAppGroup
         private string username;
         private string password;
 
+        //properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday = new DateTime();
         public string Username { get; set; }
         public string Password { get; set; }
+
+
 
     }//end of account
 }

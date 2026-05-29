@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 
 namespace ExpenseAppGroup
 {
-    public class User:Account
+    public class User : Account
     {
-        //properties
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime Birthday = new DateTime();
-        public string Username { get; set; }
-        public string Password { get; set; }
 
-        public User(string FirstName, string LastName, DateTime Birthday, string Username, string Password)
+        public User(string firstName, string lastName, string username, string password)
         {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+   
+            this.Username = username;
+            this.Password = password;
 
         }
-
         //Menu for login 
         public static void UserLogin()
         {
