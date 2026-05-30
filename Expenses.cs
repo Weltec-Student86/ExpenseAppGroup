@@ -16,16 +16,18 @@ namespace ExpenseAppGroup
 
         //method for expense----------------------------------1
         //expense that have been added to user account
+       
         public static void ViewExpenses()
         {
-           
+            Console.Clear();
+
             int exitAddExpenseChoice1 = 1;
             //do while loop to exit to home
             do
             {
                 
 
-                //users expenses they have created
+                //users expenses they have created this will need to be changed
                 Console.WriteLine($"expense 1:");
                 Console.WriteLine($"expense 2:");
                 Console.WriteLine($"expense 3:");
@@ -45,7 +47,8 @@ namespace ExpenseAppGroup
         //adding new expense to user account------------------2
         public static void AddExpense()
         {
-            
+            Console.Clear();
+
             int exitAddExpenseChoice2 = 1;
             
             //do while loop to exit to home
@@ -91,7 +94,8 @@ namespace ExpenseAppGroup
         //end of existing expense---------------------------4
         public static void UpdateExpense()
         {
-            
+            Console.Clear();
+
             Console.WriteLine("\t Enter the name of the expense you wish to update");
             //remove == readline
             int exitUpdateExpenseChoice1 = 1;
@@ -121,7 +125,7 @@ namespace ExpenseAppGroup
 
         public static void ExpenseCalculation()
         {
-
+            Console.Clear();
 
 
 

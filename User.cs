@@ -102,6 +102,9 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = Console.ReadLine();
 
+                Console.WriteLine("enter savings amount");
+                double savings = Convert.ToDouble(Console.ReadLine());
+
             //Do-While loop for confirming password
             do
             {
@@ -187,6 +190,7 @@ namespace ExpenseAppGroup
 
                     case 5:
                         Console.WriteLine("View savings");
+                        Savings.SavingsMenu();
                         break;
 
                     case 6:
