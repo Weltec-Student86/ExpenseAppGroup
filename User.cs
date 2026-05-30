@@ -35,8 +35,9 @@ namespace ExpenseAppGroup
         //List and objects
 
         public static List<User> users = new List<User>();
-        User exampleUser1 = new User("Peter", "Griffin", "p_man", "password");
-        User exampleUser2 = new User("Jimmy", "Beast", "mrbeast", "password");
+
+
+       
 
         
         
@@ -224,7 +225,27 @@ namespace ExpenseAppGroup
             Console.WriteLine($"First name: {FirstName}");
             Console.WriteLine($"Last name: {LastName}");
             Console.WriteLine($"Username: {Username}");
+            Console.WriteLine();
         }//end of Display user details----------------------------------------
+
+
+        //method to Pre-load users into the list upon application startup
+
+        public static void PreLoadUsers()
+        {
+            User exampleUser1 = new User("John", "Smith", "johnsmith7", "password");
+            User exampleUser2 = new User("Louis", "Jones", "lj1978", "password");
+            User exampleUser3 = new User("Peter", "Jones", "p_man", "password");
+            User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password");
+            User exampleUser5 = new User("Jimmy", "Donaldson", "mrbeast", "password");
+
+
+
+
+            users.Add(exampleUser1);
+            users.Add(exampleUser2);
+
+        }
 
     }//end of class---------------------------------------------------------------------------------------------
 }//end of namespace---------------------------------------------------------------------------------------------

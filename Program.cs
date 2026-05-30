@@ -18,6 +18,9 @@
         {
             Console.Clear();
 
+            //this method pre-loads users into the list upon the program starting
+            User.PreLoadUsers();
+
             //declaring varaibles
             int choice;
             bool landingPageLoop = false;
@@ -54,7 +57,7 @@
                         Admin.AdminLogin();
                         break;
 
-                    case 4:
+                    case 99:
                         Environment.Exit(0);
                         break;
 

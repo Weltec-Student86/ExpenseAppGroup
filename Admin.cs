@@ -186,6 +186,9 @@ namespace ExpenseAppGroup
                 user.DisplayUserDetails();
             }
 
+            Console.WriteLine("Press any key to return to Admin Home");
+            Console.ReadKey();
+            AdminHome();
 
         }//end of View User class-----------------------------------
 
