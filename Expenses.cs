@@ -11,8 +11,12 @@ namespace ExpenseAppGroup
         //fields
         private string expenseName;
         private double expenseAmount;
-        private int expensesFrequency;
+        private int expenseFrequency;
 
+        private static List<Expenses> _expenses = new List<Expenses>();
+        public string expName {  get; set; }
+        public double expAmount { get; set; }
+        public int expFrequency { get; set; }
 
         //method for expense----------------------------------1
         //expense that have been added to user account
@@ -25,18 +29,21 @@ namespace ExpenseAppGroup
             //do while loop to exit to home
             do
             {
-                
+                Console.WriteLine("\t Display Expenses");
 
-                //users expenses they have created this will need to be changed
-                Console.WriteLine($"expense 1:");
-                Console.WriteLine($"expense 2:");
-                Console.WriteLine($"expense 3:");
-                Console.WriteLine($"Total expense deducted: $");
+                //users expenses 
+                if (_expenses.Count == 0)
+                {
+                    Console.WriteLine($"no expenses added");
+                }
+                else
+                {
+                    foreach (var e in _expenses)
+                    Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
 
+                }
                 Console.WriteLine("1. back to home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
-
-
 
             } while (exitAddExpenseChoice1 == 0);
             User.UserHome();
@@ -47,10 +54,12 @@ namespace ExpenseAppGroup
         //adding new expense to user account------------------2
         public static void AddExpense()
         {
+
             Console.Clear();
 
             int exitAddExpenseChoice2 = 1;
-            
+
+         
             //do while loop to exit to home
             do
             {
@@ -59,19 +68,26 @@ namespace ExpenseAppGroup
                 Console.WriteLine();
 
                 Console.WriteLine("Add expense name:");
-                string expense = Console.ReadLine();
+                string expName = Console.ReadLine();
 
                 Console.WriteLine("Add expense amount:");
-                string expenseAmount = Console.ReadLine();
+                double expAmount = Convert.ToDouble(Console.ReadLine());
 
                 Console.WriteLine("Add expense frequency (days):");
-                string expenseFrequency = Console.ReadLine();
+                int expFrequency = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine("1. back to home");
                 exitAddExpenseChoice2 = Convert.ToInt32(Console.ReadLine());
 
-             
-            }while (exitAddExpenseChoice2 == 0);
+                _expenses.Add(new Expenses
+                {
+                    expenseName = expName,
+                    expenseAmount = expAmount,
+                    expenseFrequency = expFrequency
+                });
+
+
+            } while (exitAddExpenseChoice2 == 0);
             User.UserHome();
 
         }//end of AddExpense method------------------------2
@@ -131,7 +147,6 @@ namespace ExpenseAppGroup
 
         }
 
-
-
+     
     }//end of class-----------------------------------------
 }//end of namespace-----------------------------------------
