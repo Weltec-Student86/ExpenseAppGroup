@@ -4,11 +4,11 @@
     {
         static void Main(string[] args)
         {
+            //this method pre-loads users into the list upon the program starting
+            User.PreLoadUsers();
+
             //calling login menus
-
             LandingPage();
-
-
 
         }//end of main-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,8 +18,7 @@
         {
             Console.Clear();
 
-            //this method pre-loads users into the list upon the program starting
-            User.PreLoadUsers();
+           
 
             //declaring varaibles
             int choice;

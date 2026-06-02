@@ -223,6 +223,8 @@ namespace ExpenseAppGroup
         //Display user details------------------------------------------------
         public void DisplayUserDetails()
         {
+           
+
             Console.WriteLine($"First name: {FirstName}");
             Console.WriteLine($"Last name: {LastName}");
             Console.WriteLine($"Username: {Username}");
@@ -234,6 +236,7 @@ namespace ExpenseAppGroup
 
         public static void PreLoadUsers()
         {
+           
             User exampleUser0 = new User("user", "default", "user", "password");
             User exampleUser1 = new User("John", "Smith", "johnsmith7", "password1");
             User exampleUser2 = new User("Louis", "Jones", "lj1978", "password2");
@@ -241,7 +244,7 @@ namespace ExpenseAppGroup
             User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password4");
             User exampleUser5 = new User("Jimmy", "Donaldson", "mrbeast", "password5");
 
-
+            Console.Clear();
 
 
             users.Add(exampleUser1);
