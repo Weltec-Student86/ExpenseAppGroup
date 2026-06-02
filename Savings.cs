@@ -118,7 +118,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Goals:");
                 string goals = Console.ReadLine();
 
-                Console.WriteLine("1. back to savings menu");
+                Console.WriteLine("1. Back to savings menu");
                 exitAddGoalsChoice1 = Convert.ToInt32(Console.ReadLine());
 
 
@@ -146,7 +146,7 @@ namespace ExpenseAppGroup
 
                 string goals = Console.ReadLine();
 
-                Console.WriteLine("1. back to savings menu");
+                Console.WriteLine("1. Back to savings menu");
                 exitAddSavingChoice1 = Convert.ToInt32(Console.ReadLine());
 
 
@@ -172,7 +172,7 @@ namespace ExpenseAppGroup
                 double goal = Convert.ToDouble(Console.ReadLine());
                 Console.WriteLine();
 
-                Console.WriteLine("1. back to savings menu");
+                Console.WriteLine("1. Back to savings menu");
                 exitRemoveGoalsChoice1 = Convert.ToInt32(Console.ReadLine());
 
 
@@ -205,7 +205,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Select the goal you would like to update");
                 string goals = Console.ReadLine();
 
-                Console.WriteLine("1. back to savings menu");
+                Console.WriteLine("1. Back to savings menu");
                 exitUpdateGoalsChoice1 = Convert.ToInt32(Console.ReadLine());
 
 

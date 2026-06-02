@@ -29,12 +29,12 @@ namespace ExpenseAppGroup
             //do while loop to exit to home
             do
             {
-                Console.WriteLine($"\t Display Expenses");
+                Console.WriteLine($"\t Display Expenses\n");
 
                 //users expenses 
                 if (_expenses.Count == 0)
                 {
-                    Console.WriteLine($"no expenses added");
+                    Console.WriteLine($"No expenses added");
                 }
                 else
                 {
@@ -42,7 +42,7 @@ namespace ExpenseAppGroup
                     Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
 
                 }
-                Console.WriteLine("1. back to home");
+                Console.WriteLine("1. Back to home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
@@ -64,8 +64,7 @@ namespace ExpenseAppGroup
             do
             {
 
-                Console.WriteLine("\t add your expenses");
-                Console.WriteLine();
+                Console.WriteLine("\t Add your expenses\n");
 
                 Console.WriteLine("Add expense name:");
                 string expName = Console.ReadLine();
@@ -76,7 +75,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Add expense frequency (days):");
                 int expFrequency = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("1. back to home");
+                Console.WriteLine("\n1. Back to home");
                 exitAddExpenseChoice2 = Convert.ToInt32(Console.ReadLine());
 
                 _expenses.Add(new Expenses
@@ -129,7 +128,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Updated expense frequency (days):");
                 string updatedExpenseFrequency = Console.ReadLine();
 
-                Console.WriteLine("1. back to home");
+                Console.WriteLine("\n1. Back to home");
                 exitUpdateExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
 
@@ -159,12 +158,12 @@ namespace ExpenseAppGroup
             //do while loop to exit to home
             do
             {
-                Console.WriteLine($"\t Display Expenses");
+                Console.WriteLine($"\t Display Expenses\n");
 
                 //users expenses 
                 if (_expenses.Count == 0)
                 {
-                    Console.WriteLine($"no expenses added");
+                    Console.WriteLine($"No expenses added");
                 }
                 else
                 {
@@ -172,7 +171,7 @@ namespace ExpenseAppGroup
                         Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
 
                 }
-                Console.WriteLine("1. back to home");
+                Console.WriteLine("\n1. Back to home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);

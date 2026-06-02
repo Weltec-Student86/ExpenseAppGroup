@@ -8,83 +8,117 @@ namespace ExpenseAppGroup
 {
     public class Admin:Account
     {
+        //variables
+
+        //passing name of user to multiple methods - this is used to display the username on the home screen
+        public static string name = "";
+        
+        
+
+        //constructor
+
+        public Admin(string username, string password) 
+        { 
+            Username = username;
+            Password = password;
+        }
+
+
+        //List of admin accounts 
+
+        public static List<Admin> admins = new List<Admin>();
+
+
+
 
         //METHODS
 
 
-        //Admin login screen
+        //Admin login screen---------------------------------------------------------------------
         public static void AdminLogin()
         {
             Console.Clear();
 
             bool adminLoginMenu = false;
 
-            do
+            do//do-while to run administrator login menu
             {
+                Console.WriteLine("\t\tAdministrator Login");
+                Console.WriteLine("---------------------------------------------------------\n");
 
-                Console.WriteLine("Enter your admin username:");
-                string adminUserName = Console.ReadLine();
+                Console.WriteLine("Enter your username:");
+                string adminNameEntered = Console.ReadLine();
 
-                Console.WriteLine("Enter your admin password:");
-                string adminPassword = Console.ReadLine();
+                Admin.name = adminNameEntered;
 
-                if (adminUserName == "admin" && adminPassword == "password")
+                Console.WriteLine("Enter your password:");
+                string passwordEntered = Console.ReadLine();
+
+                //searches admin list for matching username and password
+                Admin adminFound = admins.Find(a => a.Username.Equals(adminNameEntered, StringComparison.Ordinal));
+
+                if (adminFound != null && adminFound.Password == passwordEntered) //login successful
                 {
-                    Console.WriteLine("Login success");
+                    Console.WriteLine("\nLogin Success! \nPress any key to continue...");
+                    Console.ReadKey();
+                    adminLoginMenu = false;
                     AdminHome();
                 }
-                else
+                else //wrong password or username
                 {
-                    Console.WriteLine("Wrong login");
+                    Console.WriteLine("\nWrong username or password. Try again.");
+
                     adminLoginMenu = true;
                 }
 
 
-            }while(adminLoginMenu == true);
-        }//end of Admin Login method-------------------------------------------------
+            } while (adminLoginMenu == true); //will keep looping until correct credentials are entered
+
+
+        }//end of Admin Login method-----------------------------------------------------------
 
 
 
 
-        //Admin Home-----------------------------------------------------------------
+        //Admin Home----------------------------------------------------------------------------
         public static void AdminHome()
         {
 
             bool adminHomeLoop = false;
             Console.Clear();
 
-            do
+            do //do-while runs admin home page
             {
 
-                Console.WriteLine("\tAdministrator Home");
-                Console.WriteLine();
+                Console.WriteLine("\t\tAdministrator Home");
+                Console.WriteLine("---------------------------------------------------------\n");
+                Console.WriteLine("Welcome " + Admin.name + "!\n");
+
+
                 Console.WriteLine("1. View all expenses");
                 Console.WriteLine("2. View all savings");
                 Console.WriteLine("3. Manage users");
                 Console.WriteLine("4. Logout");
                 Console.WriteLine("99. Exit");
 
-                Console.WriteLine("Please select an option:");
+                Console.WriteLine("\nPlease select an option:");
                 int adminHomeChoice = Convert.ToInt32(Console.ReadLine());
 
-                switch (adminHomeChoice)
+                switch (adminHomeChoice) //switch case that runs methods based on the admin's choice
                 {
                     case 1:
-                        Console.WriteLine("Viewing all user expenses");
                         Expenses.AdminViewExpenses();
                         break;
 
                     case 2:
-                        Console.WriteLine("Viewing all savings");
+                        //NEED TO ADD SAVINGS METHOD AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                         break;
 
                     case 3:
-                        Console.WriteLine("Manage users");
                         ManageUsers();
                         break;
 
                     case 4:
-                        Console.WriteLine("Logout");
                         Program.LandingPage();
                         break;
                     case 99:
@@ -93,7 +127,7 @@ namespace ExpenseAppGroup
 
                     default:
                         Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
+                        Console.WriteLine("\nEnter a valid option!\n");
                         Console.WriteLine("Press any key to return to admin home...");
                         Console.ReadKey();
                         Console.Clear();
@@ -116,12 +150,10 @@ namespace ExpenseAppGroup
 
             bool mngUserLoop = false;
 
-            Console.WriteLine("Administrator panel - Manage users");
-            Console.WriteLine();
-
-            do
+            do //do-while loop to run manage user menu
             {
-                Console.Clear() ;
+                Console.Clear();
+                Console.WriteLine("\t\tAdministrator panel - Manage users\n");
 
                 Console.WriteLine("1. View all users");
                 Console.WriteLine("2. Add new user");
@@ -130,121 +162,128 @@ namespace ExpenseAppGroup
                 Console.WriteLine("5. Back to admin home");
                 int mngUserChoice = Convert.ToInt32(Console.ReadLine());
 
-                switch (mngUserChoice)
+                switch (mngUserChoice) //switch menu for admin manage user choice
                 {
                     case 1:
                         ViewUsers();
                         break;
 
                     case 2:
-                        Console.WriteLine("Adding new user");
                         AdminAddUser();
                         break;
 
                     case 3:
-                        Console.WriteLine("Updating user details");
                         AdminUpdateUser();
                         break;
 
                     case 4:
-                        Console.WriteLine("Remove user");
-                        RemoveUser();
+                        AdminRemoveUser();
                         break;
 
                     case 5:
-                        Console.WriteLine("Back to admin home");
                         AdminHome();
                         break;
 
                     default:
                         Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to home...");
+                        Console.WriteLine("\nEnter a valid option!\n");
+                        Console.WriteLine("Press any key to return to Admin Home...");
                         Console.ReadKey();
                         Console.Clear();
                         mngUserLoop = true;
-
                         break;
 
-                }
+                }//end of switch
 
-            }while (mngUserLoop == true);
+            }while (mngUserLoop == true); //keeps looping if admin does not enter a valid choice
+
         }//end of Manage users----------------------------------------------
 
 
 
-        //View all users
+
+
+        //View all users-----------------------------------------------------------
 
         public static void ViewUsers()
         {
+            //runs a for each loop that displays all of the user accounts in the application
+
             Console.Clear();
 
-            Console.WriteLine("Viewing all users");
+            Console.WriteLine("\t\tAdministrator panel - Viewing all users\n");
 
-            foreach (User users in User.users)
+            foreach (User users in User.users) //traverses through entire user list
             {
+                //method called from user class
                 users.DisplayUserDetails();
-
             }
 
-            Console.WriteLine("Press any key to return to Admin Home");
+            Console.WriteLine("\nPress any key to return to Manage Users");
             Console.ReadKey();
-            AdminHome();
+            ManageUsers();
 
-        }//end of View User class-----------------------------------
+        }//end of View User class-----------------------------------------------
 
 
 
 
 
         //Admin add user--------------------------------------------
-        public static void AdminAddUser()                                                               //NEED TO CHANGE THIS SECTION TO MATCH REGISTER(); METHOD
+        public static void AdminAddUser()
         {
+            //lets admin add a new user account
 
             Console.Clear();
+
+            Console.WriteLine("\t\tAdministrator panel - Adding new user\n");
 
             bool pwVerify = false;
 
             Console.WriteLine("Enter the user's first name:");
-            string firstName = Console.ReadLine();
+            string firstNameEntered = Console.ReadLine();
 
             Console.WriteLine("Enter the user's last name:");
-            string lastName = Console.ReadLine();
-
-            Console.WriteLine("Enter the user's date of birth:");
-            string dob = Console.ReadLine();
+            string lastNameEntered = Console.ReadLine();
 
             Console.WriteLine("Enter their username:");
-            string userName = Console.ReadLine();
+            string userNameEntered = Console.ReadLine();
+
+            Console.WriteLine("Enter their password:");
+            string passwordEntered = Console.ReadLine();
 
             //Do-While loop for confirming password
             do
             {
 
-                Console.WriteLine("Enter their password:");
-                string password = Console.ReadLine();
+                Console.WriteLine("Re-enter password:");
+                string reEnteredPasswordEntered = Console.ReadLine();
 
-                Console.WriteLine("Re-enter their password:");
-                string reEnteredPassword = Console.ReadLine();
-
-                if (password == reEnteredPassword)
+                if (passwordEntered == reEnteredPasswordEntered)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Account successfully created!");
-                    Console.WriteLine();
+                    Console.WriteLine("\nAccount successfully created!\n");
+
                     pwVerify = true;
                 }
                 else
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Passwords do not match, please re-enter password.");
-                    Console.WriteLine();
-                }
+ 
+                    Console.WriteLine("\nPasswords do not match, please re-enter password.\n");
+
+                }//end of if-else
 
             } while (pwVerify == false);
+            //end of do-while
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue...");
+            //asks admin to enter an amount into savings for the user
+            Console.WriteLine("Enter savings amount");
+            double savings = Convert.ToDouble(Console.ReadLine());
+
+            //adds a new object to the user list with the entered details
+            User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
+            User.users.Add(newUser);
+
+            Console.WriteLine("\nPress any key to return to Manage Users");
             Console.ReadKey();
 
             ManageUsers();
@@ -258,7 +297,20 @@ namespace ExpenseAppGroup
 
         public static void AdminUpdateUser()
         {
-            Console.WriteLine("This will let the admin update user details");
+            //lets admin update user details of existing users
+            Console.Clear();
+
+            Console.WriteLine("\t\tAdministrator panel - Update user details\n");
+
+            //calls method from user class
+            User.UpdateDetails();
+
+            Console.WriteLine("\nPress any key to return to Manage Users.");
+
+            Console.ReadKey();
+
+            ManageUsers();
+
 
         }//end of Admin Update User ----------------------------------------
 
@@ -268,10 +320,39 @@ namespace ExpenseAppGroup
 
         //Remove user-------------------------------------------------------
 
-        public static void RemoveUser()
+        public static void AdminRemoveUser()
         {
-            Console.WriteLine("This will let the admin remove a user");
+            //lets admin remove existing users from the application
+
+            Console.Clear();
+
+            Console.WriteLine("\t\tAdministrator panel - Remove user\n");
+
+            //calls method from user class
+            User.RemoveUser();
+
+            Console.WriteLine("\nPress any key to return to Manage Users.");
+
+            Console.ReadKey();
+
+            ManageUsers();
+
+
         }//end of Remove User-----------------------------------------------
+
+
+
+
+
+        //Method to pre-load admin accounts into program---------------------
+        public static void PreLoadAdmins()
+        {
+            Admin admin1 = new Admin("admin", "password");
+            Admin admin2 = new Admin("a", "pw");
+
+            admins.Add(admin1);
+            admins.Add(admin2);
+        }//end of PreLoad Admins----------------------------------------------
 
 
 

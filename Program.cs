@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            //this method pre-loads users into the list upon the program starting
+            //this method pre-loads admins and users into the lists upon the program starting
+            Admin.PreLoadAdmins();
             User.PreLoadUsers();
 
             //calling login menus
@@ -27,32 +28,28 @@
             do {
                 
 
-                Console.WriteLine("\t******Welcome to the Expense App*******");
-                Console.WriteLine("\t Login or Register for an account");
+                Console.WriteLine("\t\t****** Welcome to the Expense App ******");
+                Console.WriteLine("-------------------------------------------------------------------------------\n");
+                Console.WriteLine("\t\tLogin or Register for an account");
                 Console.WriteLine();
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Register");
                 Console.WriteLine("3. Administrator Login");
                 Console.WriteLine("99. Exit");
-                Console.WriteLine("Please select a choice");
+                Console.WriteLine("\nPlease select a choice");
                 choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Login");
-                        Console.WriteLine();
                         User.UserLogin();
                         break;
 
                     case 2:
-                        Console.WriteLine("Register");
-                        Console.WriteLine();
                         User.Register();
                         break;
 
                     case 3:
-                        Console.WriteLine("Admin login");
                         Admin.AdminLogin();
                         break;
 
@@ -63,7 +60,7 @@
                     default:
                         Console.Clear();
                         Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to login page...");
+                        Console.WriteLine("Press any key to return to main page...");
                         Console.ReadKey();
                         Console.Clear();
                         landingPageLoop = true;

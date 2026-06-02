@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -10,21 +11,23 @@ namespace ExpenseAppGroup
 {
     public class User : Account
     {
+        //variables
 
-
+        //passing name of user to multiple methods - this is used to display the username on the home screen
+        public static string name = "";
 
         //constructors
 
         public User(string firstName, string lastName, string username, string password)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Username = username;
-            this.Password = password;
+            FirstName = firstName;
+            LastName = lastName;
+            Username = username;
+            Password = password;
 
         }
 
-        //List and objects
+        //List for user accounts
 
         public static List<User> users = new List<User>();
 
@@ -43,34 +46,44 @@ namespace ExpenseAppGroup
             bool loginVerify = false;
             bool usernameVerify = false;
 
-
+            //goes through a do-while loop until correct credentials are entered
             do
             {
-               
+                Console.WriteLine("\t\tLogin");
+                Console.WriteLine("---------------------------------------\n");
+
                 Console.WriteLine("Enter your username:");
                 string userNameEntered = Console.ReadLine();
+
+                //passes username into class name variable so it can be displayed on the home screen
+                User.name = userNameEntered;
 
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = Console.ReadLine();
 
+                //searches user list for correct username
+
                User userFound = users.Find(u => u.Username.Equals(userNameEntered, StringComparison.Ordinal));
 
+                //if else statement checks if the username and password match
                 if (userFound != null && userFound.Password == passwordEntered)
                 {
-                    Console.WriteLine("Login Success! Press any key to continue...");
+                    Console.WriteLine("\nLogin Success! \nPress any key to continue...");
                     Console.ReadKey();
                     userLoginScreen = false;
-                    UserHome();
+                    UserHome(); //takes user to the Home menu if correct credentials are entered
                 }
                 else
                 {
-                    Console.WriteLine("Wrong username or password. Try again.");
+                    Console.WriteLine("\nWrong username or password. Try again.");
 
-                    userLoginScreen = true;
-                }
+                    userLoginScreen = true; //makes user re-enter details if login is wrong
 
-            } while (userLoginScreen == true);
-          
+                }//end of if-else
+
+
+            } while (userLoginScreen == true); //end of do-while
+
 
         }//end of Login method----------------------------------
 
@@ -84,55 +97,59 @@ namespace ExpenseAppGroup
             Console.Clear();
 
             bool pwVerify = false;
-              
+
+            Console.WriteLine("\t\tRegister");
+            Console.WriteLine("---------------------------------------\n");
+
+            //user enters account details for new account
+
                 Console.WriteLine("Enter your first name:");
                 string firstNameEntered = Console.ReadLine();
 
-                Console.WriteLine("Enter your last name:");
+                Console.WriteLine("\nEnter your last name:");
                 string lastNameEntered = Console.ReadLine();
 
-                Console.WriteLine("Enter your username:");
+                Console.WriteLine("\nEnter your username:");
                 string userNameEntered = Console.ReadLine();
 
-                Console.WriteLine("Enter your password:");
+                Console.WriteLine("\nEnter your password:");
                 string passwordEntered = Console.ReadLine();
 
-              
 
             //Do-While loop for confirming password
             do
             {
 
-                Console.WriteLine("Re-enter password:");
+                Console.WriteLine("\nRe-enter password:");
                 string reEnteredPasswordEntered = Console.ReadLine();
 
                 if (passwordEntered == reEnteredPasswordEntered)
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Account successfully created!");
-                    Console.WriteLine();
+                    Console.WriteLine("\nAccount successfully created!\n");
                     pwVerify = true;
+                    //if passwords match, account is successfully created
                 }
                 else
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Passwords do not match, please re-enter password.");
-                    Console.WriteLine();
-                }
+                    Console.WriteLine("\nPasswords do not match, please re-enter password.\n");
+                    //if passwords don't match, the user has to re-enter the password to match
+                }//end of if-else
 
-            } while (pwVerify == false);
+            } while (pwVerify == false);//end of do-while
 
-            Console.WriteLine("enter savings amount");
+
+            //once account is created, users have to enter an amount into their savings account
+            Console.WriteLine("\nEnter savings amount:");
             double savings = Convert.ToDouble(Console.ReadLine());
 
+            //creates new object with user details entered
             User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
             users.Add(newUser);
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...\n");
             Console.ReadKey();
             
-
+            //takes user to the landing page once account is created, and they need to log in
             Program.LandingPage();
 
         }//end of Register method---------------------------------------
@@ -147,11 +164,14 @@ namespace ExpenseAppGroup
             bool userHomeLoop = false;
             Console.Clear();
 
-            do
+            do //do-while loop for user home menu options
             {
 
-                Console.WriteLine("\tHome");
-                Console.WriteLine();
+                Console.WriteLine("\t\tHome");
+                Console.WriteLine("---------------------------------------\n");
+
+                Console.WriteLine("Welcome " + (User.name) + "!\n");
+ 
                 Console.WriteLine("1. View expenses");
                 Console.WriteLine("2. Add new expense");
                 Console.WriteLine("3. Update existing expense");
@@ -160,38 +180,32 @@ namespace ExpenseAppGroup
                 Console.WriteLine("6. Logout");
                 Console.WriteLine("99. Exit");
 
-                Console.WriteLine("Please select an option:");
+                Console.WriteLine("\nPlease select an option:");
                 int homeChoice = Convert.ToInt32(Console.ReadLine());
 
-                switch (homeChoice)
+                switch (homeChoice) //switch statement that calls methods depending on the user's choice
                 {
                     case 1:
-                        Console.WriteLine("Viewing expenses");
-                        Console.WriteLine();
                         Expenses.ViewExpenses();
                         break;
 
                     case 2:
-                        Console.WriteLine("Add new expense");
-                        Console.WriteLine();
                         Expenses.AddExpense();
                         break;
 
                     case 3:
-                        Console.WriteLine("Update existing expense");
+                        Expenses.UpdateExpense();
                         break;
 
                     case 4:
-                        Console.WriteLine("Remove expense");
+                        Expenses.RemoveExpense();
                         break;
 
                     case 5:
-                        Console.WriteLine("View savings");
                         Savings.SavingsMenu();
                         break;
 
                     case 6:
-                        Console.WriteLine("Logout");
                         Program.LandingPage();
                         break;
                     case 99:
@@ -207,7 +221,7 @@ namespace ExpenseAppGroup
                         userHomeLoop = true;
                         break;
 
-                }//end of switch---------------------------------------
+                }//end of switch
 
             } while (userHomeLoop == true) ; //do while loop to re-run user home menu
 
@@ -217,26 +231,152 @@ namespace ExpenseAppGroup
 
 
 
-
-
-
         //Display user details------------------------------------------------
         public void DisplayUserDetails()
         {
-           
-
+            //displays details from the user list
             Console.WriteLine($"First name: {FirstName}");
             Console.WriteLine($"Last name: {LastName}");
-            Console.WriteLine($"Username: {Username}");
-            Console.WriteLine();
+            Console.WriteLine($"Username: {Username}\n");
+
         }//end of Display user details----------------------------------------
 
 
-        //method to Pre-load users into the list upon application startup
+
+
+
+
+        //Update details functionality for admin---------------------------------------------------
+        public static void UpdateDetails()
+        {
+            bool updateScreen = false;
+            do
+            {
+                //asks admin to search the user they want to update details for
+                Console.WriteLine("Enter the username of the user you wish to update details for:");
+                string userNameUpdEntered = Console.ReadLine();
+
+                //finds the user's corresponding index in the list
+                int index = users.FindIndex(a => a.Username.Equals(userNameUpdEntered, StringComparison.Ordinal));
+
+                if (index > 0) //checks if the user has been found or not (an index of -1 means the user has not been found)
+                {
+                    Console.WriteLine($"User found at index {index}\n");
+                  
+
+                    bool pwVerify = false;
+
+                    Console.WriteLine("Enter their first name:");
+                    string firstNameEntered = Console.ReadLine();
+
+                    Console.WriteLine("Enter their last name:");
+                    string lastNameEntered = Console.ReadLine();
+
+                    Console.WriteLine("Enter their username:");
+                    string userNameEntered = Console.ReadLine();
+
+                    Console.WriteLine("Enter their password:");
+                    string passwordEntered = Console.ReadLine();
+
+
+
+                    //Do-While loop for confirming password
+                    do
+                    {
+
+                        Console.WriteLine("Re-enter password:");
+                        string reEnteredPasswordEntered = Console.ReadLine();
+
+                        if (passwordEntered == reEnteredPasswordEntered)
+                        {
+                            Console.WriteLine("\nAccount successfully updated!\n");
+                            pwVerify = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nPasswords do not match, please re-enter password.\n");
+                        }
+
+                    } while (pwVerify == false);
+
+                    //removes old user details at that index
+                    users.RemoveAt(index);
+
+                    //adds updated details to same index of the removed user
+                    User updatedUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
+                    users.Insert(index, updatedUser);
+
+                    updateScreen = false;
+                }
+                else //displays if the user does not exist in the list
+                {
+                    Console.WriteLine("\nUser does not exist. Try again.\n");
+
+                    updateScreen = true;
+                }//end of if-else
+
+
+            } while (updateScreen == true);
+            //end of do-while
+
+
+
+        }//end of Update Details---------------------------------------------------------
+
+
+
+
+
+
+        //Remove user functionality---------------------------------------------------------
+        public static void RemoveUser()
+        {
+            //admin searches the name of the user they wish to remove
+            Console.WriteLine("Enter the username of the user you want to remove:");
+            string remUserNameEntered = Console.ReadLine();
+
+            //the variable is then passed through the list to find a matching account
+            User userRemFound = users.Find(u => u.Username.Equals(remUserNameEntered, StringComparison.Ordinal));
+
+            //if-else statement to confirm if admin wants to remove the user account
+            if (userRemFound != null)
+            {
+                Console.WriteLine($"\nThe user {userRemFound.Username} will be removed.");
+                Console.WriteLine("\nAre you sure you want to remove this user? (y/n)\n");
+
+                char removeConfirm = Convert.ToChar(Console.ReadLine());
+
+
+                if (removeConfirm == 'y') //removes user
+                {
+                    users.Remove(userRemFound);
+                    Console.WriteLine("\nUser removed.\n");
+
+                }
+                else //cancels removal
+                {
+                    Console.WriteLine("\nRemove canceled.\n");
+                }
+
+            }
+            else //displays if the name entered is not on the list
+            {
+                Console.WriteLine("\nUser does not exist.\n");
+
+            }
+
+        }//end of Remove User-----------------------------------------------------------------
+
+
+
+
+
+
+        //method to Pre-load users into the list upon application startup------------------------
 
         public static void PreLoadUsers()
         {
-           
+           //creates objects
             User exampleUser0 = new User("user", "default", "user", "password");
             User exampleUser1 = new User("John", "Smith", "johnsmith7", "password1");
             User exampleUser2 = new User("Louis", "Jones", "lj1978", "password2");
@@ -244,19 +384,18 @@ namespace ExpenseAppGroup
             User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password4");
             User exampleUser5 = new User("Jimmy", "Donaldson", "mrbeast", "password5");
 
-            Console.Clear();
-
-
+            //adds objects to the list
+            users.Add(exampleUser0);
             users.Add(exampleUser1);
             users.Add(exampleUser2);
             users.Add(exampleUser3);
             users.Add(exampleUser4);
             users.Add(exampleUser5);
 
-        }//end of pre load users-----------------------------
+        }//end of pre load users--------------------------------------------------------------
 
 
 
 
-    }//end of class---------------------------------------------------------------------------------------------
-}//end of namespace---------------------------------------------------------------------------------------------
+    }//end of class------------------------------------------------------------------------------------------------------------------------------------------------------------
+}//end of namespace--------------------------------------------------------------------------------------------------------------------------------------
