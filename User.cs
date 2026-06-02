@@ -13,15 +13,6 @@ namespace ExpenseAppGroup
 
 
         //constructors
-        public User(string firstName, string lastName, DateTime birthday, string username, string password)
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Birthday = birthday;
-            this.Username = username;
-            this.Password = password;
-
-        }
 
         public User(string firstName, string lastName, string username, string password)
         {
@@ -35,9 +26,6 @@ namespace ExpenseAppGroup
         //List and objects
 
         public static List<User> users = new List<User>();
-
-
-       
 
         
         
@@ -93,9 +81,6 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Enter your last name:");
                 string lastNameEntered = Console.ReadLine();
 
-                //Console.WriteLine("Enter your date of birth (YYYY/MM/DD):");
-                //DateTime dobEntered = Convert.ToDateTime(Console.ReadLine());
-
                 Console.WriteLine("Enter your username:");
                 string userNameEntered = Console.ReadLine();
 
@@ -128,7 +113,7 @@ namespace ExpenseAppGroup
 
             } while (pwVerify == false);
 
-            User newUser = new User(firstNameEntered, lastNameEntered, /*dobEntered*/ userNameEntered, passwordEntered);
+            User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
             users.Add(newUser);
 
             Console.WriteLine();
@@ -248,6 +233,9 @@ namespace ExpenseAppGroup
 
             users.Add(exampleUser1);
             users.Add(exampleUser2);
+            users.Add(exampleUser3);
+            users.Add(exampleUser4);
+            users.Add(exampleUser5);
 
         }
 
