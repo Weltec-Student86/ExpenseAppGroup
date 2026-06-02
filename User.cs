@@ -81,14 +81,16 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Enter your last name:");
                 string lastNameEntered = Console.ReadLine();
 
+                //Console.WriteLine("Enter your date of birth (YYYY/MM/DD):");
+                //DateTime dobEntered = Convert.ToDateTime(Console.ReadLine());
+
                 Console.WriteLine("Enter your username:");
                 string userNameEntered = Console.ReadLine();
 
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = Console.ReadLine();
 
-                Console.WriteLine("enter savings amount");
-                double savings = Convert.ToDouble(Console.ReadLine());
+              
 
             //Do-While loop for confirming password
             do
@@ -113,7 +115,10 @@ namespace ExpenseAppGroup
 
             } while (pwVerify == false);
 
-            User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
+            Console.WriteLine("enter savings amount");
+            double savings = Convert.ToDouble(Console.ReadLine());
+
+            User newUser = new User(firstNameEntered, lastNameEntered, /*dobEntered*/ userNameEntered, passwordEntered);
             users.Add(newUser);
 
             Console.WriteLine();
