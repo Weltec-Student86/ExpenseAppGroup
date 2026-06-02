@@ -148,8 +148,8 @@ namespace ExpenseAppGroup
         }
 
 
-        //method for expense----------------------------------6
-        //expense that have been added to user account
+        //method for admin expense----------------------------------6
+        //viewing all expenses that have been added to user account
 
         public static void AdminViewExpenses()
         {

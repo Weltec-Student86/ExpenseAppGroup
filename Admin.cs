@@ -71,7 +71,7 @@ namespace ExpenseAppGroup
                 {
                     case 1:
                         Console.WriteLine("Viewing all user expenses");
-                        Expenses.ViewExpenses();
+                        Expenses.AdminViewExpenses();
                         break;
 
                     case 2:
@@ -181,9 +181,10 @@ namespace ExpenseAppGroup
 
             Console.WriteLine("Viewing all users");
 
-            foreach (User user in User.users)
+            foreach (User users in User.users)
             {
-                user.DisplayUserDetails();
+                users.DisplayUserDetails();
+
             }
 
             Console.WriteLine("Press any key to return to Admin Home");

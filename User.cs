@@ -12,6 +12,7 @@ namespace ExpenseAppGroup
     {
 
 
+
         //constructors
 
         public User(string firstName, string lastName, string username, string password)
@@ -27,7 +28,8 @@ namespace ExpenseAppGroup
 
         public static List<User> users = new List<User>();
 
-        
+
+    
         
         //METHODS
 
@@ -38,24 +40,38 @@ namespace ExpenseAppGroup
             Console.Clear();
 
             bool userLoginScreen = false;
+            bool loginVerify = false;
+            bool usernameVerify = false;
+
 
             do
             {
-
+               
                 Console.WriteLine("Enter your username:");
-                string userName = Console.ReadLine();
+                string userNameEntered = Console.ReadLine();
 
                 Console.WriteLine("Enter your password:");
-                string password = Console.ReadLine();
+                string passwordEntered = Console.ReadLine();
 
-                if (userName == "user" && password == "password")
+               User userNameSearch = users.Find(e => e.Username == userNameEntered);
+               User passwordSearch = users.Find(e => e.Password == passwordEntered);
+
+                if (userNameSearch != null)
                 {
-                    Console.WriteLine("Login success");
+                    usernameVerify = true;
+                }
+
+
+                if (loginVerify == true)
+                {
+                    Console.WriteLine("Login Success! Press any key to continue...");
+                    Console.ReadKey();
                     UserHome();
                 }
                 else
                 {
-                    Console.WriteLine("Wrong login");
+                    Console.WriteLine("Wrong username or password. Try again.");
+
                     userLoginScreen = true;
                 }
 
@@ -80,9 +96,6 @@ namespace ExpenseAppGroup
 
                 Console.WriteLine("Enter your last name:");
                 string lastNameEntered = Console.ReadLine();
-
-                //Console.WriteLine("Enter your date of birth (YYYY/MM/DD):");
-                //DateTime dobEntered = Convert.ToDateTime(Console.ReadLine());
 
                 Console.WriteLine("Enter your username:");
                 string userNameEntered = Console.ReadLine();
@@ -118,7 +131,7 @@ namespace ExpenseAppGroup
             Console.WriteLine("enter savings amount");
             double savings = Convert.ToDouble(Console.ReadLine());
 
-            User newUser = new User(firstNameEntered, lastNameEntered, /*dobEntered*/ userNameEntered, passwordEntered);
+            User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
             users.Add(newUser);
 
             Console.WriteLine();
@@ -227,11 +240,12 @@ namespace ExpenseAppGroup
 
         public static void PreLoadUsers()
         {
-            User exampleUser1 = new User("John", "Smith", "johnsmith7", "password");
-            User exampleUser2 = new User("Louis", "Jones", "lj1978", "password");
-            User exampleUser3 = new User("Peter", "Jones", "p_man", "password");
-            User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password");
-            User exampleUser5 = new User("Jimmy", "Donaldson", "mrbeast", "password");
+            User exampleUser0 = new User("user", "default", "user", "password");
+            User exampleUser1 = new User("John", "Smith", "johnsmith7", "password1");
+            User exampleUser2 = new User("Louis", "Jones", "lj1978", "password2");
+            User exampleUser3 = new User("Peter", "Jones", "p_man", "password3");
+            User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password4");
+            User exampleUser5 = new User("Jimmy", "Donaldson", "mrbeast", "password5");
 
 
 
@@ -242,7 +256,10 @@ namespace ExpenseAppGroup
             users.Add(exampleUser4);
             users.Add(exampleUser5);
 
-        }
+        }//end of pre load users-----------------------------
+
+
+
 
     }//end of class---------------------------------------------------------------------------------------------
 }//end of namespace---------------------------------------------------------------------------------------------
