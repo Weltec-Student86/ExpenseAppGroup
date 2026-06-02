@@ -53,19 +53,13 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = Console.ReadLine();
 
-               User userNameSearch = users.Find(e => e.Username == userNameEntered);
-               User passwordSearch = users.Find(e => e.Password == passwordEntered);
+               User userFound = users.Find(u => u.Username.Equals(userNameEntered, StringComparison.Ordinal));
 
-                if (userNameSearch != null)
-                {
-                    usernameVerify = true;
-                }
-
-
-                if (loginVerify == true)
+                if (userFound != null && userFound.Password == passwordEntered)
                 {
                     Console.WriteLine("Login Success! Press any key to continue...");
                     Console.ReadKey();
+                    userLoginScreen = false;
                     UserHome();
                 }
                 else
