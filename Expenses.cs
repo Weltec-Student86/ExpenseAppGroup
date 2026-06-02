@@ -29,7 +29,7 @@ namespace ExpenseAppGroup
             //do while loop to exit to home
             do
             {
-                Console.WriteLine("\t Display Expenses");
+                Console.WriteLine($"\t Display Expenses");
 
                 //users expenses 
                 if (_expenses.Count == 0)
@@ -147,6 +147,39 @@ namespace ExpenseAppGroup
 
         }
 
-     
+
+        //method for expense----------------------------------6
+        //expense that have been added to user account
+
+        public static void AdminViewExpenses()
+        {
+            Console.Clear();
+
+            int exitAddExpenseChoice1 = 1;
+            //do while loop to exit to home
+            do
+            {
+                Console.WriteLine($"\t Display Expenses");
+
+                //users expenses 
+                if (_expenses.Count == 0)
+                {
+                    Console.WriteLine($"no expenses added");
+                }
+                else
+                {
+                    foreach (var e in _expenses)
+                        Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
+
+                }
+                Console.WriteLine("1. back to home");
+                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+
+            } while (exitAddExpenseChoice1 == 0);
+            Admin.AdminHome();
+
+        }//end of ViewExpense method--------------------------6
+
+
     }//end of class-----------------------------------------
 }//end of namespace-----------------------------------------

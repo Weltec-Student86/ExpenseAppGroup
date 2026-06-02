@@ -102,8 +102,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = Console.ReadLine();
 
-                Console.WriteLine("enter savings amount");
-                double savings = Convert.ToDouble(Console.ReadLine());
+              
 
             //Do-While loop for confirming password
             do
@@ -127,6 +126,9 @@ namespace ExpenseAppGroup
                 }
 
             } while (pwVerify == false);
+
+            Console.WriteLine("enter savings amount");
+            double savings = Convert.ToDouble(Console.ReadLine());
 
             User newUser = new User(firstNameEntered, lastNameEntered, /*dobEntered*/ userNameEntered, passwordEntered);
             users.Add(newUser);
