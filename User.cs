@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -15,6 +16,9 @@ namespace ExpenseAppGroup
 
         //passing name of user to multiple methods - this is used to display the username on the home screen
         public static string name = "";
+        public static int accountIndex;
+
+        private static string password = "";
 
         //constructors
 
@@ -52,14 +56,42 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\t\tLogin");
                 Console.WriteLine("---------------------------------------\n");
 
+                //username
                 Console.WriteLine("Enter your username:");
                 string userNameEntered = Console.ReadLine();
 
                 //passes username into class name variable so it can be displayed on the home screen
                 User.name = userNameEntered;
 
+                //password
                 Console.WriteLine("Enter your password:");
-                string passwordEntered = Console.ReadLine();
+                string passwordEntered = null;
+
+                        while (true) //while loop obfuscates password when the user is typing it
+                        {
+
+                            ConsoleKeyInfo ck = Console.ReadKey(true);
+                            if (ck.Key != ConsoleKey.Enter)
+                            {
+                                if (ck.Key != ConsoleKey.Backspace)
+                                {
+                                    passwordEntered += ck.KeyChar.ToString();
+                                    Console.Write("*");
+                                }
+                                else
+                                {
+                                    Console.Write("\b \b");
+                                }//end of if else
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+
+                                break;
+                            }//end of if else
+                    
+                        }//end of while
+
 
                 //searches user list for correct username
 
@@ -68,6 +100,9 @@ namespace ExpenseAppGroup
                 //if else statement checks if the username and password match
                 if (userFound != null && userFound.Password == passwordEntered)
                 {
+                    int index = users.FindIndex(a => a.Username.Equals(userNameEntered, StringComparison.Ordinal));
+                    User.accountIndex = index;
+
                     Console.WriteLine("\nLogin Success! \nPress any key to continue...");
                     Console.ReadKey();
                     userLoginScreen = false;
@@ -113,7 +148,32 @@ namespace ExpenseAppGroup
                 string userNameEntered = Console.ReadLine();
 
                 Console.WriteLine("\nEnter your password:");
-                string passwordEntered = Console.ReadLine();
+                string passwordEntered = null;
+
+                        while (true) //while loop obfuscates password when the user is typing it
+                        {
+
+                            ConsoleKeyInfo ck = Console.ReadKey(true);
+                            if (ck.Key != ConsoleKey.Enter)
+                            {
+                                if (ck.Key != ConsoleKey.Backspace)
+                                {
+                                    passwordEntered += ck.KeyChar.ToString();
+                                    Console.Write("*");
+                                }
+                                else
+                                {
+                                    Console.Write("\b \b");
+                                }//end of if else
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+
+                                break;
+                            }//end of if else
+
+                        }//end of while
 
 
             //Do-While loop for confirming password
@@ -121,7 +181,32 @@ namespace ExpenseAppGroup
             {
 
                 Console.WriteLine("\nRe-enter password:");
-                string reEnteredPasswordEntered = Console.ReadLine();
+                string reEnteredPasswordEntered = null;
+
+                        while (true) //while loop obfuscates password when the user is typing it
+                        {
+
+                            ConsoleKeyInfo ck = Console.ReadKey(true);
+                            if (ck.Key != ConsoleKey.Enter)
+                            {
+                                if (ck.Key != ConsoleKey.Backspace)
+                                {
+                                    reEnteredPasswordEntered += ck.KeyChar.ToString();
+                                    Console.Write("*");
+                                }
+                                else
+                                {
+                                    Console.Write("\b \b");
+                                }//end of if else
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+
+                                break;
+                            }//end of if else
+
+                        }//end of while
 
                 if (passwordEntered == reEnteredPasswordEntered)
                 {
@@ -160,7 +245,7 @@ namespace ExpenseAppGroup
         //User home-----------------------------------------------------
         public static void UserHome()
         {
-
+            int index = User.accountIndex;
             bool userHomeLoop = false;
             Console.Clear();
 
@@ -171,6 +256,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("---------------------------------------\n");
 
                 Console.WriteLine("Welcome " + (User.name) + "!\n");
+                Console.WriteLine("Account number: " + (User.accountIndex) + "\n");
  
                 Console.WriteLine("1. View expenses");
                 Console.WriteLine("2. Add new expense");
@@ -259,7 +345,7 @@ namespace ExpenseAppGroup
                 //finds the user's corresponding index in the list
                 int index = users.FindIndex(a => a.Username.Equals(userNameUpdEntered, StringComparison.Ordinal));
 
-                if (index > 0) //checks if the user has been found or not (an index of -1 means the user has not been found)
+                if (index > -1) //checks if the user has been found or not (an index of -1 means the user has not been found)
                 {
                     Console.WriteLine($"User found at index {index}\n");
                   
@@ -393,7 +479,6 @@ namespace ExpenseAppGroup
             users.Add(exampleUser5);
 
         }//end of pre load users--------------------------------------------------------------
-
 
 
 

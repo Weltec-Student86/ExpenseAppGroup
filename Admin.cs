@@ -46,13 +46,42 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\t\tAdministrator Login");
                 Console.WriteLine("---------------------------------------------------------\n");
 
+                //username
                 Console.WriteLine("Enter your username:");
                 string adminNameEntered = Console.ReadLine();
 
+                //passes username from login to other methods
                 Admin.name = adminNameEntered;
 
+                //password
                 Console.WriteLine("Enter your password:");
-                string passwordEntered = Console.ReadLine();
+                string passwordEntered = null;
+
+                        while (true) //while loop obfuscates password when the user is typing it
+                        {
+
+                            ConsoleKeyInfo ck = Console.ReadKey(true);
+                            if (ck.Key != ConsoleKey.Enter)
+                            {
+                                if (ck.Key != ConsoleKey.Backspace)
+                                {
+                                    passwordEntered += ck.KeyChar.ToString();
+                                    Console.Write("*");
+                                }
+                                else
+                                {
+                                    Console.Write("\b \b");
+                                }//end of if else
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+
+                                break;
+                            }//end of if else
+
+                        }//end of while
+
 
                 //searches admin list for matching username and password
                 Admin adminFound = admins.Find(a => a.Username.Equals(adminNameEntered, StringComparison.Ordinal));
@@ -250,14 +279,65 @@ namespace ExpenseAppGroup
             string userNameEntered = Console.ReadLine();
 
             Console.WriteLine("Enter their password:");
-            string passwordEntered = Console.ReadLine();
+            string passwordEntered = null;
+
+            while (true) //while loop obfuscates password when the user is typing it
+            {
+
+                ConsoleKeyInfo ck = Console.ReadKey(true);
+                if (ck.Key != ConsoleKey.Enter)
+                {
+                    if (ck.Key != ConsoleKey.Backspace)
+                    {
+                        passwordEntered += ck.KeyChar.ToString();
+                        Console.Write("*");
+                    }
+                    else
+                    {
+                        Console.Write("\b \b");
+                    }//end of if else
+                }
+                else
+                {
+                    Console.WriteLine();
+
+                    break;
+                }//end of if else
+
+            }//end of while
+
 
             //Do-While loop for confirming password
             do
             {
 
                 Console.WriteLine("Re-enter password:");
-                string reEnteredPasswordEntered = Console.ReadLine();
+                string reEnteredPasswordEntered = null;
+
+                while (true) //while loop obfuscates password when the user is typing it
+                {
+
+                    ConsoleKeyInfo ck = Console.ReadKey(true);
+                    if (ck.Key != ConsoleKey.Enter)
+                    {
+                        if (ck.Key != ConsoleKey.Backspace)
+                        {
+                            reEnteredPasswordEntered += ck.KeyChar.ToString();
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            Console.Write("\b \b");
+                        }//end of if else
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+
+                        break;
+                    }//end of if else
+
+                }//end of while
 
                 if (passwordEntered == reEnteredPasswordEntered)
                 {
