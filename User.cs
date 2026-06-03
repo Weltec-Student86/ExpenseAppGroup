@@ -272,7 +272,7 @@ namespace ExpenseAppGroup
                 switch (homeChoice) //switch statement that calls methods depending on the user's choice
                 {
                     case 1:
-                        Expenses.ViewExpenses();
+                        //ViewExpenses();
                         break;
 
                     case 2:

@@ -13,15 +13,25 @@ namespace ExpenseAppGroup
         private double expenseAmount;
         private int expenseFrequency;
 
-        private static List<Expenses> _expenses = new List<Expenses>();
-        public string expName {  get; set; }
-        public double expAmount { get; set; }
-        public int expFrequency { get; set; }
+        public static List<Expenses> _expenses = new List<Expenses>();
+        public string ExpName {  get; set; }
+        public double ExpAmount { get; set; }
+        public int ExpFrequency { get; set; }
+
+
+        //Constructor
+        public Expenses(string expenseName, double expenseAmount, int expenseFrequency)
+        {
+            ExpName = expenseName;
+            ExpAmount = expenseAmount;
+            ExpFrequency = expenseFrequency;
+
+        }
 
         //method for expense----------------------------------1
         //expense that have been added to user account
-       
-        public static void ViewExpenses()
+
+        public void AdminViewExpenses()
         {
             Console.Clear();
 
@@ -39,7 +49,7 @@ namespace ExpenseAppGroup
                 else
                 {
                     foreach (var e in _expenses)
-                    Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
+                    Console.WriteLine($"Name: {ExpName} Amount: ${ExpAmount} Frequency {ExpFrequency}");
 
                 }
                 Console.WriteLine("1. Back to home");
@@ -78,12 +88,8 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\n1. Back to home");
                 exitAddExpenseChoice2 = Convert.ToInt32(Console.ReadLine());
 
-                _expenses.Add(new Expenses
-                {
-                    expenseName = expName,
-                    expenseAmount = expAmount,
-                    expenseFrequency = expFrequency
-                });
+                Expenses newExpense = new Expenses(expName, expAmount, expFrequency);
+                _expenses.Add(newExpense);
 
 
             } while (exitAddExpenseChoice2 == 0);
@@ -150,7 +156,7 @@ namespace ExpenseAppGroup
         //method for admin expense----------------------------------6
         //viewing all expenses that have been added to user account
 
-        public static void AdminViewExpenses()
+        public static void ViewExpenses()
         {
             Console.Clear();
 
@@ -175,9 +181,32 @@ namespace ExpenseAppGroup
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
-            Admin.AdminHome();
+            User.UserHome();
 
         }//end of ViewExpense method--------------------------6
+
+        public static void PreaddedUserExpenses()
+        {
+
+            Expenses exampleExpense0 = new Expenses("Netflix", 14, 1);
+            Expenses exampleExpense1 = new Expenses("prime", 14, 1);
+            Expenses exampleExpense2 = new Expenses("internet", 14, 1);
+            Expenses exampleExpense3 = new Expenses("car broom", 14, 1);
+            Expenses exampleExpense4 = new Expenses("Docterrors", 14, 1);
+            Expenses exampleExpense5 = new Expenses("Disneyslop", 14, 1);
+
+            //adds objects to the list
+            _expenses.Add(exampleExpense0);
+            _expenses.Add(exampleExpense1);
+            _expenses.Add(exampleExpense2);
+            _expenses.Add(exampleExpense3);
+            _expenses.Add(exampleExpense4);
+            _expenses.Add(exampleExpense5);
+
+
+
+
+        }
 
 
     }//end of class-----------------------------------------

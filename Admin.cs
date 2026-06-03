@@ -136,7 +136,7 @@ namespace ExpenseAppGroup
                 switch (adminHomeChoice) //switch case that runs methods based on the admin's choice
                 {
                     case 1:
-                        Expenses.AdminViewExpenses();
+                        ViewExpenses();
                         break;
 
                     case 2:
@@ -246,6 +246,29 @@ namespace ExpenseAppGroup
             {
                 //method called from user class
                 users.DisplayUserDetails();
+            }
+
+            Console.WriteLine("\nPress any key to return to Manage Users");
+            Console.ReadKey();
+            ManageUsers();
+
+        }//end of View User class-----------------------------------------------
+
+
+        //View all users-----------------------------------------------------------
+
+        public static void ViewExpenses()
+        {
+            //runs a for each loop that displays all of the user accounts in the application
+
+            Console.Clear();
+
+            Console.WriteLine("\t\tAdministrator panel - Viewing all users\n");
+
+            foreach (Expenses Exp in Expenses._expenses) //traverses through entire user list
+            {
+                //method called from user class
+                Exp.AdminViewExpenses();
             }
 
             Console.WriteLine("\nPress any key to return to Manage Users");
