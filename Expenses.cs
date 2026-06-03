@@ -48,8 +48,8 @@ namespace ExpenseAppGroup
                 }
                 else
                 {
-                    foreach (var e in _expenses)
-                    Console.WriteLine($"Name: {ExpName} Amount: ${ExpAmount} Frequency {ExpFrequency}");
+                    foreach (Expenses e in _expenses)
+                    Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
 
                 }
                 Console.WriteLine("1. Back to home");
