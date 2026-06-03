@@ -19,7 +19,9 @@ namespace ExpenseAppGroup
         public static int accountIndex;
 
         private static string password = "";
+        
 
+        public static string CurrentLoggedInUser {  get; set; }
         //constructors
 
         public User(string firstName, string lastName, string username, string password)
@@ -28,7 +30,6 @@ namespace ExpenseAppGroup
             LastName = lastName;
             Username = username;
             Password = password;
-
         }
 
         //List for user accounts
@@ -61,8 +62,10 @@ namespace ExpenseAppGroup
                 string userNameEntered = Console.ReadLine();
 
                 //passes username into class name variable so it can be displayed on the home screen
+
                 User.name = userNameEntered;
 
+                
                 //password
                 Console.WriteLine("Enter your password:");
                 string passwordEntered = null;
@@ -77,7 +80,8 @@ namespace ExpenseAppGroup
                                 {
                                     passwordEntered += ck.KeyChar.ToString();
                                     Console.Write("*");
-                                }
+                                     
+                        }
                                 else
                                 {
                                     Console.Write("\b \b");
@@ -89,8 +93,8 @@ namespace ExpenseAppGroup
 
                                 break;
                             }//end of if else
-                    
-                        }//end of while
+                            User.CurrentLoggedInUser = userNameEntered;
+                }//end of while
 
 
                 //searches user list for correct username
@@ -272,7 +276,7 @@ namespace ExpenseAppGroup
                 switch (homeChoice) //switch statement that calls methods depending on the user's choice
                 {
                     case 1:
-                        //ViewExpenses();
+                        Expenses.ViewExpenses(User.CurrentLoggedInUser);
                         break;
 
                     case 2:

@@ -9,23 +9,27 @@ namespace ExpenseAppGroup
     public class Expenses
     {
         //fields
+        private string userName;
         private string expenseName;
         private double expenseAmount;
         private int expenseFrequency;
 
-        public static List<Expenses> _expenses = new List<Expenses>();
+      
         public string ExpName {  get; set; }
         public double ExpAmount { get; set; }
         public int ExpFrequency { get; set; }
+        public string UserName { get; set; }
 
 
+
+        public static List<Expenses> _expenses = new List<Expenses>();
         //Constructor
-        public Expenses(string expenseName, double expenseAmount, int expenseFrequency)
+        public Expenses(string name, double amount, int freq, string user)
         {
-            ExpName = expenseName;
-            ExpAmount = expenseAmount;
-            ExpFrequency = expenseFrequency;
-
+            ExpName = name;
+            ExpAmount = amount;
+            ExpFrequency = freq;
+            UserName = user;
         }
 
         //method for expense----------------------------------1
@@ -49,7 +53,8 @@ namespace ExpenseAppGroup
                 else
                 {
                     foreach (Expenses e in _expenses)
-                    Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                   
+                    Console.WriteLine($" Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
 
                 }
                 Console.WriteLine("1. Back to home");
@@ -66,10 +71,9 @@ namespace ExpenseAppGroup
         {
 
             Console.Clear();
-
             int exitAddExpenseChoice2 = 1;
 
-         
+
             //do while loop to exit to home
             do
             {
@@ -88,7 +92,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\n1. Back to home");
                 exitAddExpenseChoice2 = Convert.ToInt32(Console.ReadLine());
 
-                Expenses newExpense = new Expenses(expName, expAmount, expFrequency);
+                Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                 _expenses.Add(newExpense);
 
 
@@ -102,7 +106,7 @@ namespace ExpenseAppGroup
         //Remove expense to user --------------------------3
         public static void RemoveExpense()
         {
-            Console.WriteLine("Expense name:");
+            Console.WriteLine($"Expense name: ");
 
             Console.WriteLine("Displays expense details");
 
@@ -153,19 +157,21 @@ namespace ExpenseAppGroup
         }
 
 
-        //method for admin expense----------------------------------6
+        //method for Viewing the expenses----------------------------------6
         //viewing all expenses that have been added to user account
-
-        public static void ViewExpenses()
+        public static void ViewExpenses(string currentLoggedInUser)
         {
             Console.Clear();
 
+            
             int exitAddExpenseChoice1 = 1;
             //do while loop to exit to home
             do
             {
+                var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
                 Console.WriteLine($"\t Display Expenses\n");
-
+                Console.WriteLine();
+                Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
                 //users expenses 
                 if (_expenses.Count == 0)
                 {
@@ -173,8 +179,8 @@ namespace ExpenseAppGroup
                 }
                 else
                 {
-                    foreach (var e in _expenses)
-                        Console.WriteLine($"Name: {e.expenseName} Amount: ${e.expenseAmount} Frequency {e.expenseFrequency}");
+                    foreach (var e in userExpenses)
+                        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
 
                 }
                 Console.WriteLine("\n1. Back to home");
@@ -185,28 +191,34 @@ namespace ExpenseAppGroup
 
         }//end of ViewExpense method--------------------------6
 
+
+
+        //Method for the preadded users expenses for view expenses this is where the values are stored-----7
         public static void PreaddedUserExpenses()
         {
-
-            Expenses exampleExpense0 = new Expenses("Netflix", 14, 1);
-            Expenses exampleExpense1 = new Expenses("prime", 14, 1);
-            Expenses exampleExpense2 = new Expenses("internet", 14, 1);
-            Expenses exampleExpense3 = new Expenses("car broom", 14, 1);
-            Expenses exampleExpense4 = new Expenses("Docterrors", 14, 1);
-            Expenses exampleExpense5 = new Expenses("Disneyslop", 14, 1);
-
             //adds objects to the list
-            _expenses.Add(exampleExpense0);
-            _expenses.Add(exampleExpense1);
-            _expenses.Add(exampleExpense2);
-            _expenses.Add(exampleExpense3);
-            _expenses.Add(exampleExpense4);
-            _expenses.Add(exampleExpense5);
 
+            _expenses.Add(new Expenses
+            ("netflix", 14, 1, "johnsmith7")
+            );
 
+            _expenses.Add(new Expenses
+            ("Prime", 11, 3, "lj1978")
+            );
 
+            _expenses.Add(new Expenses
+            ("Disney", 666, 6, "p_man")
+            );
 
-        }
+            _expenses.Add(new Expenses
+            ("Gym", 14, 5, "mrs_michelle")
+            );
+
+            _expenses.Add(new Expenses
+            ("Phone Bill", 25, 3, "mrbeast")
+            );
+
+        }//end of the preadded user expenses methods--------------------------7
 
 
     }//end of class-----------------------------------------
