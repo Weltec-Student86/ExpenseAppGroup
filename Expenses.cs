@@ -54,14 +54,14 @@ namespace ExpenseAppGroup
                 {
                     foreach (Expenses e in _expenses)
                    
-                    Console.WriteLine($" Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                    Console.WriteLine($"Username: {e.UserName}\n Expense Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency (days): {e.ExpFrequency}\n");
 
                 }
                 Console.WriteLine("1. Back to home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
-            User.UserHome();
+            Admin.AdminHome();
 
         }//end of ViewExpense method--------------------------1
 
