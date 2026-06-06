@@ -56,7 +56,7 @@ namespace ExpenseAppGroup
             //goes through a do-while loop until correct credentials are entered
             do
             {
-  
+                
                     Console.WriteLine("\t\tLogin");
                     Console.WriteLine("---------------------------------------\n");
 
@@ -324,9 +324,6 @@ namespace ExpenseAppGroup
                     Console.WriteLine();
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("Please enter a valid number.\n");
-                }
-                finally
-                {
                     Console.WriteLine("Press any key to contine...");
                     Console.ReadKey();
                     UserHome();

@@ -118,52 +118,66 @@ namespace ExpenseAppGroup
 
             do //do-while runs admin home page
             {
-
-                Console.WriteLine("\t\tAdministrator Home");
-                Console.WriteLine("---------------------------------------------------------\n");
-                Console.WriteLine("Welcome " + Admin.name + "!\n");
-
-
-                Console.WriteLine("1. View all expenses");
-                Console.WriteLine("2. View all savings");
-                Console.WriteLine("3. Manage users");
-                Console.WriteLine("4. Logout");
-                Console.WriteLine("99. Exit");
-
-                Console.WriteLine("\nPlease select an option:");
-                int adminHomeChoice = Convert.ToInt32(Console.ReadLine());
-
-                switch (adminHomeChoice) //switch case that runs methods based on the admin's choice
+                try
                 {
-                    case 1:
-                        ViewExpenses();
-                        break;
 
-                    case 2:
-                        //NEED TO ADD SAVINGS METHOD AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                        break;
+                    Console.WriteLine("\t\tAdministrator Home");
+                    Console.WriteLine("---------------------------------------------------------\n");
+                    Console.WriteLine("Welcome " + Admin.name + "!\n");
 
-                    case 3:
-                        ManageUsers();
-                        break;
 
-                    case 4:
-                        Program.LandingPage();
-                        break;
-                    case 99:
-                        Environment.Exit(0);
-                        break;
+                    Console.WriteLine("1. View all expenses");
+                    Console.WriteLine("2. View all savings");
+                    Console.WriteLine("3. Manage users");
+                    Console.WriteLine("4. Logout");
+                    Console.WriteLine("99. Exit");
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("\nEnter a valid option!\n");
-                        Console.WriteLine("Press any key to return to admin home...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        adminHomeLoop = true;
-                        break;
+                    Console.WriteLine("\nPlease select an option:");
+                    int adminHomeChoice = Convert.ToInt32(Console.ReadLine());
 
-                }//end of switch-------------------------------------
+                    switch (adminHomeChoice) //switch case that runs methods based on the admin's choice
+                    {
+                        case 1:
+                            ViewExpenses();
+                            break;
+
+                        case 2:
+                            //NEED TO ADD SAVINGS METHOD AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                            break;
+
+                        case 3:
+                            ManageUsers();
+                            break;
+
+                        case 4:
+                            Program.LandingPage();
+                            break;
+                        case 99:
+                            Environment.Exit(0);
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("\nEnter a valid option!\n");
+                            Console.WriteLine("Press any key to return to admin home...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            adminHomeLoop = true;
+                            break;
+
+                    }//end of switch-------------------------------------
+
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    AdminHome();
+                }
+
 
             } while (adminHomeLoop == true); //do while loop to re-run admin home menu
 
