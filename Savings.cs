@@ -11,11 +11,38 @@ namespace ExpenseAppGroup
     public class Savings
     {
         //fields
+        private string userName;
         private string goals;
+        private double amountGoals;
         private double savings;
 
+        public string savGoals { get; set; }
+        public double amtGoals { get; set; }
+        public double savingsAmt { get; set; }
+        public string UserName { get; set; }
+
+
+        public static List<Savings> _savings = new List<Savings>();
+        public static List<Savings> _goals = new List<Savings>();
+
+        //Construtor for pre added user goals
+        public Savings(string name, double amount, string user)
+        {
+            savGoals = name;
+            amtGoals = amount;
+            UserName = user;
+
+        }
+        //Construtor for pre added user savings
+        public Savings(double amtSavings, string user)
+        {
+            amtSavings = savings;
+            UserName = user;
+
+        }
+
         //Method for Savings menu-----------------------------------1
-        public static void SavingsMenu()
+        public static void SavingsMenu(string currentLoggedInUser)
         {
 
             bool savingsMenuLoop = false;
@@ -124,7 +151,7 @@ namespace ExpenseAppGroup
 
 
             } while (exitAddGoalsChoice1 == 0);
-            Savings.SavingsMenu();
+            Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for Adding goals---------------------------------------2
 
@@ -152,7 +179,7 @@ namespace ExpenseAppGroup
 
 
             } while (exitAddSavingChoice1 == 0);
-            Savings.SavingsMenu();
+            Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for adding to savings-------------------------------3
 
@@ -178,7 +205,7 @@ namespace ExpenseAppGroup
 
 
             } while (exitRemoveGoalsChoice1 == 0);
-            Savings.SavingsMenu();
+            Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for Removing goals-------------------------4
 
@@ -211,12 +238,64 @@ namespace ExpenseAppGroup
 
 
             } while (exitUpdateGoalsChoice1 == 0);
-            Savings.SavingsMenu();
+            Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for updating goals----------------------------------------5
 
+        //method for PreaAdded users goals----------------------------------------6
+        public static void PreaddedUserGoals()
+        {
+            //adds objects to the list
+
+            _goals.Add(new Savings
+            ("trip", 1400, "johnsmith7")
+            );
+
+            _goals.Add(new Savings
+            ("trip", 11, "lj1978")
+            );
+
+            _goals.Add(new Savings
+            ("trip", 666, "p_man")
+            );
+
+            _goals.Add(new Savings
+            ("trip", 14, "mrs_michelle")
+            );
+
+            _goals.Add(new Savings
+            ("trip", 25, "mrbeast")
+            );
+
+        }//end of PreAddeded users Goals method--------------------------6
 
 
+        //method for PreaAdded users savings----------------------------------------7
+        public static void PreaddedUserSavings()
+        {
+            //adds objects to the list
+
+            _savings.Add(new Savings
+            ( 1400, "johnsmith7")
+            );
+
+            _savings.Add(new Savings
+            ( 11, "lj1978")
+            );
+
+            _savings.Add(new Savings
+            ( 666, "p_man")
+            );
+
+            _savings.Add(new Savings
+            ( 14, "mrs_michelle")
+            );
+
+            _savings.Add(new Savings
+            (11, "mrbeast")
+            );
+
+        }//end of PreAddeded users savings method--------------------------7
 
 
     }//end of class savings---------------------------------------

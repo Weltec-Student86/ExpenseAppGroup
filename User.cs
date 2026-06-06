@@ -292,7 +292,7 @@ namespace ExpenseAppGroup
                         break;
 
                     case 5:
-                        Savings.SavingsMenu();
+                        Savings.SavingsMenu(User.CurrentLoggedInUser);
                         break;
 
                     case 6:
