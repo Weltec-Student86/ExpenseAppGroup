@@ -27,9 +27,10 @@
             //declaring varaibles
             int choice;
             bool landingPageLoop = false;
-            try
-            {
+           
                 do
+                {
+                try
                 {
 
                     Console.WriteLine("\t\t****** Welcome to the Expense App ******");
@@ -41,6 +42,8 @@
                     Console.WriteLine("3. Administrator Login");
                     Console.WriteLine("99. Exit");
                     Console.WriteLine("\nPlease select a choice");
+
+
                     choice = Convert.ToInt32(Console.ReadLine());
 
                     switch (choice)
@@ -69,23 +72,28 @@
                             Console.Clear();
                             landingPageLoop = true;
                             break;
-                    }
+                    }//end of switch
 
+                }//end of try
+                catch (FormatException ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
                 }
+                finally
+                {
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    LandingPage();
+                }
+
+
+
+            }//end of do
                 while (landingPageLoop == true);
-            }
-            catch (FormatException ex) 
-            {
-                Console.WriteLine();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Please enter a valid number.\n");
-            }
-            finally
-            {
-                Console.WriteLine("Press any key to contine...");
-                Console.ReadKey();
-                LandingPage();
-            }
+            
+
         }//end of Landing Page----------------------------------
 
 

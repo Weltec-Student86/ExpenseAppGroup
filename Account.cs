@@ -15,23 +15,7 @@ namespace ExpenseAppGroup
         private string password;
 
         //properties
-        public string FirstName
-        {
-            get 
-            { 
-                return firstName; 
-            }//end of get
-
-            set 
-            { 
-                if (firstName == null)
-                {
-                    CustomExceptions blankError = new CustomExceptions();
-                    //throw blankError;
-                }
-            }//end of set
-        }
-        
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

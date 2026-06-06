@@ -56,71 +56,72 @@ namespace ExpenseAppGroup
             //goes through a do-while loop until correct credentials are entered
             do
             {
-                Console.WriteLine("\t\tLogin");
-                Console.WriteLine("---------------------------------------\n");
+  
+                    Console.WriteLine("\t\tLogin");
+                    Console.WriteLine("---------------------------------------\n");
 
-                //username
-                Console.WriteLine("Enter your username:");
-                string userNameEntered = Console.ReadLine();
+                    //username
+                    Console.WriteLine("Enter your username:");
+                    string userNameEntered = Console.ReadLine();
 
-                //passes username into class name variable so it can be displayed on the home screen
+                    //passes username into class name variable so it can be displayed on the home screen
 
-                User.name = userNameEntered;
+                    User.name = userNameEntered;
 
-                
-                //password
-                Console.WriteLine("Enter your password:");
-                string passwordEntered = null;
 
-                        while (true) //while loop obfuscates password when the user is typing it
+                    //password
+                    Console.WriteLine("Enter your password:");
+                    string passwordEntered = null;
+
+                    while (true) //while loop obfuscates password when the user is typing it
+                    {
+
+                        ConsoleKeyInfo ck = Console.ReadKey(true);
+                        if (ck.Key != ConsoleKey.Enter)
                         {
-
-                            ConsoleKeyInfo ck = Console.ReadKey(true);
-                            if (ck.Key != ConsoleKey.Enter)
+                            if (ck.Key != ConsoleKey.Backspace)
                             {
-                                if (ck.Key != ConsoleKey.Backspace)
-                                {
-                                    passwordEntered += ck.KeyChar.ToString();
-                                    Console.Write("*");
-                                     
-                        }
-                                else
-                                {
-                                    Console.Write("\b \b");
-                                }//end of if else
+                                passwordEntered += ck.KeyChar.ToString();
+                                Console.Write("*");
+
                             }
                             else
                             {
-                                Console.WriteLine();
-
-                                break;
+                                Console.Write("\b \b");
                             }//end of if else
-                            User.CurrentLoggedInUser = userNameEntered;
-                }//end of while
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+
+                            break;
+                        }//end of if else
+                        User.CurrentLoggedInUser = userNameEntered;
+                    }//end of while
 
 
-                //searches user list for correct username
+                    //searches user list for correct username
 
-               User userFound = users.Find(u => u.Username.Equals(userNameEntered, StringComparison.Ordinal));
+                    User userFound = users.Find(u => u.Username.Equals(userNameEntered, StringComparison.Ordinal));
 
-                //if else statement checks if the username and password match
-                if (userFound != null && userFound.Password == passwordEntered)
-                {
-                    int index = users.FindIndex(a => a.Username.Equals(userNameEntered, StringComparison.Ordinal));
-                    User.accountIndex = index;
+                    //if else statement checks if the username and password match
+                    if (userFound != null && userFound.Password == passwordEntered)
+                    {
+                        int index = users.FindIndex(a => a.Username.Equals(userNameEntered, StringComparison.Ordinal));
+                        User.accountIndex = index;
 
-                    Console.WriteLine("\nLogin Success! \nPress any key to continue...");
-                    Console.ReadKey();
-                    userLoginScreen = false;
-                    UserHome(); //takes user to the Home menu if correct credentials are entered
-                }
-                else
-                {
-                    Console.WriteLine("\nWrong username or password. Try again.");
+                        Console.WriteLine("\nLogin Success! \nPress any key to continue...");
+                        Console.ReadKey();
+                        userLoginScreen = false;
+                        UserHome(); //takes user to the Home menu if correct credentials are entered
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nWrong username or password. Try again.");
 
-                    userLoginScreen = true; //makes user re-enter details if login is wrong
+                        userLoginScreen = true; //makes user re-enter details if login is wrong
 
-                }//end of if-else
+                    }//end of if-else
 
 
             } while (userLoginScreen == true); //end of do-while
@@ -258,63 +259,79 @@ namespace ExpenseAppGroup
 
             do //do-while loop for user home menu options
             {
-
-                Console.WriteLine("\t\tHome");
-                Console.WriteLine("---------------------------------------\n");
-
-                Console.WriteLine("Welcome " + (User.name) + "!\n");
-                Console.WriteLine("Account number: " + (User.accountIndex) + "\n");
- 
-                Console.WriteLine("1. View expenses");
-                Console.WriteLine("2. Add new expense");
-                Console.WriteLine("3. Update existing expense");
-                Console.WriteLine("4. Remove expense");
-                Console.WriteLine("5. View savings");
-                Console.WriteLine("6. Logout");
-                Console.WriteLine("99. Exit");
-
-                Console.WriteLine("\nPlease select an option:");
-                int homeChoice = Convert.ToInt32(Console.ReadLine());
-
-                switch (homeChoice) //switch statement that calls methods depending on the user's choice
+                try
                 {
-                    case 1:
-                        Expenses.ViewExpenses(User.CurrentLoggedInUser);
-                        break;
+                    Console.WriteLine("\t\tHome");
+                    Console.WriteLine("---------------------------------------\n");
 
-                    case 2:
-                        Expenses.AddExpense();
-                        break;
+                    Console.WriteLine("Welcome " + (User.name) + "!\n");
+                    Console.WriteLine("Account number: " + (User.accountIndex) + "\n");
 
-                    case 3:
-                        Expenses.UpdateExpense();
-                        break;
+                    Console.WriteLine("1. View expenses");
+                    Console.WriteLine("2. Add new expense");
+                    Console.WriteLine("3. Update existing expense");
+                    Console.WriteLine("4. Remove expense");
+                    Console.WriteLine("5. View savings");
+                    Console.WriteLine("6. Logout");
+                    Console.WriteLine("99. Exit");
 
-                    case 4:
-                        Expenses.RemoveExpense();
-                        break;
+                    Console.WriteLine("\nPlease select an option:");
+                    int homeChoice = Convert.ToInt32(Console.ReadLine());
 
-                    case 5:
-                        Savings.SavingsMenu(User.CurrentLoggedInUser);
-                        break;
+                    switch (homeChoice) //switch statement that calls methods depending on the user's choice
+                    {
+                        case 1:
+                            Expenses.ViewExpenses(User.CurrentLoggedInUser);
+                            break;
 
-                    case 6:
-                        Program.LandingPage();
-                        break;
-                    case 99:
-                        Environment.Exit(0);
-                        break;
+                        case 2:
+                            Expenses.AddExpense();
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to home...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        userHomeLoop = true;
-                        break;
+                        case 3:
+                            Expenses.UpdateExpense();
+                            break;
 
-                }//end of switch
+                        case 4:
+                            Expenses.RemoveExpense();
+                            break;
+
+                        case 5:
+                            Savings.SavingsMenu(User.CurrentLoggedInUser);
+                            break;
+
+                        case 6:
+                            Program.LandingPage();
+                            break;
+                        case 99:
+                            Environment.Exit(0);
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Enter a valid option!\n");
+                            Console.WriteLine("Press any key to return to home...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            userHomeLoop = true;
+                            break;
+
+                    }//end of switch
+
+                }//end of try
+                catch (FormatException ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
+                }
+                finally
+                {
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    UserHome();
+                }
+
 
             } while (userHomeLoop == true) ; //do while loop to re-run user home menu
 
