@@ -51,6 +51,8 @@ namespace ExpenseAppGroup
             bool loginVerify = false;
             bool usernameVerify = false;
 
+            
+
             //goes through a do-while loop until correct credentials are entered
             do
             {
@@ -154,94 +156,94 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\nEnter your password:");
                 string passwordEntered = null;
 
-                        while (true) //while loop obfuscates password when the user is typing it
-                        {
+                while (true) //while loop obfuscates password when the user is typing it
+                {
 
-                            ConsoleKeyInfo ck = Console.ReadKey(true);
-                            if (ck.Key != ConsoleKey.Enter)
+                    ConsoleKeyInfo ck = Console.ReadKey(true);
+                    if (ck.Key != ConsoleKey.Enter)
+                    {
+                        if (ck.Key != ConsoleKey.Backspace)
+                        {
+                            passwordEntered += ck.KeyChar.ToString();
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            Console.Write("\b \b");
+                        }//end of if else
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+
+                        break;
+                    }//end of if else
+
+                }//end of while
+
+
+                //Do-While loop for confirming password
+                do
+                {
+
+                    Console.WriteLine("\nRe-enter password:");
+                    string reEnteredPasswordEntered = null;
+
+                    while (true) //while loop obfuscates password when the user is typing it
+                    {
+
+                        ConsoleKeyInfo ck = Console.ReadKey(true);
+                        if (ck.Key != ConsoleKey.Enter)
+                        {
+                            if (ck.Key != ConsoleKey.Backspace)
                             {
-                                if (ck.Key != ConsoleKey.Backspace)
-                                {
-                                    passwordEntered += ck.KeyChar.ToString();
-                                    Console.Write("*");
-                                }
-                                else
-                                {
-                                    Console.Write("\b \b");
-                                }//end of if else
+                                reEnteredPasswordEntered += ck.KeyChar.ToString();
+                                Console.Write("*");
                             }
                             else
                             {
-                                Console.WriteLine();
-
-                                break;
+                                Console.Write("\b \b");
                             }//end of if else
-
-                        }//end of while
-
-
-            //Do-While loop for confirming password
-            do
-            {
-
-                Console.WriteLine("\nRe-enter password:");
-                string reEnteredPasswordEntered = null;
-
-                        while (true) //while loop obfuscates password when the user is typing it
+                        }
+                        else
                         {
+                            Console.WriteLine();
 
-                            ConsoleKeyInfo ck = Console.ReadKey(true);
-                            if (ck.Key != ConsoleKey.Enter)
-                            {
-                                if (ck.Key != ConsoleKey.Backspace)
-                                {
-                                    reEnteredPasswordEntered += ck.KeyChar.ToString();
-                                    Console.Write("*");
-                                }
-                                else
-                                {
-                                    Console.Write("\b \b");
-                                }//end of if else
-                            }
-                            else
-                            {
-                                Console.WriteLine();
+                            break;
+                        }//end of if else
 
-                                break;
-                            }//end of if else
+                    }//end of while
 
-                        }//end of while
+                    if (passwordEntered == reEnteredPasswordEntered)
+                    {
+                        Console.WriteLine("\nAccount successfully created!\n");
+                        pwVerify = true;
+                        //if passwords match, account is successfully created
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPasswords do not match, please re-enter password.\n");
+                        //if passwords don't match, the user has to re-enter the password to match
+                    }//end of if-else
 
-                if (passwordEntered == reEnteredPasswordEntered)
-                {
-                    Console.WriteLine("\nAccount successfully created!\n");
-                    pwVerify = true;
-                    //if passwords match, account is successfully created
-                }
-                else
-                {
-                    Console.WriteLine("\nPasswords do not match, please re-enter password.\n");
-                    //if passwords don't match, the user has to re-enter the password to match
-                }//end of if-else
-
-            } while (pwVerify == false);//end of do-while
+                } while (pwVerify == false);//end of do-while
 
 
-            //once account is created, users have to enter an amount into their savings account
-            Console.WriteLine("\nEnter savings amount:");
-            double savings = Convert.ToDouble(Console.ReadLine());
+                //once account is created, users have to enter an amount into their savings account
+                Console.WriteLine("\nEnter savings amount:");
+                double savings = Convert.ToDouble(Console.ReadLine());
 
-            //creates new object with user details entered
-            User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
-            users.Add(newUser);
+                //creates new object with user details entered
+                User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
+                users.Add(newUser);
 
-            Console.WriteLine("\nPress any key to continue...\n");
-            Console.ReadKey();
-            
-            //takes user to the landing page once account is created, and they need to log in
-            Program.LandingPage();
+                Console.WriteLine("\nPress any key to continue...\n");
+                Console.ReadKey();
 
-        }//end of Register method---------------------------------------
+                //takes user to the landing page once account is created, and they need to log in
+                Program.LandingPage();
+
+            }//end of Register method---------------------------------------
 
 
 
@@ -252,6 +254,7 @@ namespace ExpenseAppGroup
             int index = User.accountIndex;
             bool userHomeLoop = false;
             Console.Clear();
+
 
             do //do-while loop for user home menu options
             {

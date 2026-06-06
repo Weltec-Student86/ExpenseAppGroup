@@ -25,52 +25,65 @@
             //declaring varaibles
             int choice;
             bool landingPageLoop = false;
-
-            do {
-                
-
-                Console.WriteLine("\t\t****** Welcome to the Expense App ******");
-                Console.WriteLine("-------------------------------------------------------------------------------\n");
-                Console.WriteLine("\t\tLogin or Register for an account");
-                Console.WriteLine();
-                Console.WriteLine("1. Login");
-                Console.WriteLine("2. Register");
-                Console.WriteLine("3. Administrator Login");
-                Console.WriteLine("99. Exit");
-                Console.WriteLine("\nPlease select a choice");
-                choice = Convert.ToInt32(Console.ReadLine());
-
-                switch (choice)
+            try
+            {
+                do
                 {
-                    case 1:
-                        User.UserLogin();
-                        break;
 
-                    case 2:
-                        User.Register();
-                        break;
+                    Console.WriteLine("\t\t****** Welcome to the Expense App ******");
+                    Console.WriteLine("-------------------------------------------------------------------------------\n");
+                    Console.WriteLine("\t\tLogin or Register for an account");
+                    Console.WriteLine();
+                    Console.WriteLine("1. Login");
+                    Console.WriteLine("2. Register");
+                    Console.WriteLine("3. Administrator Login");
+                    Console.WriteLine("99. Exit");
+                    Console.WriteLine("\nPlease select a choice");
+                    choice = Convert.ToInt32(Console.ReadLine());
 
-                    case 3:
-                        Admin.AdminLogin();
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            User.UserLogin();
+                            break;
 
-                    case 99:
-                        Environment.Exit(0);
-                        break;
+                        case 2:
+                            User.Register();
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to main page...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        landingPageLoop = true;
-                        break;
+                        case 3:
+                            Admin.AdminLogin();
+                            break;
+
+                        case 99:
+                            Environment.Exit(0);
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Enter a valid option!\n");
+                            Console.WriteLine("Press any key to return to main page...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            landingPageLoop = true;
+                            break;
+                    }
+
                 }
-          
+                while (landingPageLoop == true);
             }
-            while (landingPageLoop == true);
-
+            catch (FormatException ex) 
+            {
+                Console.WriteLine();
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Please enter a valid number.\n");
+            }
+            finally
+            {
+                Console.WriteLine("Press any key to contine...");
+                Console.ReadKey();
+                LandingPage();
+            }
         }//end of Landing Page----------------------------------
 
 
