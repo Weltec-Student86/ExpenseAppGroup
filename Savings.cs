@@ -36,7 +36,7 @@ namespace ExpenseAppGroup
         //Construtor for pre added user savings
         public Savings(double amtSavings, string user)
         {
-            amtSavings = savings;
+            savings = amtSavings;
             UserName = user;
 
         }
@@ -52,17 +52,34 @@ namespace ExpenseAppGroup
             {
                 //menu options for savings
 
-                Console.WriteLine("\t View Savings");
-                Console.WriteLine();
 
-                Console.WriteLine("Savings: {Users Savings}");
+                var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser).ToList();
+                var userGoals = _goals.Where(e => e.UserName == currentLoggedInUser).ToList();
+                Console.WriteLine($"\t Display Savings\n");
                 Console.WriteLine();
+                Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
+                //users savings displayed on home page
+                if (_savings.Count == 0)
+                {
+                    Console.WriteLine($"No savings added");
+                }
+                else
+                {
+                    foreach (var e in userSavings)
+                        Console.WriteLine($"\tCurrent Samings: {e.savings}");
 
-                Console.WriteLine("Goals:");
-                Console.WriteLine("{Users goals}");
-                Console.WriteLine("{Users goals}");
-                Console.WriteLine();
+                }
 
+                if (_goals.Count == 0)
+                {
+                    Console.WriteLine($"No goals added");
+                }
+                else
+                {
+                    foreach (var e in userGoals)
+                        Console.WriteLine($"Saving goal: {e.savGoals}\n savings goal amount: {e.amtGoals}\n");
+
+                }
                 Console.WriteLine("1. Add new goal");
                 Console.WriteLine("2. Add to savings");
                 Console.WriteLine("3. Update to goals");
