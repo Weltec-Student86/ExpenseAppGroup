@@ -103,7 +103,7 @@ namespace ExpenseAppGroup
 
                     case 2:
                         Console.WriteLine("Update to savings");
-                        Savings.UpdateSavings();
+                        //Savings.UpdateSavings();
                         Console.WriteLine();
                         
                         break;
@@ -332,7 +332,7 @@ namespace ExpenseAppGroup
 
             foreach (var e in userSavings) ;
 
-            double newSavings = userSavings +
+            //double newSavings = userSavings +
 
         }//end of method to update savings--------------------------------------8
 
