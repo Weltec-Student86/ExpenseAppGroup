@@ -10,10 +10,10 @@ namespace ExpenseAppGroup
     public abstract class Account
     {
         //fields
-        private string firstName;
-        private string lastName;
-        private string username;
-        private string password;
+        private string firstName = "defaultFirstName";
+        private string lastName = "defaultLastName";
+        private string username = "defaultUsername";
+        private string password = "defaultPassword";
 
         //properties
         public string FirstName { get; set; }
