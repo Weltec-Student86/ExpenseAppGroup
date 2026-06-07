@@ -241,7 +241,14 @@ namespace ExpenseAppGroup
                 Savings newSavings = new Savings(savings, userNameEntered);
                 Savings._savings.Add(newSavings);
 
-                Console.WriteLine("\nPress any key to continue...\n");
+                //sorts lists after adding new user
+
+                User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+                Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+                Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+                Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
+            Console.WriteLine("\nPress any key to continue...\n");
                 Console.ReadKey();
 
                 //takes user to the landing page once account is created, and they need to log in
@@ -257,6 +264,14 @@ namespace ExpenseAppGroup
         {
             int index = User.accountIndex;
             bool userHomeLoop = false;
+
+            //sorts lists alphabetically by username
+
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
             Console.Clear();
 
 
@@ -274,7 +289,7 @@ namespace ExpenseAppGroup
                     Console.WriteLine("2. Add new expense");
                     Console.WriteLine("3. Update existing expense");
                     Console.WriteLine("4. Remove expense");
-                    Console.WriteLine("5. View savings");
+                    Console.WriteLine("5. View savings and goals");
                     Console.WriteLine("6. Logout");
                     Console.WriteLine("99. Exit");
 
@@ -345,9 +360,10 @@ namespace ExpenseAppGroup
         public void DisplayUserDetails()
         {
             //displays details from the user list
+            Console.WriteLine($"Username: {Username}");
             Console.WriteLine($"First name: {FirstName}");
-            Console.WriteLine($"Last name: {LastName}");
-            Console.WriteLine($"Username: {Username}\n");
+            Console.WriteLine($"Last name: {LastName}\n");
+
 
         }//end of Display user details----------------------------------------
 
@@ -445,7 +461,7 @@ namespace ExpenseAppGroup
             Console.WriteLine("Enter the username of the user you want to remove:");
             string remUserNameEntered = Console.ReadLine();
 
-            //the variable is then passed through the list to find a matching account
+            //the variable is then passed through the lists to find a matching account details
             User userRemFound = users.Find(u => u.Username.Equals(remUserNameEntered, StringComparison.Ordinal));
             Expenses userExpRemFound = Expenses._expenses.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
             Savings userSavRemFound = Savings._savings.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
@@ -462,38 +478,44 @@ namespace ExpenseAppGroup
                 if (removeConfirm == 'y') //removes user
                 {
                     bool endRemoveLoop = false;
+
+                    //the do while loop will keep looping to remove every object from the lists that correspond to the user's account
                     do
                     {
                         User userRemFound1 = users.Find(u => u.Username.Equals(remUserNameEntered, StringComparison.Ordinal));
                         Expenses userExpRemFound1 = Expenses._expenses.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
                         Savings userSavRemFound1 = Savings._savings.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
 
+                        //removes objects from lists
                         User.users.Remove(userRemFound1);
 
                         Savings._savings.Remove(userSavRemFound1);
 
                         Expenses._expenses.Remove(userExpRemFound1);
 
-                        if (userRemFound1 != null && userExpRemFound1 != null && userSavRemFound1 != null)
+                        //will trigger the loop ending once all lists return null when being searched
+                        if (userRemFound1 == null && userExpRemFound1 == null && userSavRemFound1 == null)
                         {
                             endRemoveLoop = true;
                         }
-                    }
+
+                    }//end of do
                     while (endRemoveLoop == false);
+
                     Console.WriteLine("\nUser removed.\n");
 
                 }
                 else //cancels removal
                 {
                     Console.WriteLine("\nRemove canceled.\n");
-                }
+                }//end of if-else
 
             }
             else //displays if the name entered is not on the list
             {
                 Console.WriteLine("\nUser does not exist.\n");
 
-            }
+            }//end of if-else
 
         }//end of Remove User-----------------------------------------------------------------
 

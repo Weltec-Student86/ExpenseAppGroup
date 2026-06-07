@@ -52,101 +52,123 @@ namespace ExpenseAppGroup
         {
 
             bool savingsMenuLoop = false;
+
+            //sorts lists alphabetically by username
+
+            //sorts lists by username so they are always in order
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
             Console.Clear();
             //do while loop incase user enters wrong number
             do
             {
-                //menu options for savings
+                try
+                { 
 
 
-                var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser).ToList();
-                var userGoals = _goals.Where(e => e.UserName == currentLoggedInUser).ToList();
-                Console.WriteLine($"\t Display Savings\n");
-                Console.WriteLine();
-                Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
-                //users savings displayed on home page
-                if (_savings.Count == 0)
-                {
-                    Console.WriteLine($"No savings added");
-                }
-                else
-                {
-                    foreach (var e in userSavings)
-                        Console.WriteLine($"\tCurrent Savings: {e.savings}\n");
-
-                }
-
-                if (_goals.Count == 0)
-                {
-                    Console.WriteLine($"No goals added");
-                }
-                else
-                {
-                    foreach (var e in userGoals)
-                        Console.WriteLine($"Saving goal: {e.savGoals}\nSavings goal amount: {e.amtGoals}\n");
-
-                }
-                Console.WriteLine("1. Add new goal");
-                Console.WriteLine("2. Update savings total");
-                Console.WriteLine("3. Update to goals");
-                Console.WriteLine("4. Remove goal");
-                Console.WriteLine("5. Back home");
-                Console.WriteLine("99. Exit");
-
-                Console.WriteLine("Please select an option:");
-                int savingsChoice = Convert.ToInt32(Console.ReadLine());
+                    //menu options for savings
 
 
-                switch (savingsChoice) 
-                {
-                    case 1:
-                        Console.WriteLine("Add new goal");
-                        Savings.AddGoals();
-                        Console.WriteLine();
+                    var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser).ToList();
+                    var userGoals = _goals.Where(e => e.UserName == currentLoggedInUser).ToList();
+                    Console.WriteLine($"\t Display Savings\n");
+                    Console.WriteLine();
+                    Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
+                    //users savings displayed on home page
+                    if (_savings.Count == 0)
+                    {
+                        Console.WriteLine($"No savings added");
+                    }
+                    else
+                    {
+                        foreach (var e in userSavings)
+                            Console.WriteLine($"\tCurrent Savings: {e.savings}\n");
 
-                        break; 
+                    }
 
-                    case 2:
-                        Console.WriteLine("Update to savings");
-                        UpdateSavings(currentLoggedInUser);
-                        Console.WriteLine();
+                    if (_goals.Count == 0)
+                    {
+                        Console.WriteLine($"No goals added");
+                    }
+                    else
+                    {
+                        foreach (var e in userGoals)
+                            Console.WriteLine($"Saving goal: {e.savGoals}\nSavings goal amount: {e.amtGoals}\n");
+
+                    }
+                    Console.WriteLine("1. Add new goal");
+                    Console.WriteLine("2. Update savings total");
+                    Console.WriteLine("3. Update to goals");
+                    Console.WriteLine("4. Remove goal");
+                    Console.WriteLine("5. Back home");
+                    Console.WriteLine("99. Exit");
+
+                    Console.WriteLine("Please select an option:");
+                    int savingsChoice = Convert.ToInt32(Console.ReadLine());
+
+
+                    switch (savingsChoice) 
+                    {
+                        case 1:
+                            Console.WriteLine("Add new goal");
+                            Savings.AddGoals();
+                            Console.WriteLine();
+
+                            break; 
+
+                        case 2:
+                            Console.WriteLine("Update to savings");
+                            UpdateSavings(currentLoggedInUser);
+                            Console.WriteLine();
                         
-                        break;
+                            break;
 
-                    case 3:
-                        Console.WriteLine("Update Goals");
-                        Savings.UpdateGoals();
-                        break;
+                        case 3:
+                            Console.WriteLine("Update Goals");
+                            Savings.UpdateGoals();
+                            break;
 
-                    case 4:
-                        Console.WriteLine("Remove Goals");
-                        Savings.RemoveGoals(currentLoggedInUser);
-                        break;
+                        case 4:
+                            Console.WriteLine("Remove Goals");
+                            Savings.RemoveGoals(currentLoggedInUser);
+                            break;
 
-                    case 5:
-                        Console.WriteLine("Back home");
-                        User.UserHome();
-                        break;
+                        case 5:
+                            Console.WriteLine("Back home");
+                            User.UserHome();
+                            break;
 
-                    case 99:
-                        Environment.Exit(0);
-                        break;
+                        case 99:
+                            Environment.Exit(0);
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to savings menu...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        savingsMenuLoop = true;
-                     break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Enter a valid option!\n");
+                            Console.WriteLine("Press any key to return to savings menu...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            savingsMenuLoop = true;
+                         break;
 
 
-                }//end of switch---------------------------------------
+                    }//end of switch---------------------------------------
 
-               
+                }//end of try
+                catch (FormatException ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    SavingsMenu(currentLoggedInUser);
+                }
 
-            }while (savingsMenuLoop == true);
+            } while (savingsMenuLoop == true);
 
         }//end of savings menu method---------------------------------------1
 
