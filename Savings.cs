@@ -332,6 +332,46 @@ namespace ExpenseAppGroup
 
         }//end of Method for updating goals----------------------------------------5
 
+
+
+
+
+        public void AdminViewSavings()
+        {
+            Console.Clear();
+
+            int exitAddExpenseChoice1 = 1;
+            //do while loop to exit to home
+            do
+            {
+                Console.WriteLine($"\t Display Savings\n");
+
+                //users expenses 
+                if (_savings.Count == 0)
+                {
+                    Console.WriteLine($"No savings added");
+                }
+                else
+                {
+                    foreach (Savings s in _savings)
+
+                        Console.WriteLine($"Username: {s.UserName}\n Savings amount: {s.savings} \n");
+
+                }
+                Console.WriteLine("1. Back to home");
+                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+
+            } while (exitAddExpenseChoice1 == 0);
+            Admin.AdminHome();
+
+        }//end of ViewSavings method--------------------------1
+
+
+
+
+
+
+
         //method for PreaAdded users goals----------------------------------------6
         public static void PreaddedUserGoals()
         {
@@ -382,7 +422,7 @@ namespace ExpenseAppGroup
             );
 
             _savings.Add(new Savings
-            (100.000000, "mrbeast")
+            (100000000, "mrbeast")
             );
 
         }//end of PreAddeded users savings method--------------------------7
