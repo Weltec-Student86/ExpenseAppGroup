@@ -16,15 +16,19 @@ namespace ExpenseAppGroup
         private string goals;
         private double amountGoals;
         private double savings;
-
+        private double totalAmountGoals;
+        private static double amtSavings;
         public string savGoals { get; set; }
         public double amtGoals { get; set; }
         public double savingsAmt { get; set; }
         public string UserName { get; set; }
-
+        public static double amountToAdd { get; set; }
+      
 
         public static List<Savings> _savings = new List<Savings>();
         public static List<Savings> _goals = new List<Savings>();
+        
+       
 
         //Construtor for pre added user goals
         public Savings(string name, double amount, string user)
@@ -42,6 +46,8 @@ namespace ExpenseAppGroup
 
         }
 
+     
+       
         //Method for Savings menu-----------------------------------1
         public static void SavingsMenu(string currentLoggedInUser)
         {
@@ -103,7 +109,7 @@ namespace ExpenseAppGroup
 
                     case 2:
                         Console.WriteLine("Update to savings");
-                        Savings.UpdateSavings(User.CurrentLoggedInUser);
+                        Savings.UpdateSavings(amountToAdd, currentLoggedInUser);
                         Console.WriteLine();
                         
                         break;
@@ -176,30 +182,38 @@ namespace ExpenseAppGroup
         }//end of Method for Adding goals---------------------------------------2
 
         //Method for adding to savings ---------------------------------------3
-        public static void UpdateSavings(string currentLoggedInUser)
+        public static void UpdateSavings(double amountToAdd, string currentLoggedInUser)
         {
-            Console.Clear();
+            
+
 
             int exitUpdateSavingChoice1 = 1;
             //do while loop to exit to home
             do
             {
-                var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser).ToList();
-                foreach (var e in userSavings)
-
+                var savingsEntry = _savings.First(s => s.UserName == currentLoggedInUser);
+                if (savingsEntry != null)
+                { 
 
                     //users goals and savings they have created this will need to be changed
                     Console.WriteLine("Add savings");
 
-                Console.WriteLine("Add Goal amount:");
-                double amtSavings = Convert.ToDouble(Console.ReadLine());
+                    
+                    Console.WriteLine("Enter the amount you would like to add to savings");
+                    amountToAdd = Convert.ToDouble(Console.ReadLine());
+                    savingsEntry.savingsAmt += amountToAdd;
+                    
 
-                
+                    Console.WriteLine($"New balance: ${savingsEntry.savings}");
 
+                }
+                else
+                {
+                    Console.WriteLine("No savings found please add to savings");
+                   
+                }
 
-
-                Savings updateSav = new Savings(amtSavings, User.CurrentLoggedInUser);
-                _savings.Add(updateSav);
+                Savings.UpdateSavings(amountToAdd, currentLoggedInUser);
 
                 Console.WriteLine("1. Back to savings menu");
                 exitUpdateSavingChoice1 = Convert.ToInt32(Console.ReadLine());
@@ -208,6 +222,7 @@ namespace ExpenseAppGroup
 
             } while (exitUpdateSavingChoice1 == 0);
             Savings.SavingsMenu(User.CurrentLoggedInUser);
+           
 
         }//end of Method for adding to savings-------------------------------3
 
@@ -324,17 +339,6 @@ namespace ExpenseAppGroup
             );
 
         }//end of PreAddeded users savings method--------------------------7
-
-        //method to update savings--------------------------------------8
-        public static void UpdateSavingsCal(string currentLoggedInUser)
-        {
-            var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser).ToList();
-
-            foreach (var e in userSavings) ;
-
-            //double newSavings = userSavings +
-
-        }//end of method to update savings--------------------------------------8
 
 
     }//end of class savings---------------------------------------
