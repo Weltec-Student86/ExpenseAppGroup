@@ -142,7 +142,7 @@ namespace ExpenseAppGroup
                             break;
 
                         case 2:
-                            //NEED TO ADD SAVINGS METHOD AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                            ViewSavings();
                             break;
 
                         case 3:
@@ -292,6 +292,27 @@ namespace ExpenseAppGroup
         }//end of View User class-----------------------------------------------
 
 
+
+
+        public static void ViewSavings()
+        {
+            //runs a for each loop that displays all of the user savings in the application
+
+            Console.Clear();
+
+            Console.WriteLine("\t\tAdministrator panel - Viewing all savings\n");
+
+            foreach (Savings sav in Savings._savings) //traverses through entire savings list
+            {
+                //method called from savings class
+                sav.AdminViewSavings();
+            }
+
+            Console.WriteLine("\nPress any key to return to Manage Users");
+            Console.ReadKey();
+            ManageUsers();
+
+        }//end of View User class-----------------------------------------------
 
 
 
