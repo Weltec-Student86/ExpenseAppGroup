@@ -173,7 +173,7 @@ namespace ExpenseAppGroup
                 {
 
                     _expenses.Remove(removeExpensesfound);
-
+                                                
                     Console.Clear();
 
                     Console.WriteLine("\tUpdated expenses\n");
