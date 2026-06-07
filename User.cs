@@ -289,11 +289,11 @@ namespace ExpenseAppGroup
                             break;
 
                         case 3:
-                            Expenses.UpdateExpense();
+                            Expenses.UpdateExpense(User.CurrentLoggedInUser);
                             break;
 
                         case 4:
-                            Expenses.RemoveExpense();
+                            Expenses.RemoveExpense(User.CurrentLoggedInUser);
                             break;
 
                         case 5:

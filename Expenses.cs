@@ -32,7 +32,7 @@ namespace ExpenseAppGroup
             UserName = user;
         }
 
-        //method for expense----------------------------------1
+        //method for expense---------------------------------------------------------------------------------------------------------------------------------1
         //expense that have been added to user account
 
         public void AdminViewExpenses()
@@ -54,7 +54,7 @@ namespace ExpenseAppGroup
                 {
                     foreach (Expenses e in _expenses)
                    
-                    Console.WriteLine($"Username: {e.UserName}\n Expense Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency (days): {e.ExpFrequency}\n");
+                    Console.WriteLine($"Username: {e.UserName}\nExpense Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency (days): {e.ExpFrequency}\n");
 
                 }
                 Console.WriteLine("1. Back to home");
@@ -63,10 +63,10 @@ namespace ExpenseAppGroup
             } while (exitAddExpenseChoice1 == 0);
             Admin.AdminHome();
 
-        }//end of ViewExpense method--------------------------1
+        }//end of ViewExpense method--------------------------------------------------------------------------------------------------------------------------1
 
 
-        //adding new expense to user account------------------2
+        //adding new expense to user account----------------------------------------------------------------------------------------------------------------2
         public static void AddExpense()
         {
 
@@ -99,53 +99,109 @@ namespace ExpenseAppGroup
             } while (exitAddExpenseChoice2 == 0);
             User.UserHome();
 
-        }//end of AddExpense method------------------------2
+        }//end of AddExpense method----------------------------------------------------------------------------------------------------------------------------2
 
 
 
-        //Remove expense to user --------------------------3
-        public static void RemoveExpense()
+
+        //Remove expense to user --------------------------------------------------------------------------------------------------------------------------------3
+        public static void RemoveExpense(string currentLoggedInUser)
         {
-            Console.WriteLine($"Expense name: ");
+            Console.Clear();
+            int exitRemoveExpenseChoice1 = 1;
 
-            Console.WriteLine("Displays expense details");
+            do
+            {
+                //searches the name of the expense they wish to remove
+                Console.WriteLine("Enter the expense you want to remove:");
+                string removeExpenses = Console.ReadLine();
 
-            Console.WriteLine("Are you sure you want to delete this expense (y/n)");
+                //the variable is then passed through the list to find a matching account
+                Expenses removeExpensesfound = _expenses.Find(e => e.ExpName.Equals(removeExpenses, StringComparison.Ordinal));
+
+                //if-else statement to confirm if the user wants to remove selected expense
+                if (removeExpensesfound != null)
+                {
+                    Console.WriteLine($"\nThe Expense {removeExpensesfound.ExpName} will be removed.");
+                    Console.WriteLine("\nAre you sure you want to remove this expense? (y/n)\n");
+
+                    char removeConfirm = Convert.ToChar(Console.ReadLine());
 
 
-        }//end of update expense method---------------------3
+                    if (removeConfirm == 'y') //removes the users Expense
+                    {
+                    _expenses.Remove(removeExpensesfound);
+                    Console.WriteLine("\nExpense removed.\n");
+
+                    }
+                    else //cancels removal
+                    {
+                    Console.WriteLine("\nRemove canceled.\n");
+                    }
+
+                }
+            } while (exitRemoveExpenseChoice1 == 0);
+            User.UserHome();
+        }//end of removal of expense method-----------------------------------------------------------------------------------------------------------------------3
 
 
-        //end of existing expense---------------------------4
-        public static void UpdateExpense()
+
+        //end of existing expense-------------------------------------------------------------------------------------------------------------------4
+        public static void UpdateExpense(string currentLoggedInUser)
         {
             Console.Clear();
 
             Console.WriteLine("\t Enter the name of the expense you wish to update");
-            //remove == readline
+
             int exitUpdateExpenseChoice1 = 1;
 
-            //do while loop to exit to home
-            do
+            string removeExpenses = Console.ReadLine();
+
+            //the variable is then passed through the list to find a matching account
+            Expenses removeExpensesfound = _expenses.Find(e => e.ExpName.Equals(removeExpenses, StringComparison.Ordinal));
+
+            //if-else statement to confirm if the user wants to update selected expense
+            if (removeExpensesfound != null)
             {
+                Console.WriteLine($"\nThe expensel {removeExpensesfound.ExpName} will be updated.");
+                Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
 
-                Console.WriteLine("Updated expense name:");
-                string updatedExpense = Console.ReadLine();
+                char removeConfirm = Convert.ToChar(Console.ReadLine());
 
-                Console.WriteLine("Updated expense amount:");
-                string updatedExpenseAmount = Console.ReadLine();
 
-                Console.WriteLine("Updated expense frequency (days):");
-                string updatedExpenseFrequency = Console.ReadLine();
+                if (removeConfirm == 'y') //removes the users Expense
+                {
 
-                Console.WriteLine("\n1. Back to home");
-                exitUpdateExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+                    _expenses.Remove(removeExpensesfound);
+
+                    Console.Clear();
+
+                    Console.WriteLine("\tUpdated expenses\n");
+
+                    Console.WriteLine("Updated expense name:");
+                    string expName = Console.ReadLine();
+
+                    Console.WriteLine("Updated expense amount:");
+                    double expAmount = Convert.ToDouble(Console.ReadLine());
+
+                    Console.WriteLine("Updated expense frequency (days):");
+                    int expFrequency = Convert.ToInt32(Console.ReadLine());
+
+                    Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
+                    _expenses.Add(newExpense);
+                    Console.WriteLine("\nExpense removed.\n");
+
+                }
+                else //cancels removal
+                {
+                    Console.WriteLine("\nUpdated canceled.\n");
+                }
 
 
             } while (exitUpdateExpenseChoice1 == 0);
-            User.UserHome();
+            User.UserHome();//returns back to home page
 
-        }//end of update expense method---------------------4
+        }//end of update expense method---------------------------------------------------------------------------------------------------------------4
 
 
         public static void ExpenseCalculation()
@@ -157,7 +213,7 @@ namespace ExpenseAppGroup
         }
 
 
-        //method for Viewing the expenses----------------------------------6
+        //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------6
         //viewing all expenses that have been added to user account
         public static void ViewExpenses(string currentLoggedInUser)
         {
@@ -187,13 +243,14 @@ namespace ExpenseAppGroup
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
-            User.UserHome();
+            User.UserHome(); //returns back to home page
 
-        }//end of ViewExpense method--------------------------6
+        }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
 
 
 
-        //Method for the preadded users expenses for view expenses this is where the values are stored-----7
+
+        //Method for the preadded users expenses for view expenses this is where the values are stored--------------------------------------------------------7
         public static void PreaddedUserExpenses()
         {
             //adds objects to the list
@@ -218,7 +275,7 @@ namespace ExpenseAppGroup
             ("Phone Bill", 25, 3, "mrbeast")
             );
 
-        }//end of the preadded user expenses methods--------------------------7
+        }//end of the preadded user expenses methods-------------------------------------------------------------------------------------------------------------7
 
 
     }//end of class-----------------------------------------

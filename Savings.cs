@@ -83,7 +83,7 @@ namespace ExpenseAppGroup
                 else
                 {
                     foreach (var e in userGoals)
-                        Console.WriteLine($"Saving goal: {e.savGoals}\n savings goal amount: {e.amtGoals}\n");
+                        Console.WriteLine($"Saving goal: {e.savGoals}\nSavings goal amount: {e.amtGoals}\n");
 
                 }
                 Console.WriteLine("1. Add new goal");
@@ -108,7 +108,6 @@ namespace ExpenseAppGroup
 
                     case 2:
                         Console.WriteLine("Update to savings");
-                        //Savings.UpdateSavings(amountToAdd, currentLoggedInUser);
                         UpdateSavings(currentLoggedInUser);
                         Console.WriteLine();
                         
@@ -121,7 +120,7 @@ namespace ExpenseAppGroup
 
                     case 4:
                         Console.WriteLine("Remove Goals");
-                        Savings.RemoveGoals();
+                        Savings.RemoveGoals(currentLoggedInUser);
                         break;
 
                     case 5:
@@ -183,53 +182,8 @@ namespace ExpenseAppGroup
 
         }//end of Method for Adding goals---------------------------------------2
 
-        //Method for adding to savings ---------------------------------------3
-        //public static void UpdateSavings(string currentLoggedInUser)
-        //{
-            
 
-
-        //    int exitUpdateSavingChoice1 = 1;
-        //    //do while loop to exit to home
-        //    do
-        //    {
-        //        var savingsEntry = _savings.First(s => s.UserName == currentLoggedInUser);
-        //        if (savingsEntry != null)
-        //        { 
-
-        //            //users goals and savings they have created this will need to be changed
-        //            Console.WriteLine("Add savings");
-
-                    
-        //            Console.WriteLine("Enter the amount you would like to add to savings");
-        //            amountToAdd = Convert.ToDouble(Console.ReadLine());
-        //            savingsEntry.savingsAmt += amountToAdd;
-                    
-
-        //            Console.WriteLine($"New balance: ${savingsEntry.savings}");
-
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("No savings found please add to savings");
-                   
-        //        }
-
-        //        Savings.UpdateSavings(amountToAdd, currentLoggedInUser);
-
-        //        Console.WriteLine("1. Back to savings menu");
-        //        exitUpdateSavingChoice1 = Convert.ToInt32(Console.ReadLine());
-
-
-
-        //    } while (exitUpdateSavingChoice1 == 0);
-        //    Savings.SavingsMenu(User.CurrentLoggedInUser);
-           
-
-        //}//end of Method for adding to savings-------------------------------3
-
-
-
+        //method for updating savings --------------------------------------3
         public static void UpdateSavings(string currentLoggedInUser)
         {
             int exitUpdateSavingChoice1 = 1;
@@ -267,14 +221,14 @@ namespace ExpenseAppGroup
             }//end of do
             while (exitUpdateSavingChoice1 == 0);
 
-        }//end of update savings
+        }//end of update savings --------------------------------------3
 
 
 
 
 
         //Method for Removing goals-----------------------------4
-        public static void RemoveGoals()
+        public static void RemoveGoals(string currentLoggedInUser)
         {
             Console.Clear();
 
@@ -283,14 +237,40 @@ namespace ExpenseAppGroup
             do
             {
 
+                //searches the name of the user they wish to remove
+                Console.WriteLine("Enter the Goal you want to remove:");
+                string removeGoal = Console.ReadLine();
 
-                //users goals and savings they have created this will need to be changed
-                Console.WriteLine("Remove Goal");
-                double goal = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine();
+                //the variable is then passed through the list to find a matching account
+                Savings removeGoalfound= _goals.Find(e => e.savGoals.Equals(removeGoal, StringComparison.Ordinal));
 
-                Console.WriteLine("1. Back to savings menu");
-                exitRemoveGoalsChoice1 = Convert.ToInt32(Console.ReadLine());
+                //if-else statement to confirm if admin wants to remove the user account
+                if (removeGoalfound != null)
+                {
+                    Console.WriteLine($"\nThe goal {removeGoalfound.goals} will be removed.");
+                    Console.WriteLine("\nAre you sure you want to remove this goal? (y/n)\n");
+
+                    char removeConfirm = Convert.ToChar(Console.ReadLine());
+
+
+                    if (removeConfirm == 'y') //removes user
+                    {
+                        _goals.Remove(removeGoalfound);
+                        Console.WriteLine("\nGoal removed.\n");
+
+                    }
+                    else //cancels removal
+                    {
+                        Console.WriteLine("\nRemove canceled.\n");
+                    }
+
+                }
+                else //displays if the name entered is not on the list
+                {
+                    Console.WriteLine("\nGoal does not exist.\n");
+
+                }
+
 
 
 
