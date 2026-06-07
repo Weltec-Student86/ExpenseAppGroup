@@ -238,6 +238,9 @@ namespace ExpenseAppGroup
                 User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
                 users.Add(newUser);
 
+                Savings newSavings = new Savings(savings, userNameEntered);
+                Savings._savings.Add(newSavings);
+
                 Console.WriteLine("\nPress any key to continue...\n");
                 Console.ReadKey();
 
@@ -444,6 +447,8 @@ namespace ExpenseAppGroup
 
             //the variable is then passed through the list to find a matching account
             User userRemFound = users.Find(u => u.Username.Equals(remUserNameEntered, StringComparison.Ordinal));
+            Expenses userExpRemFound = Expenses._expenses.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
+            Savings userSavRemFound = Savings._savings.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
 
             //if-else statement to confirm if admin wants to remove the user account
             if (userRemFound != null)
@@ -456,7 +461,25 @@ namespace ExpenseAppGroup
 
                 if (removeConfirm == 'y') //removes user
                 {
-                    users.Remove(userRemFound);
+                    bool endRemoveLoop = false;
+                    do
+                    {
+                        User userRemFound1 = users.Find(u => u.Username.Equals(remUserNameEntered, StringComparison.Ordinal));
+                        Expenses userExpRemFound1 = Expenses._expenses.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
+                        Savings userSavRemFound1 = Savings._savings.Find(u => u.UserName.Equals(remUserNameEntered, StringComparison.Ordinal));
+
+                        User.users.Remove(userRemFound1);
+
+                        Savings._savings.Remove(userSavRemFound1);
+
+                        Expenses._expenses.Remove(userExpRemFound1);
+
+                        if (userRemFound1 != null && userExpRemFound1 != null && userSavRemFound1 != null)
+                        {
+                            endRemoveLoop = true;
+                        }
+                    }
+                    while (endRemoveLoop == false);
                     Console.WriteLine("\nUser removed.\n");
 
                 }

@@ -72,7 +72,7 @@ namespace ExpenseAppGroup
                 else
                 {
                     foreach (var e in userSavings)
-                        Console.WriteLine($"\tCurrent Samings: {e.savings}");
+                        Console.WriteLine($"\tCurrent Savings: {e.savings}\n");
 
                 }
 
@@ -221,6 +221,8 @@ namespace ExpenseAppGroup
             }//end of do
             while (exitUpdateSavingChoice1 == 0);
 
+            Savings.SavingsMenu(User.CurrentLoggedInUser);
+
         }//end of update savings --------------------------------------3
 
 
@@ -278,6 +280,9 @@ namespace ExpenseAppGroup
             Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for Removing goals-------------------------4
+
+
+
 
         //Method for updating goals -----------------------------------------------5
         public static void UpdateGoals()
