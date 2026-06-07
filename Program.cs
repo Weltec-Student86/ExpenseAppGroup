@@ -6,9 +6,9 @@
         {
             //this method pre-loads admins and users into the lists upon the program starting
             Admin.PreLoadAdmins();
+            User.PreLoadUsers();
             Savings.PreaddedUserSavings();
             Savings.PreaddedUserGoals();
-            User.PreLoadUsers();
             Expenses.PreaddedUserExpenses();
 
             //calling login menus

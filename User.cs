@@ -17,7 +17,6 @@ namespace ExpenseAppGroup
         //passing name of user to multiple methods - this is used to display the username on the home screen
         public static string name = "";
         public static int accountIndex;
-
         private static string password = "";
         
 
@@ -136,14 +135,15 @@ namespace ExpenseAppGroup
         //user Registration method-----------------------------
         public static void Register()
         {
-            Console.Clear();
 
-            bool pwVerify = false;
+                Console.Clear();
 
-            Console.WriteLine("\t\tRegister");
-            Console.WriteLine("---------------------------------------\n");
+                bool pwVerify = false;
 
-            //user enters account details for new account
+                Console.WriteLine("\t\tRegister");
+                Console.WriteLine("---------------------------------------\n");
+
+                //user enters account details for new account
 
                 Console.WriteLine("Enter your first name:");
                 string firstNameEntered = Console.ReadLine();
