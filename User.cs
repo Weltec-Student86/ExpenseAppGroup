@@ -530,7 +530,7 @@ namespace ExpenseAppGroup
         {
            //creates objects
             User exampleUser0 = new User("user", "default", "user", "password");
-            User exampleUser1 = new User("John", "Smith", "j", "p");
+            User exampleUser1 = new User("John", "Smith", "johnsmith7", "password1");
             User exampleUser2 = new User("Louis", "Jones", "lj1978", "password2");
             User exampleUser3 = new User("Peter", "Jones", "p_man", "password3");
             User exampleUser4 = new User("Michelle", "Peterson", "mrs_michelle", "password4");
