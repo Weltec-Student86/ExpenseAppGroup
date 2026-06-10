@@ -285,7 +285,7 @@ namespace ExpenseAppGroup
             //adds objects to the list
 
             _expenses.Add(new Expenses
-            ("netflix", 14, 1, "j")
+            ("netflix", 14, 1, "johnsmith7")
             );
 
             _expenses.Add(new Expenses
