@@ -66,109 +66,123 @@ namespace ExpenseAppGroup
             //do while loop incase user enters wrong number
             do
             {
-                //menu options for savings
-                //Get expenses for calculation
-                double totalExpenses = Expenses._expenses
-                    .Where(e => e.UserName == currentLoggedInUser)
-                    .Sum(e => e.ExpAmount);
+                try 
+                { 
+                    //menu options for savings
+                    //Get expenses for calculation
+                    double totalExpenses = Expenses._expenses
+                        .Where(e => e.UserName == currentLoggedInUser)
+                        .Sum(e => e.ExpAmount);
 
-                //Gets Savings for the user
-                var userSavings = Savings._savings.FirstOrDefault(s => s.UserName == currentLoggedInUser);
-                double currentSavings = (userSavings != null) ? userSavings.amtSavings : 0;
+                    //Gets Savings for the user
+                    var userSavings = Savings._savings.FirstOrDefault(s => s.UserName == currentLoggedInUser);
+                    double currentSavings = (userSavings != null) ? userSavings.amtSavings : 0;
 
-                //Gets Goals for the user
-                var goalEntry = _goals.FirstOrDefault(g => g.UserName == currentLoggedInUser);
-                double goalAmount = (goalEntry != null) ? goalEntry.amtGoals : 0;
+                    //Gets Goals for the user
+                    var goalEntry = _goals.Where(g => g.UserName == currentLoggedInUser);
+                    var totalGoals = goalEntry.Sum(x => x.amtGoals);
+                    
 
-                //Does the calculation: Savings - Expenses then check its with Goal
-                double newTotal = currentSavings - totalExpenses;
+                    //Does the calculation: Savings - Expenses then check its with Goal
+                    double newTotal = currentSavings - totalExpenses;
 
-                Console.WriteLine($"\t--- Savings Summary for {currentLoggedInUser} ---");
-                Console.WriteLine("---------------------------------------\n");
-                Console.WriteLine();
+                    Console.WriteLine($"\t--- Savings Summary for {currentLoggedInUser} ---");
+                    Console.WriteLine("---------------------------------------\n");
+                    Console.WriteLine();
 
-                Console.WriteLine($"Total Expenses: ${totalExpenses}");
-                Console.WriteLine($"Current Savings: ${currentSavings}");
-                Console.WriteLine($"New Total (Savings - Expenses): ${newTotal}");
-                Console.WriteLine($"Target Goal Amount: ${goalAmount}");
-                //If statment to check user has added goals if they havent displays message
-                if (goalEntry == null)
-                {
-                    Console.WriteLine($"No goals added");
+                    Console.WriteLine($"Total Expenses: ${totalExpenses}");
+                    Console.WriteLine($"Current Savings: ${currentSavings}");
+                    Console.WriteLine($"New Total (Savings - Expenses): ${newTotal}");
+                    Console.WriteLine($"Target Goal Amount: ${totalGoals}");
 
-                }
-                else
-                {
-                    if (newTotal >= goalAmount)
+                    
+
+
+                    //If statment to check user has added goals if they havent displays message
+                    if (goalEntry == null)
                     {
-                        Console.WriteLine("Status: You are on track to meet your goal!");
+                        Console.WriteLine($"No goals added");
+
                     }
                     else
                     {
-                        Console.WriteLine($"Status: You need ${goalAmount - newTotal} more to reach your goal.");
+                        if (newTotal >= totalGoals)
+                        {
+                            Console.WriteLine("Status: You are on track to meet your goal!");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Status: You need ${totalGoals - newTotal} more to reach your goal.");
+                        }
+
                     }
 
-                }
+                    Console.WriteLine();
+                    Console.WriteLine("---------------------------------------\n");
+                    Console.WriteLine("1. Add new goal");
+                    Console.WriteLine("2. View goals");
+                    Console.WriteLine("3. Update savings total");
+                    Console.WriteLine("4. Update to goals");
+                    Console.WriteLine("5. Remove goal");
+                    Console.WriteLine("6. Back home");
+                    Console.WriteLine("99. Exit");
 
-                Console.WriteLine();
-                Console.WriteLine("---------------------------------------\n");
-                Console.WriteLine("1. Add new goal");
-                Console.WriteLine("2. Update savings total");
-                Console.WriteLine("3. Update to goals");
-                Console.WriteLine("4. Remove goal");
-                Console.WriteLine("5. Back home");
-                Console.WriteLine("99. Exit");
-
-                    Console.WriteLine("Please select an option:");
-                    int savingsChoice = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Please select an option:");
+                        int savingsChoice = Convert.ToInt32(Console.ReadLine());
 
 
-                switch (savingsChoice) 
-                {
-                    case 1:
-                        Console.WriteLine("Add New Goal");
-                        Savings.AddGoals();
-                        Console.WriteLine();
+                    switch (savingsChoice) 
+                    {
+                        case 1:
+                            Console.WriteLine("Add New Goal");
+                            Savings.AddGoals();
+                            Console.WriteLine();
 
-                            break; 
+                                break;
 
-                    case 2:
-                        Console.WriteLine("Update To Savings");
-                        UpdateSavings(currentLoggedInUser);
-                        Console.WriteLine();
-                        
+                        case 2:
+                            Console.WriteLine("View Goals");
+                            ViewGoals(currentLoggedInUser);
                             break;
+
 
                         case 3:
-                            Console.WriteLine("Update Goals");
-                            Savings.UpdateGoals();
+                            Console.WriteLine("Update To Savings");
+                            UpdateSavings(currentLoggedInUser);
+                            Console.WriteLine();
+                        
+                                break;
+
+                            case 4:
+                                Console.WriteLine("Update Goals");
+                                Savings.UpdateGoals();
+                                break;
+
+                            case 5:
+                                Console.WriteLine("Remove Goals");
+                                Savings.RemoveGoals(currentLoggedInUser);
+                                break;
+
+                        case 6:
+                            Console.WriteLine("Back To Home");
+                            User.UserHome();
                             break;
 
-                        case 4:
-                            Console.WriteLine("Remove Goals");
-                            Savings.RemoveGoals(currentLoggedInUser);
-                            break;
+                            case 99:
+                                Environment.Exit(0);
+                                break;
 
-                    case 5:
-                        Console.WriteLine("Back To Home");
-                        User.UserHome();
-                        break;
-
-                        case 99:
-                            Environment.Exit(0);
-                            break;
-
-                        default:
-                            Console.Clear();
-                            Console.WriteLine("Enter a valid option!\n");
-                            Console.WriteLine("Press any key to return to savings menu...");
-                            Console.ReadKey();
-                            Console.Clear();
-                            savingsMenuLoop = true;
-                         break;
+                            default:
+                                Console.Clear();
+                                Console.WriteLine("Enter a valid option!\n");
+                                Console.WriteLine("Press any key to return to savings menu...");
+                                Console.ReadKey();
+                                Console.Clear();
+                                savingsMenuLoop = true;
+                             break;
 
 
-                    }//end of switch---------------------------------------
+                        }//end of switch---------------------------------------
 
                 }//end of try
                 catch (FormatException ex)
@@ -398,7 +412,44 @@ namespace ExpenseAppGroup
         }//end of Method for updating goals----------------------------------------5
 
 
+        public static void ViewGoals(string currentLoggedInUser)
+        {
+            Console.Clear();
 
+
+            int exitAddExpenseChoice1 = 1;
+            //do while loop to exit to home
+            do
+            {
+                var userGoals = _goals.Where(e => e.UserName == currentLoggedInUser).ToList();
+
+                Console.WriteLine($"\t View Expenses Menu\n");
+                Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
+                Console.WriteLine("---------------------------------------\n");
+                Console.WriteLine();
+
+                //users expenses 
+                if (userGoals.Count == 0)
+                {
+                    Console.WriteLine($"No Goals Added");
+
+                }
+                else
+                {
+                    foreach (var e in userGoals)
+                    {
+                        Console.WriteLine($"Name: {e.savGoals} Amount: ${e.amtGoals}");
+                    }
+
+                }
+                Console.WriteLine("\n1. Back To Savings");
+                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+
+
+            } while (exitAddExpenseChoice1 == 0);
+            SavingsMenu(currentLoggedInUser); //returns back to savings page
+
+        }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
 
 
         public void AdminViewSavings()

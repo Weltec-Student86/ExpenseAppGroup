@@ -268,22 +268,7 @@ namespace ExpenseAppGroup
                 }
                 Console.WriteLine("\n1. Back To Home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
-
-                //var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
-                //Console.WriteLine($"\t Display Expenses\n");
-                //Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
-                ////users expenses 
-                //if (_expenses.Count >= 0)
-                //{
-                //    foreach (var e in userExpenses)
-                //        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"No expenses added");
-                //}
-                //Console.WriteLine("\n1. Back to home");
-                //exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+            
 
             } while (exitAddExpenseChoice1 == 0);
             User.UserHome(); //returns back to home page
