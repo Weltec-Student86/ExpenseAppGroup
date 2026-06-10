@@ -140,6 +140,11 @@ namespace ExpenseAppGroup
                     }
 
                 }
+                else
+                {
+                    Console.WriteLine("\nExpense not found. Press any key to continue...");
+                    Console.ReadKey();
+                }
             } while (exitRemoveExpenseChoice1 == 0);
             User.UserHome();
         }//end of removal of expense method-----------------------------------------------------------------------------------------------------------------------3
@@ -149,11 +154,14 @@ namespace ExpenseAppGroup
         //end of existing expense-------------------------------------------------------------------------------------------------------------------4
         public static void UpdateExpense(string currentLoggedInUser)
         {
-            Console.Clear();
+            int exitUpdateExpenseChoice1 = 1;
+            do
+            {
+                Console.Clear();
 
             Console.WriteLine("\t Enter the name of the expense you wish to update");
 
-            int exitUpdateExpenseChoice1 = 1;
+            
 
             string removeExpenses = Console.ReadLine();
 
@@ -161,43 +169,49 @@ namespace ExpenseAppGroup
             Expenses removeExpensesfound = _expenses.Find(e => e.ExpName.Equals(removeExpenses, StringComparison.Ordinal));
 
             //if-else statement to confirm if the user wants to update selected expense
-            if (removeExpensesfound != null)
-            {
-                Console.WriteLine($"\nThe expensel {removeExpensesfound.ExpName} will be updated.");
-                Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
-
-                char removeConfirm = Convert.ToChar(Console.ReadLine());
-
-
-                if (removeConfirm == 'y') //removes the users Expense
+            
+                if (removeExpensesfound != null)
                 {
+                    Console.WriteLine($"\nThe expensel {removeExpensesfound.ExpName} will be updated.");
+                    Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
+
+                    char removeConfirm = Convert.ToChar(Console.ReadLine());
+
+
+                    if (removeConfirm == 'y') //removes the users Expense
+                    {
 
                     _expenses.Remove(removeExpensesfound);
                                                 
                     Console.Clear();
 
-                    Console.WriteLine("\tUpdated expenses\n");
+                        Console.WriteLine("\tUpdated expenses\n");
 
-                    Console.WriteLine("Updated expense name:");
-                    string expName = Console.ReadLine();
+                        Console.WriteLine("Updated expense name:");
+                        string expName = Console.ReadLine();
 
-                    Console.WriteLine("Updated expense amount:");
-                    double expAmount = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Updated expense amount:");
+                        double expAmount = Convert.ToDouble(Console.ReadLine());
 
-                    Console.WriteLine("Updated expense frequency (days):");
-                    int expFrequency = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Updated expense frequency (days):");
+                        int expFrequency = Convert.ToInt32(Console.ReadLine());
 
-                    Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
-                    _expenses.Add(newExpense);
-                    Console.WriteLine("\nExpense removed.\n");
+                        Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
+                        _expenses.Add(newExpense);
+                        Console.WriteLine("\nExpense removed.\n");
+
+                    }
+                    else //cancels removal
+                    {
+                        Console.WriteLine("\nUpdated canceled.\n");
+                    }
 
                 }
-                else //cancels removal
+                else
                 {
-                    Console.WriteLine("\nUpdated canceled.\n");
+                    Console.WriteLine("\nExpense not found. Press any key to continue...");
+                    Console.ReadKey();
                 }
-
-
             } while (exitUpdateExpenseChoice1 == 0);
             User.UserHome();//returns back to home page
 
@@ -225,19 +239,42 @@ namespace ExpenseAppGroup
             do
             {
                 var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
+
+
+                //var user = _expenses.Where(e => e.UserName == currentLoggedInUser);
+
+                //if (userExpenses <= -1)
+                //{
+
+                //    Console.WriteLine("No expenses found.");
+                //    Console.ReadKey();
+                //}
+                //else
+                //{
+                //    Console.WriteLine("fuck");
+                //    foreach (var e in user)
+                //    {
+                //        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                //    }
+                //    Console.ReadKey();
+
+
+                //}
+
+
+
                 Console.WriteLine($"\t Display Expenses\n");
                 Console.WriteLine();
                 Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
                 //users expenses 
-                if (_expenses.Count == 0)
-                {
-                    Console.WriteLine($"No expenses added");
-                }
-                else
+                if (_expenses.Count >= 0)
                 {
                     foreach (var e in userExpenses)
                         Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
-
+                }
+                else
+                {
+                    Console.WriteLine($"No expenses added");
                 }
                 Console.WriteLine("\n1. Back to home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
@@ -246,6 +283,7 @@ namespace ExpenseAppGroup
             User.UserHome(); //returns back to home page
 
         }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
+
 
 
 
