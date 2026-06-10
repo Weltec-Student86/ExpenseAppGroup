@@ -53,6 +53,15 @@ namespace ExpenseAppGroup
         {
 
             bool savingsMenuLoop = false;
+
+            //sorts lists alphabetically by username
+
+            //sorts lists by username so they are always in order
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
             Console.Clear();
             //do while loop incase user enters wrong number
             do
@@ -110,8 +119,8 @@ namespace ExpenseAppGroup
                 Console.WriteLine("5. Back home");
                 Console.WriteLine("99. Exit");
 
-                Console.WriteLine("Please select an option:");
-                int savingsChoice = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Please select an option:");
+                    int savingsChoice = Convert.ToInt32(Console.ReadLine());
 
 
                 switch (savingsChoice) 
@@ -121,49 +130,58 @@ namespace ExpenseAppGroup
                         Savings.AddGoals();
                         Console.WriteLine();
 
-                        break; 
+                            break; 
 
                     case 2:
                         Console.WriteLine("Update To Savings");
                         UpdateSavings(currentLoggedInUser);
                         Console.WriteLine();
                         
-                        break;
+                            break;
 
-                    case 3:
-                        Console.WriteLine("Update Goals");
-                        Savings.UpdateGoals();
-                        break;
+                        case 3:
+                            Console.WriteLine("Update Goals");
+                            Savings.UpdateGoals();
+                            break;
 
-                    case 4:
-                        Console.WriteLine("Remove Goals");
-                        Savings.RemoveGoals(currentLoggedInUser);
-                        break;
+                        case 4:
+                            Console.WriteLine("Remove Goals");
+                            Savings.RemoveGoals(currentLoggedInUser);
+                            break;
 
                     case 5:
                         Console.WriteLine("Back To Home");
                         User.UserHome();
                         break;
 
-                    case 99:
-                        Environment.Exit(0);
-                        break;
+                        case 99:
+                            Environment.Exit(0);
+                            break;
 
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("Enter a valid option!\n");
-                        Console.WriteLine("Press any key to return to savings menu...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        savingsMenuLoop = true;
-                     break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Enter a valid option!\n");
+                            Console.WriteLine("Press any key to return to savings menu...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            savingsMenuLoop = true;
+                         break;
 
 
-                }//end of switch---------------------------------------
+                    }//end of switch---------------------------------------
 
-               
+                }//end of try
+                catch (FormatException ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    SavingsMenu(currentLoggedInUser);
+                }
 
-            }while (savingsMenuLoop == true);
+            } while (savingsMenuLoop == true);
 
         }//end of savings menu method---------------------------------------1
 

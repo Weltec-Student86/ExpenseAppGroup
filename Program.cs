@@ -27,9 +27,16 @@
             //declaring varaibles
             int choice;
             bool landingPageLoop = false;
-           
-                do
-                {
+
+            //sorts lists alphabetically by username
+            
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
+            do
+            {
                     try
                     {
 
@@ -86,8 +93,8 @@
                     }
 
 
-                }//end of do
-                while (landingPageLoop == true);
+            }//end of do
+            while (landingPageLoop == true);
             
 
         }//end of Landing Page----------------------------------

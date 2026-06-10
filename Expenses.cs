@@ -40,6 +40,8 @@ namespace ExpenseAppGroup
             Console.Clear();
 
             int exitAddExpenseChoice1 = 1;
+
+
             //do while loop to exit to home
             do
             {
@@ -54,7 +56,7 @@ namespace ExpenseAppGroup
                 {
                     foreach (Expenses e in _expenses)
                    
-                    Console.WriteLine($"Username: {e.UserName}\nExpense Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency (days): {e.ExpFrequency}\n");
+                    Console.WriteLine($"Username: {e.UserName}\nExpense Name: {e.ExpName}\t Amount: ${e.ExpAmount}\t Frequency (days): {e.ExpFrequency}\n");
 
                 }
                 Console.WriteLine("1. Back to home");
@@ -266,6 +268,22 @@ namespace ExpenseAppGroup
                 }
                 Console.WriteLine("\n1. Back To Home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
+
+                //var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
+                //Console.WriteLine($"\t Display Expenses\n");
+                //Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
+                ////users expenses 
+                //if (_expenses.Count >= 0)
+                //{
+                //    foreach (var e in userExpenses)
+                //        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                //}
+                //else
+                //{
+                //    Console.WriteLine($"No expenses added");
+                //}
+                //Console.WriteLine("\n1. Back to home");
+                //exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
             User.UserHome(); //returns back to home page

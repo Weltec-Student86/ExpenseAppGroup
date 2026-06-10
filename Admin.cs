@@ -114,6 +114,13 @@ namespace ExpenseAppGroup
         {
 
             bool adminHomeLoop = false;
+
+            //sorts lists alphabetically by username
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
             Console.Clear();
 
             do //do-while runs admin home page
@@ -193,52 +200,72 @@ namespace ExpenseAppGroup
 
             bool mngUserLoop = false;
 
+            //sorts lists alphabetically by username
+            User.users.Sort((s1, s2) => s1.Username.CompareTo(s2.Username));
+            Expenses._expenses.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._savings.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+            Savings._goals.Sort((s1, s2) => s1.UserName.CompareTo(s2.UserName));
+
             do //do-while loop to run manage user menu
             {
-                Console.Clear();
-                Console.WriteLine("\t\tAdministrator panel - Manage users\n");
+                try 
+                { 
 
-                Console.WriteLine("1. View all users");
-                Console.WriteLine("2. Add new user");
-                Console.WriteLine("3. Update user");
-                Console.WriteLine("4. Remove user");
-                Console.WriteLine("5. Back to admin home");
-                int mngUserChoice = Convert.ToInt32(Console.ReadLine());
+                    Console.Clear();
+                    Console.WriteLine("\t\tAdministrator panel - Manage users\n");
 
-                switch (mngUserChoice) //switch menu for admin manage user choice
+                    Console.WriteLine("1. View all users");
+                    Console.WriteLine("2. Add new user");
+                    Console.WriteLine("3. Update user");
+                    Console.WriteLine("4. Remove user");
+                    Console.WriteLine("5. Back to admin home");
+                    int mngUserChoice = Convert.ToInt32(Console.ReadLine());
+
+                    switch (mngUserChoice) //switch menu for admin manage user choice
+                    {
+                        case 1:
+                            ViewUsers();
+                            break;
+
+                        case 2:
+                            AdminAddUser();
+                            break;
+
+                        case 3:
+                            AdminUpdateUser();
+                            break;
+
+                        case 4:
+                            AdminRemoveUser();
+                            break;
+
+                        case 5:
+                            AdminHome();
+                            break;
+
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("\nEnter a valid option!\n");
+                            Console.WriteLine("Press any key to return to Admin Home...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            mngUserLoop = true;
+                            break;
+
+                    }//end of switch
+
+                }//end of try
+                catch (FormatException ex)
                 {
-                    case 1:
-                        ViewUsers();
-                        break;
+                    Console.WriteLine();
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please enter a valid number.\n");
+                    Console.WriteLine("Press any key to contine...");
+                    Console.ReadKey();
+                    ManageUsers();
+                }
 
-                    case 2:
-                        AdminAddUser();
-                        break;
-
-                    case 3:
-                        AdminUpdateUser();
-                        break;
-
-                    case 4:
-                        AdminRemoveUser();
-                        break;
-
-                    case 5:
-                        AdminHome();
-                        break;
-
-                    default:
-                        Console.Clear();
-                        Console.WriteLine("\nEnter a valid option!\n");
-                        Console.WriteLine("Press any key to return to Admin Home...");
-                        Console.ReadKey();
-                        Console.Clear();
-                        mngUserLoop = true;
-                        break;
-
-                }//end of switch
-
-            }while (mngUserLoop == true); //keeps looping if admin does not enter a valid choice
+            } while (mngUserLoop == true); //keeps looping if admin does not enter a valid choice
 
         }//end of Manage users----------------------------------------------
 
@@ -420,6 +447,9 @@ namespace ExpenseAppGroup
             //adds a new object to the user list with the entered details
             User newUser = new User(firstNameEntered, lastNameEntered, userNameEntered, passwordEntered);
             User.users.Add(newUser);
+
+            Savings newSavings = new Savings(savings, userNameEntered);
+            Savings._savings.Add(newSavings);
 
             Console.WriteLine("\nPress any key to return to Manage Users");
             Console.ReadKey();
