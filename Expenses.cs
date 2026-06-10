@@ -44,7 +44,7 @@ namespace ExpenseAppGroup
             do
             {
                 Console.WriteLine($"\t Display Expenses\n");
-
+                Console.WriteLine("---------------------------------------\n");
                 //users expenses 
                 if (_expenses.Count == 0)
                 {
@@ -79,6 +79,7 @@ namespace ExpenseAppGroup
             {
 
                 Console.WriteLine("\t Add your expenses\n");
+                Console.WriteLine("---------------------------------------\n");
 
                 Console.WriteLine("Add expense name:");
                 string expName = Console.ReadLine();
@@ -112,6 +113,10 @@ namespace ExpenseAppGroup
 
             do
             {
+
+                Console.WriteLine("\t Remove Expenses Menu");
+                Console.WriteLine("---------------------------------------\n");
+                Console.WriteLine();
                 //searches the name of the expense they wish to remove
                 Console.WriteLine("Enter the expense you want to remove:");
                 string removeExpenses = Console.ReadLine();
@@ -159,16 +164,20 @@ namespace ExpenseAppGroup
             {
                 Console.Clear();
 
-            Console.WriteLine("\t Enter the name of the expense you wish to update");
+                Console.WriteLine("\t Update Expenses Menu\n");
+                Console.WriteLine("---------------------------------------\n");
+                Console.WriteLine();
+                Console.WriteLine("\t Enter the name of the expense you wish to update");
+                
 
-            
 
-            string removeExpenses = Console.ReadLine();
 
-            //the variable is then passed through the list to find a matching account
-            Expenses removeExpensesfound = _expenses.Find(e => e.ExpName.Equals(removeExpenses, StringComparison.Ordinal));
+                string removeExpenses = Console.ReadLine();
 
-            //if-else statement to confirm if the user wants to update selected expense
+                //the variable is then passed through the list to find a matching account
+                Expenses removeExpensesfound = _expenses.Find(e => e.ExpName.Equals(removeExpenses, StringComparison.Ordinal));
+
+                //if-else statement to confirm if the user wants to update selected expense
             
                 if (removeExpensesfound != null)
                 {
@@ -181,7 +190,7 @@ namespace ExpenseAppGroup
                     if (removeConfirm == 'y') //removes the users Expense
                     {
 
-                    _expenses.Remove(removeExpensesfound);
+                        _expenses.Remove(removeExpensesfound);
                                                 
                     Console.Clear();
 
@@ -198,18 +207,18 @@ namespace ExpenseAppGroup
 
                         Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                         _expenses.Add(newExpense);
-                        Console.WriteLine("\nExpense removed.\n");
+                        Console.WriteLine("\nExpense Removed.\n");
 
                     }
                     else //cancels removal
                     {
-                        Console.WriteLine("\nUpdated canceled.\n");
+                        Console.WriteLine("\nUpdated Canceled.\n");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("\nExpense not found. Press any key to continue...");
+                    Console.WriteLine("\nExpense Not Found. Press any key to continue...");
                     Console.ReadKey();
                 }
             } while (exitUpdateExpenseChoice1 == 0);
@@ -218,13 +227,9 @@ namespace ExpenseAppGroup
         }//end of update expense method---------------------------------------------------------------------------------------------------------------4
 
 
-        public static void ExpenseCalculation()
-        {
-            Console.Clear();
+       
 
 
-
-        }
 
 
         //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------6
@@ -240,43 +245,26 @@ namespace ExpenseAppGroup
             {
                 var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
 
-
-                //var user = _expenses.Where(e => e.UserName == currentLoggedInUser);
-
-                //if (userExpenses <= -1)
-                //{
-
-                //    Console.WriteLine("No expenses found.");
-                //    Console.ReadKey();
-                //}
-                //else
-                //{
-                //    Console.WriteLine("fuck");
-                //    foreach (var e in user)
-                //    {
-                //        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
-                //    }
-                //    Console.ReadKey();
-
-
-                //}
-
-
-
-                Console.WriteLine($"\t Display Expenses\n");
-                Console.WriteLine();
+                Console.WriteLine($"\t View Expenses Menu\n");
                 Console.WriteLine($"\tWelcome {currentLoggedInUser}\n");
+                Console.WriteLine("---------------------------------------\n");
+                Console.WriteLine();
+                
                 //users expenses 
-                if (_expenses.Count >= 0)
+                if (userExpenses.Count == 0)
                 {
-                    foreach (var e in userExpenses)
-                        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                    Console.WriteLine($"No Expenses Added");
+
                 }
                 else
                 {
-                    Console.WriteLine($"No expenses added");
+                    foreach (var e in userExpenses)
+                    {
+                        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                    }
+                    
                 }
-                Console.WriteLine("\n1. Back to home");
+                Console.WriteLine("\n1. Back To Home");
                 exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
             } while (exitAddExpenseChoice1 == 0);
@@ -294,7 +282,7 @@ namespace ExpenseAppGroup
             //adds objects to the list
 
             _expenses.Add(new Expenses
-            ("netflix", 14, 1, "johnsmith7")
+            ("netflix", 14, 1, "j")
             );
 
             _expenses.Add(new Expenses
