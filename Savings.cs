@@ -99,7 +99,7 @@ namespace ExpenseAppGroup
 
 
                     //If statment to check user has added goals if they havent displays message
-                    if (goalEntry == null)
+                    if (totalGoals == 0)
                     {
                         Console.WriteLine($"No goals added");
 
@@ -490,23 +490,39 @@ namespace ExpenseAppGroup
             //adds objects to the list
 
             _goals.Add(new Savings
-            ("trip", 250, "johnsmith7")
+            ("Dinner", 34, "johnsmith7")
+            );
+            _goals.Add(new Savings
+            ("Fix Car", 2569, "johnsmith7")
             );
 
-            _goals.Add(new Savings
-            ("trip", 11, "lj1978")
-            );
 
             _goals.Add(new Savings
-            ("trip", 666, "p_man")
+            ("New Tv", 800, "lj1978")
             );
 
-            _goals.Add(new Savings
-            ("trip", 14, "mrs_michelle")
-            );
 
             _goals.Add(new Savings
-            ("trip", 25, "mrbeast")
+            ("Hoilday Trip", 2700, "p_man")
+            );
+            _goals.Add(new Savings
+            ("Office Chair", 128, "p_man")
+            );
+
+
+            _goals.Add(new Savings
+            ("Electric Shaver", 55, "mrs_michelle")
+            );
+
+
+            _goals.Add(new Savings
+            ("Private Island", 15000000, "mrbeast")
+            );
+            _goals.Add(new Savings
+            ("New Workers", 12, "mrbeast")
+            );
+            _goals.Add(new Savings
+            ("Priavte Jet", 250000, "mrbeast")
             );
 
         }//end of PreAddeded users Goals method--------------------------6
@@ -518,23 +534,23 @@ namespace ExpenseAppGroup
             //adds objects to the list
 
             _savings.Add(new Savings
-            ( 1400, "johnsmith7")
+            ( 18.98, "johnsmith7")
             );
 
             _savings.Add(new Savings
-            ( 11, "lj1978")
+            ( 1500, "lj1978")
             );
 
             _savings.Add(new Savings
-            ( 666, "p_man")
+            ( 3400, "p_man")
             );
 
             _savings.Add(new Savings
-            ( 14, "mrs_michelle")
+            ( 350, "mrs_michelle")
             );
 
             _savings.Add(new Savings
-            (100000000, "mrbeast")
+            (1000000000, "mrbeast")
             );
 
         }//end of PreAddeded users savings method--------------------------7

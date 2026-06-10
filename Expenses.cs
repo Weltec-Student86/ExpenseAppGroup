@@ -285,24 +285,41 @@ namespace ExpenseAppGroup
             //adds objects to the list
 
             _expenses.Add(new Expenses
-            ("netflix", 14, 1, "johnsmith7")
+            ("Power Bill", 211, 1, "johnsmith7")
             );
+            _expenses.Add(new Expenses
+            ("Rent", 250, 7, "johnsmith7")
+);
+
 
             _expenses.Add(new Expenses
-            ("Prime", 11, 3, "lj1978")
+            ("Xbox Game Pass", 25, 3, "lj1978")
+            );
+            _expenses.Add(new Expenses
+            ("Car Insurance", 110, 3, "lj1978")
             );
 
+
             _expenses.Add(new Expenses
-            ("Disney", 666, 6, "p_man")
+            ("Disney Plus+", 666, 6, "p_man")
             );
+
 
             _expenses.Add(new Expenses
             ("Gym", 14, 5, "mrs_michelle")
             );
+            _expenses.Add(new Expenses
+            ("Phone Plan", 44, 5, "mrs_michelle")
+            );
+
 
             _expenses.Add(new Expenses
-            ("Phone Bill", 25, 3, "mrbeast")
+            ("Crew Members pay", 2.13, 1, "mrbeast")
             );
+            _expenses.Add(new Expenses
+            ("Private Yacht", 50000, 7, "mrbeast")
+            );
+
 
         }//end of the preadded user expenses methods-------------------------------------------------------------------------------------------------------------7
 
