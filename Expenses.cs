@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Damien was responsible for this class
 {
     public class Expenses
     {
@@ -32,19 +32,14 @@ namespace ExpenseAppGroup
             UserName = user;
         }
 
-        //method for expense---------------------------------------------------------------------------------------------------------------------------------1
+        //method for expense---------------------------------------------------------------------------------------------------------------------------------1 Damien
         //expense that have been added to user account
 
         public void AdminViewExpenses()
         {
             Console.Clear();
 
-            int exitAddExpenseChoice1 = 1;
-
-
-            //do while loop to exit to home
-            do
-            {
+          
                 Console.WriteLine($"\t Display Expenses\n");
                 Console.WriteLine("---------------------------------------\n");
                 //users expenses 
@@ -59,21 +54,19 @@ namespace ExpenseAppGroup
                     Console.WriteLine($"Username: {e.UserName}\nExpense Name: {e.ExpName}\t Amount: ${e.ExpAmount}\t Frequency (days): {e.ExpFrequency}\n");
 
                 }
-                Console.WriteLine("1. Back to home");
-                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
-            } while (exitAddExpenseChoice1 == 0);
-            Admin.AdminHome();
+                Console.WriteLine("\nPress any key to return to Admin Home");
+                Console.ReadKey();              
+                Admin.AdminHome();
 
         }//end of ViewExpense method--------------------------------------------------------------------------------------------------------------------------1
 
 
-        //adding new expense to user account----------------------------------------------------------------------------------------------------------------2
+        //adding new expense to user account----------------------------------------------------------------------------------------------------------------2 Damien
         public static void AddExpense()
         {
 
             Console.Clear();
-            int exitAddExpenseChoice2 = 1;
 
 
                 Console.WriteLine("\t Add your expenses\n");
@@ -93,6 +86,7 @@ namespace ExpenseAppGroup
                 Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                 _expenses.Add(newExpense);
 
+                Console.WriteLine("\nExpense successfully added.");
                 Console.WriteLine("\nPress any key to return to Home Menu");
                 Console.ReadKey();
                 User.UserHome();
@@ -103,7 +97,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Remove expense to user --------------------------------------------------------------------------------------------------------------------------------3
+        //Remove expense to user --------------------------------------------------------------------------------------------------------------------------------3 Katie and Damien
         public static void RemoveExpense(string currentLoggedInUser)
         {
             Console.Clear();
@@ -154,7 +148,7 @@ namespace ExpenseAppGroup
 
 
 
-        //end of existing expense-------------------------------------------------------------------------------------------------------------------4
+        //end of existing expense-------------------------------------------------------------------------------------------------------------------4 Damien (with minor assistance from Katie)
         public static void UpdateExpense(string currentLoggedInUser)
         {
            
@@ -163,7 +157,7 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\t Update Expenses Menu\n");
                 Console.WriteLine("---------------------------------------\n");
                 Console.WriteLine();
-                Console.WriteLine("\t Enter the name of the expense you wish to update");
+                Console.WriteLine("Enter the name of the expense you wish to update:");
                 
 
                 string removeExpenses = Console.ReadLine();
@@ -175,7 +169,7 @@ namespace ExpenseAppGroup
             
                 if (removeExpensesfound != null)
                 {
-                    Console.WriteLine($"\nThe expensel {removeExpensesfound.ExpName} will be updated.");
+                    Console.WriteLine($"\nThe expense {removeExpensesfound.ExpName} will be updated.");
                     Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
 
                     char removeConfirm = Convert.ToChar(Console.ReadLine());
@@ -186,7 +180,7 @@ namespace ExpenseAppGroup
 
                         _expenses.Remove(removeExpensesfound);
                                                 
-                    Console.Clear();
+                        Console.Clear();
 
                         Console.WriteLine("\tUpdated expenses\n");
 
@@ -201,7 +195,7 @@ namespace ExpenseAppGroup
 
                         Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                         _expenses.Add(newExpense);
-                        Console.WriteLine("\nExpense Removed.\n");
+                        Console.WriteLine("\nExpense successfully updated.\n");
 
                     }
                     else //cancels removal
@@ -228,7 +222,7 @@ namespace ExpenseAppGroup
 
 
 
-        //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------5
+        //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------5 Damien
         //viewing all expenses that have been added to user account
         public static void ViewExpenses(string currentLoggedInUser)
         {
@@ -251,7 +245,7 @@ namespace ExpenseAppGroup
                 {
                     foreach (var e in userExpenses)
                     {
-                        Console.WriteLine($"Name: {e.ExpName} Amount: ${e.ExpAmount} Frequency {e.ExpFrequency}");
+                        Console.WriteLine($"Name: {e.ExpName} \tAmount: ${e.ExpAmount} \tFrequency (days): {e.ExpFrequency}");
                     }
                     
                 }
@@ -265,7 +259,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Method for the preadded users expenses for view expenses this is where the values are stored--------------------------------------------------------6
+        //Method for the preadded users expenses for view expenses this is where the values are stored--------------------------------------------------------6 Damien
         public static void PreaddedUserExpenses()
         {
             //adds objects to the list

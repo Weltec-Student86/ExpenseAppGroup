@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Katie was responsible for this class
 {
     public class Admin:Account
     {
@@ -34,7 +34,7 @@ namespace ExpenseAppGroup
         //METHODS
 
 
-        //Admin login screen---------------------------------------------------------------------
+        //Admin login screen--------------------------------------------------------------------- Katie
         public static void AdminLogin()
         {
             Console.Clear();
@@ -109,7 +109,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Admin Home----------------------------------------------------------------------------
+        //Admin Home---------------------------------------------------------------------------- Katie
         public static void AdminHome()
         {
 
@@ -194,7 +194,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Manage users------------------------------------------------------------------------------------------
+        //Manage users------------------------------------------------------------------------------------------ Katie
         public static void ManageUsers()
         {
 
@@ -273,7 +273,7 @@ namespace ExpenseAppGroup
 
 
 
-        //View all users-----------------------------------------------------------
+        //View all users----------------------------------------------------------- Katie
 
         public static void ViewUsers()
         {
@@ -316,11 +316,11 @@ namespace ExpenseAppGroup
             Console.ReadKey();
             ManageUsers();
 
-        }//end of View User class-----------------------------------------------
+        }//end of View Expenses class-----------------------------------------------
 
 
 
-
+        //View all savings-------------------------------------------------------------- Katie
         public static void ViewSavings()
         {
             //runs a for each loop that displays all of the user savings in the application
@@ -339,11 +339,11 @@ namespace ExpenseAppGroup
             Console.ReadKey();
             ManageUsers();
 
-        }//end of View User class-----------------------------------------------
+        }//end of View Savings class-----------------------------------------------
 
 
 
-        //Admin add user--------------------------------------------
+        //Admin add user-------------------------------------------- Katie
         public static void AdminAddUser()
         {
             //lets admin add a new user account
@@ -461,7 +461,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Update user------------------------------------------------------
+        //Update user------------------------------------------------------ Katie
 
         public static void AdminUpdateUser()
         {
@@ -486,7 +486,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Remove user-------------------------------------------------------
+        //Remove user------------------------------------------------------- Katie
 
         public static void AdminRemoveUser()
         {
@@ -512,7 +512,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Method to pre-load admin accounts into program---------------------
+        //Method to pre-load admin accounts into program--------------------- Katie
         public static void PreLoadAdmins()
         {
             Admin admin1 = new Admin("admin", "password");

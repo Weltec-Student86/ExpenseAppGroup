@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Damien was responsible for this class
 {
     public class Savings
     {
@@ -49,7 +49,7 @@ namespace ExpenseAppGroup
         //Methods
      
        
-        //Method for Savings menu-----------------------------------1
+        //Method for Savings menu-----------------------------------1 Damien
         public static void SavingsMenu(string currentLoggedInUser)
         {
 
@@ -199,7 +199,7 @@ namespace ExpenseAppGroup
         }//end of savings menu method---------------------------------------1
 
 
-        //Method for Adding goals-------------------------------------------2
+        //Method for Adding goals-------------------------------------------2 Damien
         public static void AddGoals()
         {
             Console.Clear();
@@ -218,6 +218,7 @@ namespace ExpenseAppGroup
                 Savings newGoal = new Savings(savGoals, amtGoals, User.CurrentLoggedInUser);
                 _goals.Add(newGoal);
 
+                Console.WriteLine("\nGoal successfully added.");
                 Console.WriteLine("\nPress any key to return to Savings Menu");
                 Console.ReadKey();
 
@@ -226,7 +227,7 @@ namespace ExpenseAppGroup
         }//end of Method for Adding goals---------------------------------------2
 
 
-        //method for updating savings --------------------------------------3
+        //method for updating savings --------------------------------------3 Damien and Katie
         public static void UpdateSavings(string currentLoggedInUser)
         {
             Console.Clear();
@@ -246,6 +247,8 @@ namespace ExpenseAppGroup
                     Savings updatedSavings = new Savings(amountToAdd, currentLoggedInUser);
                     _savings.Insert(savingsEntry, updatedSavings);
 
+                    Console.WriteLine("\nSavings has been successfully updated.");
+
                 }
                 else
                 {
@@ -262,7 +265,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Method for Removing goals-----------------------------4
+        //Method for Removing goals-----------------------------4 Damien
         public static void RemoveGoals(string currentLoggedInUser)
         {
             Console.Clear();
@@ -273,23 +276,23 @@ namespace ExpenseAppGroup
                 Console.WriteLine("\tRemove Goals Menu");
                 Console.WriteLine("---------------------------------------\n");
 
-                //searches the name of the user they wish to remove
+                //searches the name of the goal they wish to remove
                 Console.WriteLine("Enter the Goal you want to remove:");
                 string removeGoal = Console.ReadLine();
 
                 //the variable is then passed through the list to find a matching account
                 Savings removeGoalfound= _goals.Find(e => e.savGoals.Equals(removeGoal, StringComparison.Ordinal));
 
-                //if-else statement to confirm if admin wants to remove the user account
+                //if-else statement to confirm if admin wants to remove the goal
                 if (removeGoalfound != null)
                 {
-                    Console.WriteLine($"\nThe goal {removeGoalfound.goals} will be removed.");
+                    Console.WriteLine($"\nThe goal {removeGoal} will be removed.");
                     Console.WriteLine("\nAre you sure you want to remove this goal? (y/n)\n");
 
                     char removeConfirm = Convert.ToChar(Console.ReadLine());
 
 
-                    if (removeConfirm == 'y') //removes user
+                    if (removeConfirm == 'y') //removes goal
                     {
                         _goals.Remove(removeGoalfound);
                         Console.WriteLine("\nGoal removed.\n");
@@ -301,7 +304,7 @@ namespace ExpenseAppGroup
                     }
 
                 }
-                else //displays if the name entered is not on the list
+                else //displays if the goal entered is not on the list
                 {
                     Console.WriteLine("\nGoal does not exist.\n");
 
@@ -316,12 +319,10 @@ namespace ExpenseAppGroup
 
 
 
-        //Method for updating goals -----------------------------------------------5
+        //Method for updating goals -----------------------------------------------5 Damien
         public static void UpdateGoals()
         {
-            Console.Clear();
-
-                    Console.Clear();
+            Console.Clear();                  
 
                     Console.WriteLine("\t Update Goals Menu");
                     Console.WriteLine("---------------------------------------\n");
@@ -334,7 +335,7 @@ namespace ExpenseAppGroup
                     //the variable is then passed through the list to find a matching account
                     Savings removeGoalsfound = _goals.Find(g => g.savGoals.Equals(removeGoal, StringComparison.Ordinal));
 
-                    //if-else statement to confirm if the user wants to update selected expense
+                    //if-else statement to confirm if the user wants to update selected goal
 
                     if (removeGoalsfound != null)
                     {
@@ -344,7 +345,7 @@ namespace ExpenseAppGroup
                         char removeConfirm = Convert.ToChar(Console.ReadLine());
 
 
-                        if (removeConfirm == 'y') //removes the users Expense
+                        if (removeConfirm == 'y') //removes the users goal
                         {
 
                             _goals.Remove(removeGoalsfound);
@@ -371,9 +372,9 @@ namespace ExpenseAppGroup
                         }
 
                     }
-                    else
+                    else//prints if goal is not found
                     {
-                        Console.WriteLine("\nGoal not found. Press any key to continue...");
+                        Console.WriteLine("\nGoal not found.");
                         Console.ReadKey();
                     }
 
@@ -384,6 +385,7 @@ namespace ExpenseAppGroup
         }//end of Method for updating goals----------------------------------------5
 
 
+        //view goals method------------------------------------------------------------------------------------------------------------------------6 Damien
         public static void ViewGoals(string currentLoggedInUser)
         {
             Console.Clear();
@@ -414,22 +416,23 @@ namespace ExpenseAppGroup
                 Console.ReadKey();
                 Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-        }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
+        }//end of ViewGoal method-----------------------------------------------------------------------------------------------------------------------6
 
 
+
+
+        //Admin view savings --------------------------------------------------------------7 Damien
         public void AdminViewSavings()
         {
             Console.Clear();
 
-            int exitAddExpenseChoice1 = 1;
             //do while loop to exit to home
-            do
-            {
+ 
                 Console.WriteLine($"\t Admin Menu For Display Savings\n");
                 Console.WriteLine("---------------------------------------\n");
                 Console.WriteLine();
 
-                //users expenses 
+                //displays savings for all users 
                 if (_savings.Count == 0)
                 {
                     Console.WriteLine($"No savings added");
@@ -441,15 +444,16 @@ namespace ExpenseAppGroup
                         Console.WriteLine($"Username: {s.UserName}\n Savings amount: {s.amtSavings} \n");
 
                 }
-                Console.WriteLine("1. Back To Home");
-                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
 
-            } while (exitAddExpenseChoice1 == 0);
+            Console.WriteLine("\nPress any key to return to Admin Home");
+            Console.ReadKey();
             Admin.AdminHome();
 
-        }//end of ViewSavings method--------------------------1
+        }//end of ViewSavings method--------------------------7
      
-        //method for PreaAdded users goals----------------------------------------6
+
+
+        //method for PreaAdded users goals----------------------------------------8 Damien
         public static void PreaddedUserGoals()
         {
             //adds objects to the list
@@ -490,10 +494,10 @@ namespace ExpenseAppGroup
             ("Priavte Jet", 250000, "mrbeast")
             );
 
-        }//end of PreAddeded users Goals method--------------------------6
+        }//end of PreAddeded users Goals method--------------------------8
 
 
-        //method for PreaAdded users savings----------------------------------------7
+        //method for PreaAdded users savings----------------------------------------9 Damien
         public static void PreaddedUserSavings()
         {
             //adds objects to the list
@@ -518,7 +522,7 @@ namespace ExpenseAppGroup
             (1000000000, "mrbeast")
             );
 
-        }//end of PreAddeded users savings method--------------------------7
+        }//end of PreAddeded users savings method--------------------------9
 
 
     }//end of class savings---------------------------------------

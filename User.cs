@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Katie was responsible for this class
 {
     public class User : Account
     {
@@ -41,7 +41,7 @@ namespace ExpenseAppGroup
         //METHODS
 
 
-        //Menu for login --------------------------------------
+        //Menu for login -------------------------------------- Katie
         public static void UserLogin()
         {
             Console.Clear();
@@ -132,7 +132,7 @@ namespace ExpenseAppGroup
 
 
 
-        //user Registration method-----------------------------
+        //user Registration method----------------------------- Katie
         public static void Register()
         {
 
@@ -259,7 +259,7 @@ namespace ExpenseAppGroup
 
 
 
-        //User home-----------------------------------------------------
+        //User home----------------------------------------------------- Katie
         public static void UserHome()
         {
             int index = User.accountIndex;
@@ -357,7 +357,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Display user details------------------------------------------------
+        //Display user details------------------------------------------------ Katie
         public void DisplayUserDetails()
         {
             //displays details from the user list
@@ -373,7 +373,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Update details functionality for admin---------------------------------------------------
+        //Update details functionality for admin--------------------------------------------------- Katie and Damien
         public static void UpdateDetails()
         {
             bool updateScreen = false;
@@ -455,7 +455,7 @@ namespace ExpenseAppGroup
 
 
 
-        //Remove user functionality---------------------------------------------------------
+        //Remove user functionality--------------------------------------------------------- Katie and Damien
         public static void RemoveUser()
         {
             //admin searches the name of the user they wish to remove
@@ -525,7 +525,7 @@ namespace ExpenseAppGroup
 
 
 
-        //method to Pre-load users into the list upon application startup------------------------
+        //method to Pre-load users into the list upon application startup------------------------ Katie
 
         public static void PreLoadUsers()
         {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Katie was responsible for this class
 {
     public abstract class Account
     {

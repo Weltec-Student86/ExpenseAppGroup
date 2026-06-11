@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpenseAppGroup
+namespace ExpenseAppGroup //Attempted by Katie
 {
 
     //attempted to make custom exceptions but struggled to implement them

@@ -1,8 +1,8 @@
 ﻿namespace ExpenseAppGroup
 {
-    internal class Program
+    internal class Program //Collaboration between Katie and Damien
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             //this method pre-loads admins and users into the lists upon the program starting
             Admin.PreLoadAdmins();
@@ -18,7 +18,7 @@
 
 
         //Method for Home page
-        public static void LandingPage()
+        public static void LandingPage() //Katie and Damien
         {
             Console.Clear();
 
