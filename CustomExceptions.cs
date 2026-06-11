@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExpenseAppGroup
 {
+
+    //attempted to make custom exceptions but struggled to implement them
+
     public class CustomExceptions:Exception
     {
         private static string msg = "Error!";
