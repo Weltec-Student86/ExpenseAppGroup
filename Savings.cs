@@ -46,6 +46,7 @@ namespace ExpenseAppGroup
 
         }
 
+        //Methods
      
        
         //Method for Savings menu-----------------------------------1
@@ -119,9 +120,9 @@ namespace ExpenseAppGroup
 
                     Console.WriteLine();
                     Console.WriteLine("---------------------------------------\n");
-                    Console.WriteLine("1. Add new goal");
+                    Console.WriteLine("1. Update savings total");
                     Console.WriteLine("2. View goals");
-                    Console.WriteLine("3. Update savings total");
+                    Console.WriteLine("3. Add new goal");
                     Console.WriteLine("4. Update to goals");
                     Console.WriteLine("5. Remove goal");
                     Console.WriteLine("6. Back home");
@@ -134,11 +135,10 @@ namespace ExpenseAppGroup
                     switch (savingsChoice) 
                     {
                         case 1:
-                            Console.WriteLine("Add New Goal");
-                            Savings.AddGoals();
+                            Console.WriteLine("Update To Savings");
+                            UpdateSavings(currentLoggedInUser);
                             Console.WriteLine();
-
-                                break;
+                            break;
 
                         case 2:
                             Console.WriteLine("View Goals");
@@ -147,11 +147,10 @@ namespace ExpenseAppGroup
 
 
                         case 3:
-                            Console.WriteLine("Update To Savings");
-                            UpdateSavings(currentLoggedInUser);
+                            Console.WriteLine("Add New Goal");
+                            Savings.AddGoals();
                             Console.WriteLine();
-                        
-                                break;
+                            break;
 
                             case 4:
                                 Console.WriteLine("Update Goals");
@@ -205,12 +204,7 @@ namespace ExpenseAppGroup
         {
             Console.Clear();
 
-            int exitAddGoalsChoice1 = 1;
-            //do while loop to exit to home
-            do
-            {
-
-
+            
                 //users goals and savings they have created this will need to be changed
                 Console.WriteLine("\t Add New Goal\n");
                 Console.WriteLine("---------------------------------------\n");
@@ -221,13 +215,12 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Add Goal Amount:");
                 double amtGoals = Convert.ToDouble(Console.ReadLine());
 
-                Console.WriteLine("1. Back To Savings Menu");
-                exitAddGoalsChoice1 = Convert.ToInt32(Console.ReadLine());
-
                 Savings newGoal = new Savings(savGoals, amtGoals, User.CurrentLoggedInUser);
                 _goals.Add(newGoal);
 
-            } while (exitAddGoalsChoice1 == 0);
+                Console.WriteLine("\nPress any key to return to Savings Menu");
+                Console.ReadKey();
+
             Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for Adding goals---------------------------------------2
@@ -236,10 +229,8 @@ namespace ExpenseAppGroup
         //method for updating savings --------------------------------------3
         public static void UpdateSavings(string currentLoggedInUser)
         {
-            int exitUpdateSavingChoice1 = 1;
-            
-            do
-            {
+            Console.Clear();
+
                 Console.WriteLine($"\t Update {currentLoggedInUser} Savings\n");
                 Console.WriteLine("---------------------------------------\n");
                 var userSavings = _savings.Where(e => e.UserName == currentLoggedInUser);
@@ -252,28 +243,18 @@ namespace ExpenseAppGroup
 
                     _savings.RemoveAt(savingsEntry);
 
-                    //Console.WriteLine(savingsEntry);
-
                     Savings updatedSavings = new Savings(amountToAdd, currentLoggedInUser);
                     _savings.Insert(savingsEntry, updatedSavings);
 
                 }
                 else
                 {
-                    Console.WriteLine("No savings found. Press any key to continue...");
-                    exitUpdateSavingChoice1 = 0;
+                    Console.WriteLine("No Savings Found.");
                 }
 
-
-                foreach (var e in userSavings)
-                {
-                    Console.WriteLine($"\tCurrent Savings: {e.savings}");
-                }
-
-            }//end of do
-            while (exitUpdateSavingChoice1 == 0);
-
-            Savings.SavingsMenu(User.CurrentLoggedInUser);
+                Console.WriteLine("\nPress any key to return to Savings Menu");
+                Console.ReadKey();
+                Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of update savings --------------------------------------3
 
@@ -288,8 +269,7 @@ namespace ExpenseAppGroup
 
             int exitRemoveGoalsChoice1 = 1;
             //do while loop to exit to home
-            do
-            {
+            
                 Console.WriteLine("\tRemove Goals Menu");
                 Console.WriteLine("---------------------------------------\n");
 
@@ -327,13 +307,11 @@ namespace ExpenseAppGroup
 
                 }
 
+                Console.WriteLine("\nPress any key to return to Savings Menu");
+                Console.ReadKey();
+                Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-
-
-            } while (exitRemoveGoalsChoice1 == 0);
-            Savings.SavingsMenu(User.CurrentLoggedInUser);
-
-        }//end of Method for Removing goals-------------------------4
+            }//end of Method for Removing goals-------------------------4
 
 
 
@@ -343,20 +321,13 @@ namespace ExpenseAppGroup
         {
             Console.Clear();
 
-            int exitUpdateGoalsChoice1 = 1;
-            //do while loop to exit to home
-
-                do
-                {
                     Console.Clear();
 
                     Console.WriteLine("\t Update Goals Menu");
                     Console.WriteLine("---------------------------------------\n");
                     Console.WriteLine();
 
-                    Console.WriteLine("\t Enter the name of the Goal you wish to update");
-
-
+                    Console.WriteLine("Enter the name of the Goal you wish to update\n");
 
                     string removeGoal = Console.ReadLine();
 
@@ -406,8 +377,9 @@ namespace ExpenseAppGroup
                         Console.ReadKey();
                     }
 
-                } while (exitUpdateGoalsChoice1 == 0);
-                    Savings.SavingsMenu(User.CurrentLoggedInUser);
+                Console.WriteLine("\nPress any key to return to Savings Menu");
+                Console.ReadKey();
+                Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of Method for updating goals----------------------------------------5
 
@@ -416,11 +388,6 @@ namespace ExpenseAppGroup
         {
             Console.Clear();
 
-
-            int exitAddExpenseChoice1 = 1;
-            //do while loop to exit to home
-            do
-            {
                 var userGoals = _goals.Where(e => e.UserName == currentLoggedInUser).ToList();
 
                 Console.WriteLine($"\t View Expenses Menu\n");
@@ -442,12 +409,10 @@ namespace ExpenseAppGroup
                     }
 
                 }
-                Console.WriteLine("\n1. Back To Savings");
-                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
-
-
-            } while (exitAddExpenseChoice1 == 0);
-            SavingsMenu(currentLoggedInUser); //returns back to savings page
+             
+                Console.WriteLine("\nPress any key to return to Savings Menu");
+                Console.ReadKey();
+                Savings.SavingsMenu(User.CurrentLoggedInUser);
 
         }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
 
