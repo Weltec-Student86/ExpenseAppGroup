@@ -20,7 +20,7 @@ namespace ExpenseAppGroup //Katie was responsible for this class
         private static string password = "";
         
 
-        public static string CurrentLoggedInUser {  get; set; }
+        public static string CurrentLoggedInUser {  get; set; } //Damien used to pull saved user data from this class into expenses and savings class
         //constructors
 
         public User(string firstName, string lastName, string username, string password)

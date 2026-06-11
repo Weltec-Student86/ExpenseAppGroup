@@ -26,8 +26,8 @@ namespace ExpenseAppGroup //Damien was responsible for this class
         public double amountToAdd { get; set; }
       
 
-        public static List<Savings> _savings = new List<Savings>();
-        public static List<Savings> _goals = new List<Savings>();
+        public static List<Savings> _savings = new List<Savings>();//list of pre added savings list
+        public static List<Savings> _goals = new List<Savings>();//list of pre added goals list
 
 
         //Construtor for pre added user goals
@@ -49,7 +49,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
         //Methods
      
        
-        //Method for Savings menu-----------------------------------1 Damien
+        //Method for Savings menu----------------------------------------------------------------------------------1 Damien
         public static void SavingsMenu(string currentLoggedInUser)
         {
 
@@ -131,7 +131,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                         Console.WriteLine("Please select an option:");
                         int savingsChoice = Convert.ToInt32(Console.ReadLine());
 
-
+                    //(currentLoggedInUser); used to transport stored data across methods
                     switch (savingsChoice) 
                     {
                         case 1:
@@ -196,16 +196,16 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
             } while (savingsMenuLoop == true);
 
-        }//end of savings menu method---------------------------------------1
+        }//end of savings menu method------------------------------------------------------------------------------1
 
 
-        //Method for Adding goals-------------------------------------------2 Damien
+        //Method for Adding goals-----------------------------------------------------------------2 Damien
         public static void AddGoals()
         {
             Console.Clear();
 
             
-                //users goals and savings they have created this will need to be changed
+                //Allows user to enter a new goal and then stores it in list
                 Console.WriteLine("\t Add New Goal\n");
                 Console.WriteLine("---------------------------------------\n");
 
@@ -224,10 +224,10 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
             Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-        }//end of Method for Adding goals---------------------------------------2
+        }//end of Method for Adding goals-----------------------------------------------------------2
 
 
-        //method for updating savings --------------------------------------3 Damien and Katie
+        //method for updating savings ------------------------------------------------------------------3 Damien and Katie
         public static void UpdateSavings(string currentLoggedInUser)
         {
             Console.Clear();
@@ -259,13 +259,13 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 Console.ReadKey();
                 Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-        }//end of update savings --------------------------------------3
+        }//end of update savings ---------------------------------------------------------------------------3
 
 
 
 
 
-        //Method for Removing goals-----------------------------4 Damien
+        //Method for Removing goals--------------------------------------------------------------------------4 Damien
         public static void RemoveGoals(string currentLoggedInUser)
         {
             Console.Clear();
@@ -314,12 +314,12 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 Console.ReadKey();
                 Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-            }//end of Method for Removing goals-------------------------4
+            }//end of Method for Removing goals-----------------------------------------------------------4
 
 
 
 
-        //Method for updating goals -----------------------------------------------5 Damien
+        //Method for updating goals ------------------------------------------------------------------------------------5 Damien
         public static void UpdateGoals()
         {
             Console.Clear();                  
@@ -369,20 +369,20 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                         else //cancels removal
                         {
                             Console.WriteLine("\nUpdated canceled.\n");
-                        }
+                        }// end of second if else
 
                     }
                     else//prints if goal is not found
                     {
                         Console.WriteLine("\nGoal not found.");
                         Console.ReadKey();
-                    }
+                    }//end of first if else
 
                 Console.WriteLine("\nPress any key to return to Savings Menu");
                 Console.ReadKey();
                 Savings.SavingsMenu(User.CurrentLoggedInUser);
 
-        }//end of Method for updating goals----------------------------------------5
+        }//end of Method for updating goals----------------------------------------------------------------------------------5
 
 
         //view goals method------------------------------------------------------------------------------------------------------------------------6 Damien
@@ -408,9 +408,9 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                     foreach (var e in userGoals)
                     {
                         Console.WriteLine($"Name: {e.savGoals} Amount: ${e.amtGoals}");
-                    }
+                    }//end of foreach
 
-                }
+                }//end of else if
              
                 Console.WriteLine("\nPress any key to return to Savings Menu");
                 Console.ReadKey();
@@ -443,17 +443,17 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
                         Console.WriteLine($"Username: {s.UserName}\n Savings amount: {s.amtSavings} \n");
 
-                }
+                }//end of if else
 
             Console.WriteLine("\nPress any key to return to Admin Home");
             Console.ReadKey();
             Admin.AdminHome();
 
-        }//end of ViewSavings method--------------------------7
+        }//end of ViewSavings method---------------------------------------------------------7
      
 
 
-        //method for PreaAdded users goals----------------------------------------8 Damien
+        //method for PreaAdded users goals---------------------------------------------------------8 Damien
         public static void PreaddedUserGoals()
         {
             //adds objects to the list
@@ -494,7 +494,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
             ("Priavte Jet", 250000, "mrbeast")
             );
 
-        }//end of PreAddeded users Goals method--------------------------8
+        }//end of PreAddeded users Goals method------------------------------------------------------8
 
 
         //method for PreaAdded users savings----------------------------------------9 Damien
@@ -522,7 +522,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
             (1000000000, "mrbeast")
             );
 
-        }//end of PreAddeded users savings method--------------------------9
+        }//end of PreAddeded users savings method------------------------------------9
 
 
     }//end of class savings---------------------------------------

@@ -43,17 +43,17 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 Console.WriteLine($"\t Display Expenses\n");
                 Console.WriteLine("---------------------------------------\n");
                 //users expenses 
-                if (_expenses.Count == 0)
+                if (_expenses.Count == 0)//checks preadded list to see if any save data is there if not prints message
                 {
                     Console.WriteLine($"No expenses added");
                 }
                 else
                 {
-                    foreach (Expenses e in _expenses)
+                    foreach (Expenses e in _expenses)//if expenses is found in list prints new message
                    
                     Console.WriteLine($"Username: {e.UserName}\nExpense Name: {e.ExpName}\t Amount: ${e.ExpAmount}\t Frequency (days): {e.ExpFrequency}\n");
 
-                }
+                }//end of if else 
 
                 Console.WriteLine("\nPress any key to return to Admin Home");
                 Console.ReadKey();              
@@ -68,6 +68,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
             Console.Clear();
 
+                //allows for user to add new expense to list
 
                 Console.WriteLine("\t Add your expenses\n");
                 Console.WriteLine("---------------------------------------\n");
@@ -82,7 +83,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 int expFrequency = Convert.ToInt32(Console.ReadLine());
 
            
-
+                //adds entered data into pre added list
                 Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                 _expenses.Add(newExpense);
 
@@ -106,6 +107,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 Console.WriteLine("\t Remove Expenses Menu");
                 Console.WriteLine("---------------------------------------\n");
                 Console.WriteLine();
+
                 //searches the name of the expense they wish to remove
                 Console.WriteLine("Enter the expense you want to remove:\n");
                 string removeExpenses = Console.ReadLine();
@@ -168,6 +170,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 //if-else statement to confirm if the user wants to update selected expense
             
                 if (removeExpensesfound != null)
+                //checks to see if expense is in preadded list if data is there from list 
                 {
                     Console.WriteLine($"\nThe expense {removeExpensesfound.ExpName} will be updated.");
                     Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
@@ -197,18 +200,19 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                         _expenses.Add(newExpense);
                         Console.WriteLine("\nExpense successfully updated.\n");
 
-                    }
+                    }//end of if
+
                     else //cancels removal
                     {
                         Console.WriteLine("\nUpdated Canceled.\n");
-                    }
+                    }//end of else
 
                 }
-                else
+                else// else to check if no data found 
                 {
                     Console.WriteLine("\nExpense Not Found.");
                     
-                }
+                }//end of else
 
                 Console.WriteLine("\nPress any key to return to Home Menu");
                 Console.ReadKey();
@@ -227,7 +231,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
         public static void ViewExpenses(string currentLoggedInUser)
         {
             Console.Clear();
-
+                //searchs the list expense list uses current logged in user to pull correct data
                 var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
 
                 Console.WriteLine($"\t View Expenses Menu\n");
@@ -243,7 +247,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
                 }
                 else
                 {
-                    foreach (var e in userExpenses)
+                    foreach (var e in userExpenses)//prints users current expense name, amount and frequency 
                     {
                         Console.WriteLine($"Name: {e.ExpName} \tAmount: ${e.ExpAmount} \tFrequency (days): {e.ExpFrequency}");
                     }
