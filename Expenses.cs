@@ -76,10 +76,6 @@ namespace ExpenseAppGroup
             int exitAddExpenseChoice2 = 1;
 
 
-            //do while loop to exit to home
-            do
-            {
-
                 Console.WriteLine("\t Add your expenses\n");
                 Console.WriteLine("---------------------------------------\n");
 
@@ -92,15 +88,15 @@ namespace ExpenseAppGroup
                 Console.WriteLine("Add expense frequency (days):");
                 int expFrequency = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("\n1. Back to home");
-                exitAddExpenseChoice2 = Convert.ToInt32(Console.ReadLine());
+           
 
                 Expenses newExpense = new Expenses(expName, expAmount, expFrequency, User.CurrentLoggedInUser);
                 _expenses.Add(newExpense);
 
+                Console.WriteLine("\nPress any key to return to Home Menu");
+                Console.ReadKey();
+                User.UserHome();
 
-            } while (exitAddExpenseChoice2 == 0);
-            User.UserHome();
 
         }//end of AddExpense method----------------------------------------------------------------------------------------------------------------------------2
 
@@ -111,16 +107,13 @@ namespace ExpenseAppGroup
         public static void RemoveExpense(string currentLoggedInUser)
         {
             Console.Clear();
-            int exitRemoveExpenseChoice1 = 1;
-
-            do
-            {
+            
 
                 Console.WriteLine("\t Remove Expenses Menu");
                 Console.WriteLine("---------------------------------------\n");
                 Console.WriteLine();
                 //searches the name of the expense they wish to remove
-                Console.WriteLine("Enter the expense you want to remove:");
+                Console.WriteLine("Enter the expense you want to remove:\n");
                 string removeExpenses = Console.ReadLine();
 
                 //the variable is then passed through the list to find a matching account
@@ -150,10 +143,13 @@ namespace ExpenseAppGroup
                 else
                 {
                     Console.WriteLine("\nExpense not found. Press any key to continue...");
-                    Console.ReadKey();
+                    
                 }
-            } while (exitRemoveExpenseChoice1 == 0);
-            User.UserHome();
+
+                Console.WriteLine("\nPress any key to return to Home Menu");
+                Console.ReadKey();
+                User.UserHome();
+
         }//end of removal of expense method-----------------------------------------------------------------------------------------------------------------------3
 
 
@@ -161,9 +157,7 @@ namespace ExpenseAppGroup
         //end of existing expense-------------------------------------------------------------------------------------------------------------------4
         public static void UpdateExpense(string currentLoggedInUser)
         {
-            int exitUpdateExpenseChoice1 = 1;
-            do
-            {
+           
                 Console.Clear();
 
                 Console.WriteLine("\t Update Expenses Menu\n");
@@ -171,8 +165,6 @@ namespace ExpenseAppGroup
                 Console.WriteLine();
                 Console.WriteLine("\t Enter the name of the expense you wish to update");
                 
-
-
 
                 string removeExpenses = Console.ReadLine();
 
@@ -220,11 +212,13 @@ namespace ExpenseAppGroup
                 }
                 else
                 {
-                    Console.WriteLine("\nExpense Not Found. Press any key to continue...");
-                    Console.ReadKey();
+                    Console.WriteLine("\nExpense Not Found.");
+                    
                 }
-            } while (exitUpdateExpenseChoice1 == 0);
-            User.UserHome();//returns back to home page
+
+                Console.WriteLine("\nPress any key to return to Home Menu");
+                Console.ReadKey();
+                User.UserHome();
 
         }//end of update expense method---------------------------------------------------------------------------------------------------------------4
 
@@ -234,17 +228,12 @@ namespace ExpenseAppGroup
 
 
 
-        //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------6
+        //method for Viewing the expenses--------------------------------------------------------------------------------------------------------------5
         //viewing all expenses that have been added to user account
         public static void ViewExpenses(string currentLoggedInUser)
         {
             Console.Clear();
 
-            
-            int exitAddExpenseChoice1 = 1;
-            //do while loop to exit to home
-            do
-            {
                 var userExpenses = _expenses.Where(e => e.UserName == currentLoggedInUser).ToList();
 
                 Console.WriteLine($"\t View Expenses Menu\n");
@@ -266,20 +255,17 @@ namespace ExpenseAppGroup
                     }
                     
                 }
-                Console.WriteLine("\n1. Back To Home");
-                exitAddExpenseChoice1 = Convert.ToInt32(Console.ReadLine());
-            
+                Console.WriteLine("\nPress any key to return to Home Menu");
+                Console.ReadKey();
+                User.UserHome();
 
-            } while (exitAddExpenseChoice1 == 0);
-            User.UserHome(); //returns back to home page
-
-        }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------6
+        }//end of ViewExpense method-----------------------------------------------------------------------------------------------------------------------5
 
 
 
 
 
-        //Method for the preadded users expenses for view expenses this is where the values are stored--------------------------------------------------------7
+        //Method for the preadded users expenses for view expenses this is where the values are stored--------------------------------------------------------6
         public static void PreaddedUserExpenses()
         {
             //adds objects to the list
@@ -321,7 +307,7 @@ namespace ExpenseAppGroup
             );
 
 
-        }//end of the preadded user expenses methods-------------------------------------------------------------------------------------------------------------7
+        }//end of the preadded user expenses methods-------------------------------------------------------------------------------------------------------------6
 
 
     }//end of class-----------------------------------------

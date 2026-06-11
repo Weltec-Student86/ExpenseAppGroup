@@ -285,11 +285,11 @@ namespace ExpenseAppGroup
                     Console.WriteLine("Welcome " + (User.name) + "!\n");
                     Console.WriteLine("Account number: " + (User.accountIndex) + "\n");
 
-                    Console.WriteLine("1. View expenses");
-                    Console.WriteLine("2. Add new expense");
-                    Console.WriteLine("3. Update existing expense");
-                    Console.WriteLine("4. Remove expense");
-                    Console.WriteLine("5. View savings and goals");
+                    Console.WriteLine("1. View savings and goals");
+                    Console.WriteLine("2. View expenses");
+                    Console.WriteLine("3. Add new expense");
+                    Console.WriteLine("4. Update existing expense");
+                    Console.WriteLine("5. Remove expense");
                     Console.WriteLine("6. Logout");
                     Console.WriteLine("99. Exit");
 
@@ -299,23 +299,24 @@ namespace ExpenseAppGroup
                     switch (homeChoice) //switch statement that calls methods depending on the user's choice
                     {
                         case 1:
-                            Expenses.ViewExpenses(User.CurrentLoggedInUser);
+                            Savings.SavingsMenu(User.CurrentLoggedInUser);
+                            
                             break;
 
                         case 2:
-                            Expenses.AddExpense();
+                            Expenses.ViewExpenses(User.CurrentLoggedInUser);
                             break;
 
                         case 3:
-                            Expenses.UpdateExpense(User.CurrentLoggedInUser);
+                            Expenses.AddExpense();
                             break;
 
                         case 4:
-                            Expenses.RemoveExpense(User.CurrentLoggedInUser);
+                            Expenses.UpdateExpense(User.CurrentLoggedInUser);
                             break;
 
                         case 5:
-                            Savings.SavingsMenu(User.CurrentLoggedInUser);
+                            Expenses.RemoveExpense(User.CurrentLoggedInUser);
                             break;
 
                         case 6:
