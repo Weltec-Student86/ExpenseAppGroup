@@ -339,8 +339,8 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
                     if (removeGoalsfound != null)
                     {
-                        Console.WriteLine($"\nThe expensel {removeGoalsfound.savGoals} will be updated.");
-                        Console.WriteLine("\nAre you sure you want to update this expense? (y/n)\n");
+                        Console.WriteLine($"\nThe goal {removeGoal} will be updated.");
+                        Console.WriteLine("\nAre you sure you want to update this goal? (y/n)\n");
 
                         char removeConfirm = Convert.ToChar(Console.ReadLine());
 
@@ -362,7 +362,7 @@ namespace ExpenseAppGroup //Damien was responsible for this class
 
                             Savings newGoal = new Savings(savGoals, amtGoals, User.CurrentLoggedInUser);
                             _goals.Add(newGoal);
-                            Console.WriteLine("\nExpense removed.\n");
+                            Console.WriteLine("\nGoal successfully updated.\n");
 
 
                         }
